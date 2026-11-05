@@ -17,6 +17,8 @@
 - Dark/light theme toggle that remembers the selection
 - Inline SVG links to the portfolio repository and LinkedIn
 - Reduced-motion support and visible keyboard focus styles
+- Home page with an accessible profile image and missing-image fallback
+- Scroll reveals that turn off for visitors who prefer reduced motion
 
 ## Tech stack
 
@@ -31,12 +33,15 @@
 ├── assets/
 │   ├── css/
 │   │   ├── base.css
+│   │   ├── home.css
 │   │   └── layout.css
 │   ├── data/
 │   ├── images/
 │   │   └── favicon.svg
 │   └── js/
+│       ├── home.js
 │       ├── nav.js
+│       ├── reveal.js
 │       ├── site.js
 │       └── theme.js
 ├── about.html

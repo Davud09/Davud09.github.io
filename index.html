@@ -3,18 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Portfolio of an electrical and electronics engineering student.">
+    <meta name="description" content="Davud Idrisov is a first-year electrical and electronics engineering student who enjoys repairing, building, and figuring out how things work.">
     <meta name="theme-color" content="#101a2b">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Davud Idrisov — Portfolio">
-    <meta property="og:description" content="Portfolio of an electrical and electronics engineering student.">
+    <meta property="og:description" content="Davud Idrisov is a first-year electrical and electronics engineering student who enjoys repairing, building, and figuring out how things work.">
     <title>Davud Idrisov — Portfolio</title>
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/home.css">
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
+    <script src="assets/js/home.js" defer></script>
+    <script src="assets/js/reveal.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -42,15 +45,52 @@
         </button>
       </div>
     </header>
-    <main class="page-content">
-      <p class="eyebrow">Electrical &amp; electronics engineering</p>
-      <h1>Welcome to my portfolio.</h1>
-      <p class="page-intro">[TODO: Add a short personal introduction and a currently or fun-fact line.]</p>
-      <div class="page-actions">
-        <a class="button" href="projects.html">Explore projects</a>
-        <a class="button button--quiet" href="about.html">About me</a>
-      </div>
-      <p class="placeholder-note">[TODO: Add your profile photo to assets/images and include it here.]</p>
+    <main>
+      <section class="home-hero" aria-labelledby="home-title">
+        <div class="home-hero__content" data-reveal>
+          <p class="eyebrow">Electrical &amp; electronics engineering · ADA University</p>
+          <h1 id="home-title">I like figuring out how things <span>work.</span></h1>
+          <p class="home-hero__intro">
+            I’m Davud, a first-year electrical and electronics engineering student at ADA
+            University’s School of IT and Engineering. I enjoy taking things apart, finding
+            the problem, and putting them back together so they work again.
+          </p>
+          <div class="page-actions">
+            <a class="button" href="projects.html">See my projects <span aria-hidden="true">↗</span></a>
+            <a class="button button--quiet" href="about.html">More about me</a>
+          </div>
+        </div>
+        <figure class="home-portrait" data-reveal>
+          <div class="home-portrait__frame">
+            <img
+              class="home-portrait__image"
+              src="assets/images/davud-idrisov.jpeg"
+              alt="Davud Idrisov wearing a suit in an electronics laboratory"
+              width="601"
+              height="808"
+              fetchpriority="high"
+            >
+            <span class="home-portrait__fallback" hidden aria-hidden="true">DI</span>
+          </div>
+          <figcaption>Davud Idrisov <span>·</span> First-year engineering student</figcaption>
+        </figure>
+        <a class="home-scroll" href="#currently" aria-label="Scroll to currently">
+          <span aria-hidden="true">↓</span> A little more
+        </a>
+      </section>
+
+      <section class="currently-section" id="currently" aria-labelledby="currently-title" data-reveal>
+        <div class="currently-section__label">
+          <p class="eyebrow">Currently</p>
+          <h2 id="currently-title">Learning by doing.</h2>
+        </div>
+        <p>
+          I’m working on getting better at coding while studying electrical and electronics
+          engineering. In SITE 1101, I built a NOT gate on a breadboard as part of a team
+          project to make NAND, AND, OR, and NOT gates.
+        </p>
+        <a class="text-link" href="projects.html">See the project <span aria-hidden="true">↗</span></a>
+      </section>
     </main>
     <footer class="site-footer">
       <div class="site-footer__copy">
