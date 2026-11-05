@@ -1,37 +1,50 @@
 # Davud Idrisov — Portfolio
 
-> **Current status:** The four pages and interactive resume are implemented. Remaining `[TODO: ...]` items need Davud's details, project media, or deployment information.
+Personal portfolio for my SITE 1101: Principles of Information Systems course.
+It brings together my engineering background, course projects, and an interactive
+resume called **Field Workshop**.
 
-## Live site
+## Live site and repository
 
-[TODO: Add the GitHub Pages URL after choosing a GitHub username and deploying.]
+- **Website:** [https://davud09.github.io/](https://davud09.github.io/)
+- **Public GitHub repository:** [github.com/Davud09/Davud09.github.io](https://github.com/Davud09/Davud09.github.io)
 
-## About
+## Screenshots
 
-A static portfolio for my SITE 1101 coursework and personal resume. It includes
-my background, completed and planned projects, and an interactive resume called
-Field Workshop.
+### Home
 
-## Features so far
+![Portfolio home page showing the introduction, profile photo, and currently section](assets/images/homepage.png)
 
-- Four linked page shells with shared responsive navigation and footer
-- Keyboard-operable mobile menu with current-page highlighting
-- Dark/light theme toggle that remembers the selection
-- Inline SVG links to the portfolio repository and LinkedIn
-- Reduced-motion support and visible keyboard focus styles
-- Home page with an accessible profile image and missing-image fallback
-- Scroll reveals that turn off for visitors who prefer reduced motion
-- About page with education, clearly labeled skill levels, activities, languages, and interests
-- JSON-driven project cards with planned/completed status, media TODOs, and an accessible lightbox
-- Field Workshop game with real resume stations, keyboard/touch controls, XP, achievements, and a plain-resume path
+### Projects
 
-## Tech stack
+![Projects page showing the project cards and their current media placeholders](assets/images/projects.png)
+
+Project photos are still to be added, so the cards currently identify missing media
+with explicit TODO labels.
+
+## Features
+
+- Four responsive pages: Home, About, Projects, and Field Workshop
+- Keyboard-operable mobile navigation with current-page highlighting
+- Dark and light themes with a saved preference
+- Accessible profile image fallback, visible focus styles, and reduced-motion support
+- About page covering my education, skills, activities, languages, and interests
+- Project cards loaded from JSON, including planned projects and an optional slot
+- Keyboard-accessible project image lightbox
+- Field Workshop interactive resume with keyboard and touch controls, XP, achievements,
+  and a plain-resume option
+- Shared footer with a generated copyright year and GitHub/LinkedIn links
+
+## Technology
 
 - HTML5
-- CSS3
+- CSS3 (custom properties; responsive and theme-aware styles)
 - Vanilla JavaScript (ES6+)
+- JSON project data
 
-## Folder structure
+No framework, build step, backend, or npm package is required.
+
+## Project structure
 
 ```text
 .
@@ -47,46 +60,72 @@ Field Workshop.
 │   │   └── projects.json
 │   ├── images/
 │   │   ├── davud-idrisov.jpeg
-│   │   └── favicon.svg
+│   │   ├── favicon.svg
+│   │   ├── homepage.png
+│   │   └── projects.png
 │   └── js/
 │       ├── home.js
 │       ├── nav.js
 │       ├── projects.js
 │       ├── reveal.js
-│       ├── quest/
-│       │   ├── achievements.js
-│       │   ├── content.js
-│       │   ├── input.js
-│       │   ├── main.js
-│       │   ├── render.js
-│       │   └── state.js
 │       ├── site.js
-│       └── theme.js
+│       ├── theme.js
+│       └── quest/
+│           ├── achievements.js
+│           ├── content.js
+│           ├── input.js
+│           ├── main.js
+│           ├── render.js
+│           └── state.js
 ├── about.html
 ├── content.md
 ├── index.html
 ├── projects.html
 ├── quest.html
+├── README.md
 ├── .gitignore
 └── .nojekyll
 ```
 
 ## Run locally
 
-Open `index.html` in a browser, or use the VS Code Live Server extension.
+The project-card data and Field Workshop game use browser features that require a
+local web server. The simplest option is to open the project folder in VS Code and
+start **Live Server** from `index.html`.
 
-## Deployment
+Alternatively, with Python installed, run this command from the project root:
 
-[TODO: Document the GitHub Pages repository and deployment settings.]
+```powershell
+python -m http.server 8000
+```
 
-## Screenshots
+Then open [http://localhost:8000](http://localhost:8000). Stop the server with
+`Ctrl+C` in the terminal.
 
-[TODO: Add a screenshot after the visual design is complete.]
+## Deployment with GitHub Pages
+
+This repository is named `Davud09.github.io`, which serves as the account's
+GitHub Pages site.
+
+1. Push the `main` branch to the public repository.
+2. In GitHub, open **Settings → Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
+4. Select branch **main** and folder **/(root)**, then save.
+5. Wait for the Pages deployment to finish. Open
+   [https://davud09.github.io/](https://davud09.github.io/) and check the Home,
+   About, Projects, and Field Workshop pages.
 
 ## What I learned
 
-[TODO: Reflect on what you learned while building the site.]
+While building this portfolio, I practiced separating a static site into
+page-specific and shared styles, using JavaScript modules for interactive features,
+loading project content from JSON, and checking keyboard access and small-screen
+layouts. I also used Git commits to keep the work organized by stage.
 
 ## Generative AI
 
-[TODO: Describe how GenAI was used and how its output was reviewed and edited.]
+I used a generative AI assistant as a pair-programming and review tool while
+planning the site, drafting and adjusting HTML/CSS/JavaScript, and checking the
+result. I supplied the personal details and project facts; AI-generated wording
+and code were reviewed and revised during development. The assistant did not
+provide personal facts about me.
