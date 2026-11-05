@@ -17,14 +17,15 @@
 
 .site-header__brand {
   flex: 0 0 auto;
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
   text-decoration: none;
 }
 
-.site-header__brand span {
-  color: var(--color-accent);
+.site-header__brand:hover {
+  color: var(--color-accent-strong);
 }
 
 .site-header__controls,
@@ -86,6 +87,26 @@
 .menu-toggle:hover {
   border-color: var(--color-accent);
   color: var(--color-accent-strong);
+}
+
+.site-footer__social .icon-link[aria-label="Davud Idrisov on GitHub"],
+.site-footer__social .icon-link[aria-label="Portfolio source code on GitHub"] {
+  display: flex;
+  width: auto;
+  gap: var(--space-2);
+  padding-inline: var(--space-3);
+}
+
+.site-footer__social .icon-link[aria-label="Davud Idrisov on GitHub"]::after {
+  content: "Profile";
+  font-size: var(--text-xs);
+  font-weight: 650;
+}
+
+.site-footer__social .icon-link[aria-label="Portfolio source code on GitHub"]::after {
+  content: "Repo";
+  font-size: var(--text-xs);
+  font-weight: 650;
 }
 
 .icon-link svg,

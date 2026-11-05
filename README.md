@@ -19,8 +19,9 @@ resume called **Field Workshop**.
 
 ![Projects page showing the project cards and their current media placeholders](assets/images/projects.png)
 
-Project photos are still to be added, so the cards currently identify missing media
-with explicit TODO labels.
+Photos for the breadboard, Hour of Code, and Robotics projects are still to be added;
+those cards clearly identify their missing media. The portfolio card uses a screenshot
+from the site.
 
 ## Features
 
@@ -29,11 +30,12 @@ with explicit TODO labels.
 - Dark and light themes with a saved preference
 - Accessible profile image fallback, visible focus styles, and reduced-motion support
 - About page covering my education, skills, activities, languages, and interests
-- Project cards loaded from JSON, including planned projects and an optional slot
+- Project cards loaded from JSON, including upcoming course work and the portfolio build
 - Keyboard-accessible project image lightbox
 - Field Workshop interactive resume with keyboard and touch controls, XP, achievements,
   and a plain-resume option
-- Shared footer with a generated copyright year and GitHub/LinkedIn links
+- Shared footer with a generated copyright year and distinct GitHub profile, repository,
+  and LinkedIn links
 
 ## Technology
 

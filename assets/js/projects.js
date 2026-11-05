@@ -70,7 +70,7 @@ function renderProject(project, index) {
 
   const tools = document.createElement("div");
   tools.className = "project-card__tools";
-  tools.append(createTextElement("p", "project-card__tools-label", "Tools & materials"));
+  tools.append(createTextElement("p", "project-card__tools-label", "Tools & focus"));
   const tags = document.createElement("ul");
   tags.className = "project-card__tags";
 

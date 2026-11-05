@@ -12,6 +12,7 @@ export function renderMap(map, content, state) {
       if (station) {
         const marker = document.createElement("span");
         marker.className = `workshop-map__station${state.explored.includes(station.id) ? " is-explored" : ""}`;
+        marker.textContent = station.symbol;
         marker.style.gridColumn = String(x + 1);
         marker.style.gridRow = String(y + 1);
         tile.append(marker);
@@ -20,7 +21,7 @@ export function renderMap(map, content, state) {
       if (state.position.x === x && state.position.y === y) {
         const player = document.createElement("span");
         player.className = `workshop-map__player${station ? " is-at-station" : ""}`;
-        player.textContent = "YOU";
+        player.textContent = "DI";
         tile.append(player);
       }
 
@@ -38,7 +39,8 @@ export function renderHud(elements, content, state, achievementData) {
     (item) => item.x === state.position.x && item.y === state.position.y
   );
   elements.xp.textContent = `${state.xp} XP`;
-  elements.progress.textContent = `${state.explored.length} / ${content.stations.length} stations explored`;
+  elements.progress.textContent = `${state.explored.length} / ${content.stations.length} stops explored`;
+  elements.progressFill.style.width = `${(state.explored.length / content.stations.length) * 100}%`;
   elements.location.textContent = station
     ? `You’re at: ${station.label}. Select “Inspect station” to read this resume note.`
     : "You are at the workshop entrance. Move to a marked station.";
@@ -51,14 +53,14 @@ export function renderHud(elements, content, state, achievementData) {
     marker.className = `workshop-key__marker${state.explored.includes(item.id) ? " is-explored" : ""}`;
     marker.setAttribute("aria-hidden", "true");
     const label = document.createElement("span");
-    label.textContent = `${String(index + 1).padStart(2, "0")} · ${item.label}`;
+    label.textContent = `${item.symbol} · ${item.label}`;
     entry.append(marker, label);
     stationKey.append(entry);
   }
   elements.stationKey.replaceChildren(stationKey);
 
   const unlocked = new Set(state.achievements);
-  elements.achievementCount.textContent = `${state.achievements.length} / ${achievementData.length}`;
+  elements.achievementCount.textContent = `${state.achievements.length} unlocked`;
   const achievements = document.createDocumentFragment();
 
   for (const item of achievementData) {

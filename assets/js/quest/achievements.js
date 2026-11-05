@@ -7,15 +7,27 @@ export const achievements = [
   },
   {
     id: "circuit-reader",
-    title: "Logic-gate builder",
+    title: "Circuit reader",
     description: "Read the SITE 1101 breadboard project note.",
-    icon: "⚡"
+    icon: "C"
+  },
+  {
+    id: "scoreboard",
+    title: "Scoreboard found",
+    description: "Check out the academic results station.",
+    icon: "S"
+  },
+  {
+    id: "portfolio-builder",
+    title: "Built by hand",
+    description: "Visit the portfolio studio.",
+    icon: "W"
   },
   {
     id: "full-workshop",
-    title: "Whole workshop",
-    description: "Read all six resume stations.",
-    icon: "★"
+    title: "Full tour",
+    description: "Explore every stop in the workshop.",
+    icon: "✓"
   }
 ];
 
@@ -28,6 +40,14 @@ export function findNewAchievements(state, stationCount) {
 
   if (state.explored.includes("circuit-gates")) {
     unlocked.push("circuit-reader");
+  }
+
+  if (state.explored.includes("scores")) {
+    unlocked.push("scoreboard");
+  }
+
+  if (state.explored.includes("portfolio")) {
+    unlocked.push("portfolio-builder");
   }
 
   if (state.explored.length === stationCount) {

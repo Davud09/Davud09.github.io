@@ -15,10 +15,6 @@ worked on car engines, motors, and electronics.
 - ADA University, School of IT and Engineering (SITE)
 - First-year Bachelor of Science in Electrical and Electronics Engineering (BSEEE)
 
-## Qualifications
-
-- [TODO: Add formal qualifications or certificates, if applicable.]
-
 ## Skills
 
 - Python — basic
@@ -34,23 +30,32 @@ worked on car engines, motors, and electronics.
 - Team breadboard project: built NAND, OR, and NOT gates.
 - I built the NOT gate and learned to use a breadboard and correctly connect LEDs,
   transistors, resistors, and a battery.
-- Date: [TODO]
 - Project video: https://youtu.be/rQI84usunvg
 
 ### Planned projects
 
-- Hour of Code — planned; not started; details and media: [TODO]
-- Robotics — planned; not started; details and media: [TODO]
+- Hour of Code: learning Python, Microsoft MakeCode, and preparing a presentation
+- Robotics: LEGO EV3, Microsoft MakeCode, drawing, and problem solving
 
 ### Outside the course
 
-- High-school debate club — dates: [TODO]
-- Village volunteering: built small homes for squirrels — dates: [TODO]
+- High-school debate club
+- Village volunteering: built small homes for squirrels
 - Helped create a village community that repairs electronics and mechanical
-  items, including cars — dates: [TODO]
+  items, including cars
 - Swimming since age 7.
 - Participated in a regional swimming championship in Qusar in 2024.
-  Placement or award: [TODO: Add only if applicable.]
+
+## Test scores
+
+- SAT Math — 800
+- SAT Verbal — 680
+- IELTS — 7.5
+
+## Portfolio project
+
+- Built this responsive portfolio and the Field Workshop resume game with HTML,
+  CSS, and vanilla JavaScript.
 
 ## Languages
 
@@ -67,3 +72,13 @@ worked on car engines, motors, and electronics.
 - Calisthenics and street lifting: 24 kg weighted pull-ups for 8 reps and
   32 kg dips for 9 reps
 - Swimming
+- Gym
+- Skiing
+- Volleyball
+
+## Projects in progress
+
+- Hour of Code: learning Python, Microsoft MakeCode, and preparing a presentation
+- Robotics: LEGO EV3, Microsoft MakeCode, drawing, and problem solving
+- SITE 1101 portfolio: responsive HTML, CSS, and JavaScript pages, including the
+  Field Workshop interactive resume

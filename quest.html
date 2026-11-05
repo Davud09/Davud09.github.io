@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Explore Davud Idrisov’s resume in the Field Workshop, an interactive repair-bench experience.">
-    <meta name="theme-color" content="#101a2b">
+    <meta name="theme-color" content="#101a28">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Field Workshop — Davud Idrisov">
     <meta property="og:description" content="An interactive resume built around a hands-on repair workshop.">
@@ -20,7 +20,7 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="site-header__brand" href="index.html">Davud Idrisov<span aria-hidden="true">.</span></a>
+      <a class="site-header__brand" href="index.html">Davud Idrisov</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
         <span class="menu-toggle__lines" aria-hidden="true"></span>
       </button>
@@ -32,7 +32,7 @@
           <a class="site-nav__link" href="quest.html" aria-current="page">Field Workshop</a>
         </nav>
         <div class="site-header__social">
-          <a class="icon-link" href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer" aria-label="Portfolio GitHub repository">
+          <a class="icon-link" href="https://github.com/Davud09" target="_blank" rel="noopener noreferrer" aria-label="Davud Idrisov on GitHub">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.3-1.24-1.64-1.24-1.64-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.2 4.93 1.57.1-.73.39-1.23.7-1.51-2.47-.28-5.06-1.24-5.06-5.5 0-1.22.43-2.22 1.15-3-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.43 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.78 1.15 3 0 4.27-2.6 5.21-5.08 5.49.4.34.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
           </a>
           <a class="icon-link" href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer" aria-label="Davud Idrisov on LinkedIn">
@@ -49,8 +49,8 @@
         <p class="eyebrow">Interactive resume · bonus</p>
         <h1>The Repair Bench</h1>
         <p>
-          Walk around the workshop and inspect a station to learn about my education,
-          project work, and interests. Each new station adds experience points.
+          A hands-on tour of what I’m learning, building, and doing outside class.
+          Pick a station, explore its story, and collect workshop XP along the way.
         </p>
         <a class="button button--quiet quest-skip" href="about.html">Skip the game — view my plain resume <span aria-hidden="true">↗</span></a>
       </header>
@@ -62,23 +62,26 @@
             <strong id="workshop-xp">0 XP</strong>
           </div>
           <div class="workshop__progress" aria-live="polite">
-            <span id="workshop-progress">0 / 6 stations explored</span>
+            <span id="workshop-progress">0 stations explored</span>
+            <span class="workshop__progress-track" aria-hidden="true">
+              <span class="workshop__progress-fill" id="workshop-progress-fill"></span>
+            </span>
           </div>
         </div>
 
         <div class="workshop__layout">
           <div class="workshop__play">
             <p class="workshop__instructions" id="workshop-instructions">
-              Focus the workshop map, then use arrow keys or WASD to move. Reach a station and select Inspect.
+              Use arrow keys or WASD to move. Visit a marked station, then press Enter or select Inspect.
             </p>
-            <div class="workshop-map" id="workshop-map" tabindex="0" aria-describedby="workshop-instructions workshop-location" aria-label="Workshop map"></div>
+            <div class="workshop-map" id="workshop-map" tabindex="0" aria-describedby="workshop-instructions workshop-location" aria-label="Workshop map. Move with arrow keys or WASD; press Enter to inspect a station."></div>
             <ul class="workshop-key" id="workshop-key"></ul>
             <p class="workshop__location" id="workshop-location" aria-live="polite">You are at the workshop entrance.</p>
 
             <div class="workshop-controls" aria-label="Workshop touch controls">
               <button type="button" data-move="up" aria-label="Move up">↑</button>
               <button type="button" data-move="left" aria-label="Move left">←</button>
-              <button class="workshop-controls__inspect" type="button" data-inspect>Inspect station</button>
+              <button class="workshop-controls__inspect" type="button" data-inspect>Inspect</button>
               <button type="button" data-move="right" aria-label="Move right">→</button>
               <button type="button" data-move="down" aria-label="Move down">↓</button>
             </div>
@@ -87,14 +90,14 @@
           <aside class="workshop-panel" aria-label="Resume station and achievements">
             <section class="station-panel" aria-labelledby="station-title" aria-live="polite">
               <p class="eyebrow">Station notes</p>
-              <h2 id="station-title">Welcome to the workshop</h2>
-              <p id="station-description">Move to a station and inspect it to open a resume note.</p>
+              <h2 id="station-title">Choose your first stop</h2>
+              <p id="station-description">Move the DI marker to a station, then inspect it to open a story from my portfolio.</p>
               <ul class="station-facts" id="station-facts"></ul>
             </section>
             <section class="achievement-panel" aria-labelledby="achievement-title">
               <div class="achievement-panel__heading">
                 <h2 id="achievement-title">Achievements</h2>
-                <span id="achievement-count">0 / 3</span>
+                <span id="achievement-count">0 unlocked</span>
               </div>
               <ul class="achievement-list" id="achievement-list"></ul>
             </section>
@@ -120,7 +123,10 @@
         <p>Made for SITE 1101: Principles of Information Systems.</p>
       </div>
       <div class="site-footer__social" aria-label="Social and source links">
-        <a class="icon-link" href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer" aria-label="Portfolio GitHub repository">
+        <a class="icon-link" href="https://github.com/Davud09" target="_blank" rel="noopener noreferrer" aria-label="Davud Idrisov on GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.3-1.24-1.64-1.24-1.64-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.2 4.93 1.57.1-.73.39-1.23.7-1.51-2.47-.28-5.06-1.24-5.06-5.5 0-1.22.43-2.22 1.15-3-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.43 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.78 1.15 3 0 4.27-2.6 5.21-5.08 5.49.4.34.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+        </a>
+        <a class="icon-link" href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer" aria-label="Portfolio source code on GitHub">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.3-1.24-1.64-1.24-1.64-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.2 4.93 1.57.1-.73.39-1.23.7-1.51-2.47-.28-5.06-1.24-5.06-5.5 0-1.22.43-2.22 1.15-3-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.43 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.78 1.15 3 0 4.27-2.6 5.21-5.08 5.49.4.34.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
         </a>
         <a class="icon-link" href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer" aria-label="Davud Idrisov on LinkedIn">

@@ -21,13 +21,12 @@
   {
     "id": "hour-of-code",
     "title": "Project 2: Hour of Code",
-    "status": "Planned",
+    "status": "Coming up",
     "description": [
-      "I have not started this project yet.",
-      "I’ll add what I worked on, the tools I used, and what I learned after it is complete."
+      "I’m preparing to learn more Python and try Microsoft MakeCode for this project.",
+      "I also plan to put together a presentation; I’ll add the finished work and what I learned once the project is complete."
     ],
-    "tools": [],
-    "toolsTodo": "[TODO: Add tools after the project is complete.]",
+    "tools": ["Learning Python", "Microsoft MakeCode", "Presentation"],
     "image": null,
     "imageAlt": "",
     "mediaTodo": "[TODO: Add an Hour of Code screenshot after the project is complete.]",
@@ -36,31 +35,30 @@
   {
     "id": "robotics",
     "title": "Project 3: Robotics",
-    "status": "Planned",
+    "status": "Coming up",
     "description": [
-      "This robotics project is planned and has not started yet.",
-      "I’ll add the project goal, my contribution, tools, and what I learned when the work begins."
+      "For this project, I plan to work with a LEGO EV3 robot and use Microsoft MakeCode.",
+      "The work will also involve drawing and problem solving; I’ll add the robot and my completed work when it is ready."
     ],
-    "tools": [],
-    "toolsTodo": "[TODO: Add tools after the project begins.]",
+    "tools": ["LEGO EV3", "Microsoft MakeCode", "Drawing", "Problem solving"],
     "image": null,
     "imageAlt": "",
     "mediaTodo": "[TODO: Add a robotics project photo or screenshot when available.]",
     "links": []
   },
   {
-    "id": "optional-project",
-    "title": "Optional project",
-    "status": "Add when ready",
+    "id": "personal-portfolio",
+    "title": "Project 4: The Workshop on the Web",
+    "status": "Course portfolio",
     "description": [
-      "No optional project has been added yet.",
-      "[TODO: Add what the project was, what I did, and what I learned.]"
+      "I planned and built this portfolio to bring my coursework, interests, and experience into one place.",
+      "I used plain HTML, CSS, and JavaScript to make responsive pages and the Field Workshop resume game.",
+      "Building it gave me practice organizing a site and making interactive features work with a keyboard and on mobile."
     ],
-    "tools": [],
-    "toolsTodo": "[TODO: Add the tools and materials used.]",
-    "image": null,
-    "imageAlt": "",
-    "mediaTodo": "[TODO: Add a photo or screenshot of the project.]",
+    "tools": ["HTML5", "CSS3", "Vanilla JavaScript", "Git and GitHub Pages"],
+    "image": "assets/images/homepage.png",
+    "imageAlt": "Home page of my portfolio, with my introduction and profile photo.",
+    "mediaTodo": "",
     "links": []
   }
 ]

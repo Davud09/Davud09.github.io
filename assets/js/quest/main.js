@@ -10,6 +10,7 @@ const message = document.querySelector("#workshop-message");
 const elements = {
   xp: document.querySelector("#workshop-xp"),
   progress: document.querySelector("#workshop-progress"),
+  progressFill: document.querySelector("#workshop-progress-fill"),
   location: document.querySelector("#workshop-location"),
   stationKey: document.querySelector("#workshop-key"),
   title: document.querySelector("#station-title"),

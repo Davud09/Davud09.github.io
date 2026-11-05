@@ -1,20 +1,20 @@
 :root {
   color-scheme: dark;
 
-  --color-page: #101a2b;
-  --color-surface: #17283a;
-  --color-surface-raised: #203548;
-  --color-text: #f4f1e8;
-  --color-text-muted: #bdc9c5;
-  --color-accent: #f39a55;
-  --color-accent-strong: #ffb16d;
-  --color-green: #315a4b;
-  --color-border: #415568;
-  --color-focus: #ffd18a;
-  --color-on-accent: #172333;
+  --color-page: #101a28;
+  --color-surface: #192938;
+  --color-surface-raised: #223746;
+  --color-text: #f0f3ef;
+  --color-text-muted: #b9c7c9;
+  --color-accent: #8fbec5;
+  --color-accent-strong: #b6d5d7;
+  --color-green: #34554d;
+  --color-border: #405865;
+  --color-focus: #c6e4e6;
+  --color-on-accent: #132630;
 
-  --font-body: "Segoe UI", Arial, sans-serif;
-  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-body);
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -34,7 +34,7 @@
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-pill: 999px;
-  --shadow-card: 0 1rem 2.5rem rgb(0 0 0 / 18%);
+  --shadow-card: 0 1rem 2.5rem rgb(0 0 0 / 20%);
 
   font-family: var(--font-body);
   font-size: 100%;
@@ -48,36 +48,36 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --color-page: #f5f2e9;
-  --color-surface: #e8eee8;
+  --color-page: #f3f5f2;
+  --color-surface: #e6eeea;
   --color-surface-raised: #ffffff;
-  --color-text: #172333;
-  --color-text-muted: #46564f;
-  --color-accent: #a84813;
-  --color-accent-strong: #84370f;
-  --color-green: #d3e2d5;
-  --color-border: #9eaca3;
-  --color-focus: #74320d;
+  --color-text: #1a2c35;
+  --color-text-muted: #465a5e;
+  --color-accent: #246477;
+  --color-accent-strong: #1c5364;
+  --color-green: #d2e1d9;
+  --color-border: #a5b6b3;
+  --color-focus: #174e5d;
   --color-on-accent: #ffffff;
-  --shadow-card: 0 1rem 2.5rem rgb(23 35 51 / 10%);
+  --shadow-card: 0 1rem 2.5rem rgb(26 44 53 / 9%);
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     color-scheme: light;
 
-    --color-page: #f5f2e9;
-    --color-surface: #e8eee8;
+    --color-page: #f3f5f2;
+    --color-surface: #e6eeea;
     --color-surface-raised: #ffffff;
-    --color-text: #172333;
-    --color-text-muted: #46564f;
-    --color-accent: #a84813;
-    --color-accent-strong: #84370f;
-    --color-green: #d3e2d5;
-    --color-border: #9eaca3;
-    --color-focus: #74320d;
+    --color-text: #1a2c35;
+    --color-text-muted: #465a5e;
+    --color-accent: #246477;
+    --color-accent-strong: #1c5364;
+    --color-green: #d2e1d9;
+    --color-border: #a5b6b3;
+    --color-focus: #174e5d;
     --color-on-accent: #ffffff;
-    --shadow-card: 0 1rem 2.5rem rgb(23 35 51 / 10%);
+    --shadow-card: 0 1rem 2.5rem rgb(26 44 53 / 9%);
   }
 }
 
@@ -124,13 +124,14 @@ h2,
 h3 {
   font-family: var(--font-display);
   line-height: 1.1;
+  letter-spacing: -0.035em;
 }
 
 h1 {
   max-width: 14ch;
   margin-block: var(--space-4);
   font-size: var(--text-xl);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .page-actions {
@@ -142,7 +143,7 @@ h1 {
 
 .button {
   display: inline-flex;
-  min-height: 2.75rem;
+  min-height: 3rem;
   align-items: center;
   justify-content: center;
   padding: var(--space-3) var(--space-6);
@@ -152,14 +153,38 @@ h1 {
   color: var(--color-on-accent);
   font-weight: 700;
   text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
 }
 
 .button:hover {
   background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+  transform: translateY(-2px);
+}
+
+.button__arrow {
+  display: inline-block;
+  font-size: 1.4em;
+  font-weight: 800;
+  line-height: 0.7;
+  transition: transform 160ms ease;
+}
+
+.button:hover .button__arrow {
+  transform: translateX(3px);
 }
 
 .button--quiet {
   background: transparent;
+  color: var(--color-text);
+}
+
+.button--quiet:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface-raised);
   color: var(--color-text);
 }
 
