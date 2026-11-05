@@ -31,9 +31,16 @@ worked on car engines, motors, and electronics.
 
 ### SITE 1101
 
-- Team breadboard project: built NAND, AND, OR, and NOT gates.
-- I built the NOT gate and learned to use a breadboard.
+- Team breadboard project: built NAND, OR, and NOT gates.
+- I built the NOT gate and learned to use a breadboard and correctly connect LEDs,
+  transistors, resistors, and a battery.
 - Date: [TODO]
+- Project video: https://youtu.be/rQI84usunvg
+
+### Planned projects
+
+- Hour of Code — planned; not started; details and media: [TODO]
+- Robotics — planned; not started; details and media: [TODO]
 
 ### Outside the course
 

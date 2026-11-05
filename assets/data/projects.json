@@ -1,0 +1,51 @@
+[
+  {
+    "id": "site1101-logic-gates",
+    "title": "SITE 1101 Project 1",
+    "status": "Completed",
+    "description": [
+      "Our team built NAND, OR, and NOT gates on a breadboard.",
+      "I built the NOT gate and learned to use a breadboard and correctly connect LEDs, transistors, resistors, and a battery."
+    ],
+    "tools": ["Breadboard", "LED", "Transistor", "Resistor", "Battery"],
+    "image": null,
+    "imageAlt": "",
+    "mediaTodo": "[TODO: Add a photo or screenshot of the breadboard project.]",
+    "links": [
+      {
+        "label": "Watch the team project video",
+        "url": "https://youtu.be/rQI84usunvg"
+      }
+    ]
+  },
+  {
+    "id": "hour-of-code",
+    "title": "Project 2: Hour of Code",
+    "status": "Planned",
+    "description": [
+      "I have not started this project yet.",
+      "I’ll add what I worked on, the tools I used, and what I learned after it is complete."
+    ],
+    "tools": [],
+    "toolsTodo": "[TODO: Add tools after the project is complete.]",
+    "image": null,
+    "imageAlt": "",
+    "mediaTodo": "[TODO: Add an Hour of Code screenshot after the project is complete.]",
+    "links": []
+  },
+  {
+    "id": "robotics",
+    "title": "Project 3: Robotics",
+    "status": "Planned",
+    "description": [
+      "This robotics project is planned and has not started yet.",
+      "I’ll add the project goal, my contribution, tools, and what I learned when the work begins."
+    ],
+    "tools": [],
+    "toolsTodo": "[TODO: Add tools after the project begins.]",
+    "image": null,
+    "imageAlt": "",
+    "mediaTodo": "[TODO: Add a robotics project photo or screenshot when available.]",
+    "links": []
+  }
+]

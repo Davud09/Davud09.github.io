@@ -20,6 +20,7 @@
 - Home page with an accessible profile image and missing-image fallback
 - Scroll reveals that turn off for visitors who prefer reduced motion
 - About page with education, clearly labeled skill levels, activities, languages, and interests
+- JSON-driven project cards with planned/completed status, media TODOs, and an accessible lightbox
 
 ## Tech stack
 
@@ -36,14 +37,17 @@
 │   │   ├── about.css
 │   │   ├── base.css
 │   │   ├── home.css
-│   │   └── layout.css
+│   │   ├── layout.css
+│   │   └── projects.css
 │   ├── data/
+│   │   └── projects.json
 │   ├── images/
 │   │   ├── davud-idrisov.jpeg
 │   │   └── favicon.svg
 │   └── js/
 │       ├── home.js
 │       ├── nav.js
+│       ├── projects.js
 │       ├── reveal.js
 │       ├── site.js
 │       └── theme.js
