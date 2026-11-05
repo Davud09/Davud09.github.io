@@ -47,5 +47,20 @@
     "imageAlt": "",
     "mediaTodo": "[TODO: Add a robotics project photo or screenshot when available.]",
     "links": []
+  },
+  {
+    "id": "optional-project",
+    "title": "Optional project",
+    "status": "Add when ready",
+    "description": [
+      "No optional project has been added yet.",
+      "[TODO: Add what the project was, what I did, and what I learned.]"
+    ],
+    "tools": [],
+    "toolsTodo": "[TODO: Add the tools and materials used.]",
+    "image": null,
+    "imageAlt": "",
+    "mediaTodo": "[TODO: Add a photo or screenshot of the project.]",
+    "links": []
   }
 ]
