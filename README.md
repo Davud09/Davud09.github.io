@@ -21,7 +21,7 @@
 - Scroll reveals that turn off for visitors who prefer reduced motion
 - About page with education, clearly labeled skill levels, activities, languages, and interests
 - JSON-driven project cards with planned/completed status, media TODOs, and an accessible lightbox
-- Field Workshop game engine with keyboard/touch controls, XP, achievements, and a plain-resume path
+- Field Workshop game with real resume stations, keyboard/touch controls, XP, achievements, and a plain-resume path
 
 ## Tech stack
 

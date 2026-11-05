@@ -1,7 +1,7 @@
 # Portfolio content source
 
-This file is the source of truth for personal facts used on the Home and About pages.
-Unknown details stay marked as `[TODO]` until Davud provides them.
+This file is the source of truth for personal facts used on the portfolio pages and
+the Field Workshop game. Unknown details stay marked as `[TODO]` until Davud provides them.
 
 ## Personal story
 

@@ -2,19 +2,19 @@ export const achievements = [
   {
     id: "first-inspection",
     title: "Bench opened",
-    description: "Inspect your first resume station.",
+    description: "Read your first resume station.",
     icon: "01"
   },
   {
     id: "circuit-reader",
-    title: "Circuit reader",
-    description: "Inspect the circuit project station.",
+    title: "Logic-gate builder",
+    description: "Read the SITE 1101 breadboard project note.",
     icon: "⚡"
   },
   {
     id: "full-workshop",
-    title: "Full workshop",
-    description: "Explore every station.",
+    title: "Whole workshop",
+    description: "Read all six resume stations.",
     icon: "★"
   }
 ];
