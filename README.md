@@ -1,6 +1,6 @@
 # Davud Idrisov — Portfolio
 
-> **Current stage:** shared navigation, theme control, and footer are in place. Replace remaining `[TODO: ...]` items as content and media are ready.
+> **Current status:** The four pages and interactive resume are implemented. Remaining `[TODO: ...]` items need Davud's details, project media, or deployment information.
 
 ## Live site
 
@@ -8,7 +8,9 @@
 
 ## About
 
-[TODO: Add a short description of the portfolio.]
+A static portfolio for my SITE 1101 coursework and personal resume. It includes
+my background, completed and planned projects, and an interactive resume called
+Field Workshop.
 
 ## Features so far
 
@@ -39,7 +41,8 @@
 │   │   ├── base.css
 │   │   ├── home.css
 │   │   ├── layout.css
-│   │   └── projects.css
+│   │   ├── projects.css
+│   │   └── quest.css
 │   ├── data/
 │   │   └── projects.json
 │   ├── images/

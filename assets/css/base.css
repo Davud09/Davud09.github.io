@@ -11,6 +11,7 @@
   --color-green: #315a4b;
   --color-border: #415568;
   --color-focus: #ffd18a;
+  --color-on-accent: #172333;
 
   --font-body: "Segoe UI", Arial, sans-serif;
   --font-display: Georgia, "Times New Roman", serif;
@@ -57,6 +58,7 @@
   --color-green: #d3e2d5;
   --color-border: #9eaca3;
   --color-focus: #74320d;
+  --color-on-accent: #ffffff;
   --shadow-card: 0 1rem 2.5rem rgb(23 35 51 / 10%);
 }
 
@@ -74,6 +76,7 @@
     --color-green: #d3e2d5;
     --color-border: #9eaca3;
     --color-focus: #74320d;
+    --color-on-accent: #ffffff;
     --shadow-card: 0 1rem 2.5rem rgb(23 35 51 / 10%);
   }
 }
@@ -108,13 +111,6 @@ button:focus-visible {
   outline-offset: 4px;
 }
 
-.page-content {
-  width: min(72rem, calc(100% - 2 * var(--space-6)));
-  min-height: 60vh;
-  margin-inline: auto;
-  padding-block: clamp(var(--space-12), 12vh, var(--space-16));
-}
-
 .eyebrow {
   color: var(--color-accent-strong);
   font-size: var(--text-sm);
@@ -137,12 +133,6 @@ h1 {
   font-weight: 500;
 }
 
-.page-intro {
-  max-width: 62ch;
-  color: var(--color-text-muted);
-  font-size: var(--text-lg);
-}
-
 .page-actions {
   display: flex;
   flex-wrap: wrap;
@@ -159,7 +149,7 @@ h1 {
   border: 1px solid var(--color-accent);
   border-radius: var(--radius-pill);
   background: var(--color-accent);
-  color: #172333;
+  color: var(--color-on-accent);
   font-weight: 700;
   text-decoration: none;
 }
@@ -173,14 +163,8 @@ h1 {
   color: var(--color-text);
 }
 
-.placeholder-note,
 .text-link {
   color: var(--color-text-muted);
-}
-
-.placeholder-note {
-  margin-top: var(--space-12);
-  font-size: var(--text-sm);
 }
 
 @media (prefers-reduced-motion: reduce) {
