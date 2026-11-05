@@ -1,6 +1,6 @@
-# Your Name — Portfolio
+# Davud Idrisov — Portfolio
 
-> **Stage 1 scaffold:** replace the bracketed `[TODO: ...]` content as details and media are ready.
+> **Current stage:** shared navigation, theme control, and footer are in place. Replace remaining `[TODO: ...]` items as content and media are ready.
 
 ## Live site
 
@@ -10,9 +10,13 @@
 
 [TODO: Add a short description of the portfolio.]
 
-## Features
+## Features so far
 
-[TODO: List completed website features.]
+- Four linked page shells with shared responsive navigation and footer
+- Keyboard-operable mobile menu with current-page highlighting
+- Dark/light theme toggle that remembers the selection
+- Inline SVG links to the portfolio repository and LinkedIn
+- Reduced-motion support and visible keyboard focus styles
 
 ## Tech stack
 
@@ -26,12 +30,15 @@
 .
 ├── assets/
 │   ├── css/
-│   │   └── base.css
+│   │   ├── base.css
+│   │   └── layout.css
 │   ├── data/
 │   ├── images/
 │   │   └── favicon.svg
 │   └── js/
-│       └── site.js
+│       ├── nav.js
+│       ├── site.js
+│       └── theme.js
 ├── about.html
 ├── index.html
 ├── projects.html
