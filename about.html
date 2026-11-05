@@ -7,11 +7,12 @@
     <meta name="theme-color" content="#101a2b">
     <meta property="og:type" content="website">
     <meta property="og:title" content="About — Davud Idrisov">
-    <meta property="og:description" content="Background, education, interests, and activities of an electrical and electronics engineering student.">
-    <title>Davud Idrisov</title>
+    <meta property="og:description" content="My background, education, hands-on skills, activities, languages, and interests.">
+    <title>About — Davud Idrisov</title>
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/about.css">
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
@@ -42,10 +43,175 @@
         </button>
       </div>
     </header>
-    <main class="page-content">
-      <p class="eyebrow">About</p>
-      <h1>A little about me.</h1>
-      <p class="page-intro">[TODO: Add your background, education, qualifications, skills, activities, languages, and interests.]</p>
+    <main class="about-page">
+      <header class="about-intro">
+        <p class="eyebrow">About me</p>
+        <h1>Building, fixing, and learning how things work.</h1>
+        <p class="about-intro__summary">
+          I chose engineering because I like building and reassembling things, solving
+          problems, and seeing a clear result when something works again.
+        </p>
+      </header>
+
+      <section class="about-section story-section" aria-labelledby="story-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">01 / My story</p>
+          <h2 id="story-title">A hands-on kind of curiosity.</h2>
+        </div>
+        <div class="story-copy">
+          <p>
+            I’ve assembled and repaired TVs, TV boxes, phones, PCs and laptops. I’ve
+            also worked on car engines, motors, and other electronics. I’m drawn to
+            understanding what is wrong, working through the problem, and getting to
+            the moment when it works again.
+          </p>
+          <p>
+            I’m now studying Electrical and Electronics Engineering at ADA University
+            and building on that practical experience through my coursework.
+          </p>
+        </div>
+      </section>
+
+      <section class="about-section education-section" aria-labelledby="education-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">02 / Education</p>
+          <h2 id="education-title">What I’m studying.</h2>
+        </div>
+        <article class="education-card">
+          <p class="education-card__label">First year</p>
+          <h3>Bachelor of Science in Electrical and Electronics Engineering</h3>
+          <p>ADA University · School of IT and Engineering (SITE)</p>
+        </article>
+        <div class="qualifications">
+          <h3>Qualifications</h3>
+          <p>[TODO: Add formal qualifications or certificates, if applicable.]</p>
+        </div>
+      </section>
+
+      <section class="about-section skills-section" aria-labelledby="skills-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">03 / Skills</p>
+          <h2 id="skills-title">Where I’m at today.</h2>
+        </div>
+        <p class="section-note">
+          These labels describe my current level rather than a test score or formal
+          certification.
+        </p>
+        <div class="skill-grid">
+          <article class="skill-card">
+            <h3>Python</h3>
+            <p class="skill-level">Basic</p>
+          </article>
+          <article class="skill-card">
+            <h3>C++</h3>
+            <p class="skill-level">Basic</p>
+          </article>
+          <article class="skill-card">
+            <h3>Assembly</h3>
+            <p class="skill-level">Very basic</p>
+          </article>
+          <article class="skill-card skill-card--wide">
+            <h3>Hands-on repair and assembly</h3>
+            <p class="skill-level">Practical experience</p>
+            <p>
+              TVs, TV boxes, phones, PCs and laptops, car engines, motors, and
+              electronics.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="about-section activities-section" aria-labelledby="activities-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">04 / Activities</p>
+          <h2 id="activities-title">Learning beyond lectures.</h2>
+        </div>
+        <div class="activity-timeline">
+          <article class="timeline-entry">
+            <p class="timeline-entry__when">SITE 1101 · [TODO: Date]</p>
+            <div>
+              <h3>Breadboard logic gates</h3>
+              <p>
+                My team built NAND, AND, OR, and NOT gates. I built the NOT gate and
+                learned to work with a breadboard.
+              </p>
+            </div>
+          </article>
+          <article class="timeline-entry">
+            <p class="timeline-entry__when">High school · [TODO: Dates]</p>
+            <div>
+              <h3>Debate club</h3>
+              <p>I was a member of my high-school debate club.</p>
+            </div>
+          </article>
+          <article class="timeline-entry">
+            <p class="timeline-entry__when">Village volunteering · [TODO: Dates]</p>
+            <div>
+              <h3>Small homes for squirrels</h3>
+              <p>I volunteered to help build small homes for squirrels in my village.</p>
+            </div>
+          </article>
+          <article class="timeline-entry">
+            <p class="timeline-entry__when">Village community · [TODO: Dates]</p>
+            <div>
+              <h3>Repairing things together</h3>
+              <p>
+                I helped create a small community where we repair electronics and
+                mechanical things, including cars.
+              </p>
+            </div>
+          </article>
+          <article class="timeline-entry">
+            <p class="timeline-entry__when">Since age 7 · Qusar, 2024</p>
+            <div>
+              <h3>Swimming</h3>
+              <p>
+                I’ve been swimming since I was seven and participated in a regional
+                championship in Qusar in 2024. [TODO: Add a result only if applicable.]
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="about-section languages-section" aria-labelledby="languages-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">05 / Languages</p>
+          <h2 id="languages-title">Languages I speak.</h2>
+        </div>
+        <ul class="language-list">
+          <li><span>Azerbaijani</span><span class="language-level">C1</span></li>
+          <li><span>English</span><span class="language-level">C1</span></li>
+          <li><span>Turkish</span><span class="language-level">C1</span></li>
+          <li><span>Russian</span><span class="language-level">C1</span></li>
+          <li><span>Lezgi</span><span class="language-level">C1</span></li>
+          <li><span>French</span><span class="language-level">A2</span></li>
+        </ul>
+      </section>
+
+      <section class="about-section interests-section" aria-labelledby="interests-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">06 / Interests</p>
+          <h2 id="interests-title">Outside engineering.</h2>
+        </div>
+        <div class="interest-grid">
+          <article class="interest-card">
+            <p class="interest-card__number">01</p>
+            <h3>Hiking</h3>
+            <p>Shahdag, Kapaz, Qizilqaya, Galakhudat, Laza, and Tufandag.</p>
+          </article>
+          <article class="interest-card">
+            <p class="interest-card__number">02</p>
+            <h3>Calisthenics &amp; street lifting</h3>
+            <p>24 kg weighted pull-ups for 8 reps; 32 kg dips for 9 reps.</p>
+          </article>
+          <article class="interest-card">
+            <p class="interest-card__number">03</p>
+            <h3>Swimming</h3>
+            <p>A regular interest since I was seven.</p>
+          </article>
+        </div>
+      </section>
     </main>
     <footer class="site-footer">
       <div class="site-footer__copy">

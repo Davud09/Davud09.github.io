@@ -19,6 +19,7 @@
 - Reduced-motion support and visible keyboard focus styles
 - Home page with an accessible profile image and missing-image fallback
 - Scroll reveals that turn off for visitors who prefer reduced motion
+- About page with education, clearly labeled skill levels, activities, languages, and interests
 
 ## Tech stack
 
@@ -32,11 +33,13 @@
 .
 ├── assets/
 │   ├── css/
+│   │   ├── about.css
 │   │   ├── base.css
 │   │   ├── home.css
 │   │   └── layout.css
 │   ├── data/
 │   ├── images/
+│   │   ├── davud-idrisov.jpeg
 │   │   └── favicon.svg
 │   └── js/
 │       ├── home.js
@@ -45,6 +48,7 @@
 │       ├── site.js
 │       └── theme.js
 ├── about.html
+├── content.md
 ├── index.html
 ├── projects.html
 ├── quest.html
