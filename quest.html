@@ -3,18 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="An interactive resume and about page for Your Name.">
+    <meta name="description" content="Explore Davud Idrisov’s resume in the Field Workshop, an interactive repair-bench experience.">
     <meta name="theme-color" content="#101a2b">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Field Workshop — Davud Idrisov">
-    <meta property="og:description" content="An interactive resume and about page for Your Name.">
+    <meta property="og:description" content="An interactive resume built around a hands-on repair workshop.">
     <title>Field Workshop — Davud Idrisov</title>
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/quest.css">
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
+    <script type="module" src="assets/js/quest/main.js"></script>
   </head>
   <body>
     <header class="site-header">
@@ -42,11 +44,75 @@
         </button>
       </div>
     </header>
-    <main class="page-content">
-      <p class="eyebrow">Interactive resume · bonus</p>
-      <h1>Field Workshop</h1>
-      <p class="page-intro">[TODO: Build the interactive experience from real resume details.]</p>
-      <a class="text-link" href="about.html">View the plain about page</a>
+    <main class="quest-page">
+      <header class="quest-intro">
+        <p class="eyebrow">Interactive resume · bonus</p>
+        <h1>The Repair Bench</h1>
+        <p>
+          Walk around the workshop and inspect a station to learn about my education,
+          project work, and interests. Each new station adds experience points.
+        </p>
+        <a class="quest-skip" href="about.html">Skip the game — view my plain resume <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <section class="workshop" aria-label="Interactive resume game">
+        <div class="workshop__hud">
+          <div class="workshop__score">
+            <span class="workshop__score-label">Workshop XP</span>
+            <strong id="workshop-xp">0 XP</strong>
+          </div>
+          <div class="workshop__progress" aria-live="polite">
+            <span id="workshop-progress">0 / 6 stations explored</span>
+          </div>
+        </div>
+
+        <div class="workshop__layout">
+          <div class="workshop__play">
+            <p class="workshop__instructions" id="workshop-instructions">
+              Focus the workshop map, then use arrow keys or WASD to move. Reach a station and select Inspect.
+            </p>
+            <div class="workshop-map" id="workshop-map" tabindex="0" aria-describedby="workshop-instructions workshop-location" aria-label="Workshop map"></div>
+            <ul class="workshop-key" id="workshop-key"></ul>
+            <p class="workshop__location" id="workshop-location" aria-live="polite">You are at the workshop entrance.</p>
+
+            <div class="workshop-controls" aria-label="Workshop touch controls">
+              <button type="button" data-move="up" aria-label="Move up">↑</button>
+              <button type="button" data-move="left" aria-label="Move left">←</button>
+              <button class="workshop-controls__inspect" type="button" data-inspect>Inspect station</button>
+              <button type="button" data-move="right" aria-label="Move right">→</button>
+              <button type="button" data-move="down" aria-label="Move down">↓</button>
+            </div>
+          </div>
+
+          <aside class="workshop-panel" aria-label="Resume station and achievements">
+            <section class="station-panel" aria-labelledby="station-title" aria-live="polite">
+              <p class="eyebrow">Station notes</p>
+              <h2 id="station-title">Welcome to the workshop</h2>
+              <p id="station-description">Move to a station and inspect it to open a resume note.</p>
+              <ul class="station-facts" id="station-facts"></ul>
+            </section>
+            <section class="achievement-panel" aria-labelledby="achievement-title">
+              <div class="achievement-panel__heading">
+                <h2 id="achievement-title">Achievements</h2>
+                <span id="achievement-count">0 / 3</span>
+              </div>
+              <ul class="achievement-list" id="achievement-list"></ul>
+            </section>
+          </aside>
+        </div>
+        <p class="workshop__message" id="workshop-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="plain-resume-link" aria-label="Plain resume option">
+        <p>Want the straightforward version instead?</p>
+        <a class="button button--quiet" href="about.html">View the plain resume</a>
+      </section>
+      <noscript>
+        <p class="no-script-note">
+          The interactive workshop needs JavaScript. You can
+          <a href="about.html">skip the game and read the plain resume</a>.
+        </p>
+      </noscript>
     </main>
     <footer class="site-footer">
       <div class="site-footer__copy">

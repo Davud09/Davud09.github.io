@@ -21,6 +21,7 @@
 - Scroll reveals that turn off for visitors who prefer reduced motion
 - About page with education, clearly labeled skill levels, activities, languages, and interests
 - JSON-driven project cards with planned/completed status, media TODOs, and an accessible lightbox
+- Field Workshop game engine with keyboard/touch controls, XP, achievements, and a plain-resume path
 
 ## Tech stack
 
@@ -49,6 +50,13 @@
 │       ├── nav.js
 │       ├── projects.js
 │       ├── reveal.js
+│       ├── quest/
+│       │   ├── achievements.js
+│       │   ├── content.js
+│       │   ├── input.js
+│       │   ├── main.js
+│       │   ├── render.js
+│       │   └── state.js
 │       ├── site.js
 │       └── theme.js
 ├── about.html
