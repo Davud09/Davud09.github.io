@@ -1,24 +1,27 @@
 :root {
   color-scheme: dark;
 
-  --color-page: #101a28;
-  --color-surface: #192938;
-  --color-surface-raised: #223746;
-  --color-text: #f0f3ef;
-  --color-text-muted: #b9c7c9;
-  --color-accent: #8fbec5;
-  --color-accent-strong: #b6d5d7;
-  --color-green: #34554d;
-  --color-border: #405865;
-  --color-focus: #c6e4e6;
-  --color-on-accent: #132630;
+  --color-page: #1e2021;
+  --color-surface: #25292a;
+  --color-surface-raised: #2d3233;
+  --color-text: #edf0ed;
+  --color-text-muted: #b8c2be;
+  --color-accent: #83b7aa;
+  --color-accent-strong: #a0cfc2;
+  --color-green: #394b44;
+  --color-border: #757d7b;
+  --color-focus: #a9d8cb;
+  --color-on-accent: #14221e;
 
-  --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: system-ui, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-body);
+  --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  --text-2xs: 0.6875rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
   --text-lg: 1.25rem;
+  --text-2xl: clamp(1.75rem, 4vw, 2.5rem);
   --text-xl: clamp(2.5rem, 8vw, 5rem);
   --line-height-body: 1.65;
 
@@ -48,36 +51,36 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --color-page: #f3f5f2;
-  --color-surface: #e6eeea;
+  --color-page: #f4f6f3;
+  --color-surface: #e9eeea;
   --color-surface-raised: #ffffff;
-  --color-text: #1a2c35;
-  --color-text-muted: #465a5e;
-  --color-accent: #246477;
-  --color-accent-strong: #1c5364;
-  --color-green: #d2e1d9;
-  --color-border: #a5b6b3;
-  --color-focus: #174e5d;
+  --color-text: #202725;
+  --color-text-muted: #56635f;
+  --color-accent: #28695d;
+  --color-accent-strong: #20594f;
+  --color-green: #d8e2dc;
+  --color-border: #7f8a84;
+  --color-focus: #20594f;
   --color-on-accent: #ffffff;
-  --shadow-card: 0 1rem 2.5rem rgb(26 44 53 / 9%);
+  --shadow-card: 0 1rem 2.5rem rgb(32 39 37 / 9%);
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     color-scheme: light;
 
-    --color-page: #f3f5f2;
-    --color-surface: #e6eeea;
+    --color-page: #f4f6f3;
+    --color-surface: #e9eeea;
     --color-surface-raised: #ffffff;
-    --color-text: #1a2c35;
-    --color-text-muted: #465a5e;
-    --color-accent: #246477;
-    --color-accent-strong: #1c5364;
-    --color-green: #d2e1d9;
-    --color-border: #a5b6b3;
-    --color-focus: #174e5d;
+    --color-text: #202725;
+    --color-text-muted: #56635f;
+    --color-accent: #28695d;
+    --color-accent-strong: #20594f;
+    --color-green: #d8e2dc;
+    --color-border: #7f8a84;
     --color-on-accent: #ffffff;
-    --shadow-card: 0 1rem 2.5rem rgb(26 44 53 / 9%);
+    --color-focus: #20594f;
+    --shadow-card: 0 1rem 2.5rem rgb(32 39 37 / 9%);
   }
 }
 
