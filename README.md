@@ -1,135 +1,83 @@
 # Davud Idrisov — Portfolio
 
-Personal portfolio for my SITE 1101: Principles of Information Systems course.
-It brings together my engineering background, course projects, and an interactive
-resume called **Field Workshop**.
+A personal portfolio for my SITE 1101: Principles of Information Systems course.
+I’m a first-year Electrical and Electronics Engineering student at ADA University.
+This site brings together my background, coursework, projects, and an interactive
+resume game.
 
-## Live site and repository
+**Live site:** [davud09.github.io](https://davud09.github.io/) ·
+**Source:** [github.com/Davud09/Davud09.github.io](https://github.com/Davud09/Davud09.github.io)
 
-- **Website:** [https://davud09.github.io/](https://davud09.github.io/)
-- **Public GitHub repository:** [github.com/Davud09/Davud09.github.io](https://github.com/Davud09/Davud09.github.io)
-
-## Screenshots
+## The site
 
 ### Home
 
-![Portfolio home page showing the introduction, profile photo, and currently section](assets/images/homepage.png)
+![Desktop screenshot of the homepage, showing my introduction, profile photo, live page-interactive timing, and four-stage Signal Lab circuit challenge](assets/images/homepage.png)
+
+The homepage includes the **Signal Lab**, a four-stage circuit puzzle. The final
+stage adds a countdown and a switch sequence. The performance readout uses the
+browser's Navigation Timing API to show when the page became interactive; the
+result depends on the device and browser.
 
 ### Projects
 
-![Projects page showing the project cards and their current media placeholders](assets/images/projects.png)
+![Desktop screenshot of the projects page with the completed breadboard project, upcoming Hour of Code and Robotics projects, and portfolio project](assets/images/projects.png)
 
-Photos for the breadboard, Hour of Code, and Robotics projects are still to be added;
-those cards clearly identify their missing media. The portfolio card uses a screenshot
-from the site.
+The projects page is populated from [`assets/data/projects.json`](assets/data/projects.json).
+The SITE 1101 breadboard project is complete; Hour of Code and Robotics are listed
+as upcoming. Photos for those course projects have not been added yet, so the page
+labels the missing images rather than presenting placeholders as finished work.
+The breadboard team project video is linked from its project card.
 
-## Features
+## What’s here
 
-- Four responsive pages: Home, About, Projects, and Field Workshop
-- Keyboard-operable mobile navigation with current-page highlighting
-- Dark and light themes with a saved preference
-- Four-stage interactive circuit challenge with a timed final round
-- Home-page performance readout measured with the browser Navigation Timing API
-- Accessible profile image fallback, visible focus styles, and reduced-motion support
-- About page covering my education, skills, activities, languages, and interests
-- Project cards loaded from JSON, including upcoming course work and the portfolio build
-- Keyboard-accessible project image lightbox
-- Field Workshop interactive resume with keyboard and touch controls, XP, achievements,
-  and a plain-resume option
-- Shared footer with a generated copyright year and distinct GitHub profile, repository,
-  and LinkedIn links
+- **Home:** introduction, profile photo, browser-measured interactive timing, and
+  the four-stage Signal Lab challenge
+- **About:** education, practical repair experience, programming skills, activities,
+  test scores, languages, and interests
+- **Projects:** project cards loaded from JSON and a keyboard-operable image viewer
+- **Field Workshop:** a keyboard- and touch-operable interactive resume with map
+  stations, XP, achievements, and a link to the plain resume
+- Responsive layout, dark/light themes, keyboard focus styles, reduced-motion support,
+  and profile-image fallback
 
-## Technology
+## Built with
 
-- HTML5
-- CSS3 (custom properties; responsive and theme-aware styles)
-- Vanilla JavaScript (ES6+)
+- HTML, CSS, and vanilla JavaScript
 - JSON project data
+- GitHub Pages
 
-No framework, build step, backend, or npm package is required.
-
-## Project structure
-
-```text
-.
-├── assets/
-│   ├── css/
-│   │   ├── about.css
-│   │   ├── base.css
-│   │   ├── home.css
-│   │   ├── layout.css
-│   │   ├── projects.css
-│   │   └── quest.css
-│   ├── data/
-│   │   └── projects.json
-│   ├── images/
-│   │   ├── davud-idrisov.jpeg
-│   │   ├── favicon.svg
-│   │   ├── homepage.png
-│   │   └── projects.png
-│   └── js/
-│       ├── home.js
-│       ├── nav.js
-│       ├── projects.js
-│       ├── reveal.js
-│       ├── site.js
-│       ├── theme.js
-│       └── quest/
-│           ├── achievements.js
-│           ├── content.js
-│           ├── input.js
-│           ├── main.js
-│           ├── render.js
-│           └── state.js
-├── about.html
-├── content.md
-├── index.html
-├── projects.html
-├── quest.html
-├── README.md
-├── .gitignore
-└── .nojekyll
-```
+There is no build step, framework, or package installation.
 
 ## Run locally
 
-The project-card data and Field Workshop game use browser features that require a
-local web server. The simplest option is to open the project folder in VS Code and
-start **Live Server** from `index.html`.
-
-Alternatively, with Python installed, run this command from the project root:
+The projects page loads its content from JSON, so run the site through a local HTTP
+server rather than opening the HTML files directly. From the repository folder:
 
 ```powershell
 python -m http.server 8000
 ```
 
-Then open [http://localhost:8000](http://localhost:8000). Stop the server with
-`Ctrl+C` in the terminal.
+Open [http://localhost:8000](http://localhost:8000) and stop the server with
+`Ctrl+C`.
 
-## Deployment with GitHub Pages
+## Project files
 
-This repository is named `Davud09.github.io`, which serves as the account's
-GitHub Pages site.
+```text
+.
+├── about.html
+├── index.html
+├── projects.html
+├── quest.html
+├── content.md
+└── assets/
+    ├── css/       # Shared and page-specific styles
+    ├── data/      # Project-card data
+    ├── images/    # Profile photo, favicon, and page screenshots
+    └── js/        # Navigation, theme, page behavior, and workshop game
+```
 
-1. Push the `main` branch to the public repository.
-2. In GitHub, open **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select branch **main** and folder **/(root)**, then save.
-5. Wait for the Pages deployment to finish. Open
-   [https://davud09.github.io/](https://davud09.github.io/) and check the Home,
-   About, Projects, and Field Workshop pages.
+## Contact
 
-## What I learned
-
-While building this portfolio, I practiced separating a static site into
-page-specific and shared styles, using JavaScript modules for interactive features,
-loading project content from JSON, and checking keyboard access and small-screen
-layouts. I also used Git commits to keep the work organized by stage.
-
-## Generative AI
-
-I used a generative AI assistant as a pair-programming and review tool while
-planning the site, drafting and adjusting HTML/CSS/JavaScript, and checking the
-result. I supplied the personal details and project facts; AI-generated wording
-and code were reviewed and revised during development. The assistant did not
-provide personal facts about me.
+- [GitHub profile](https://github.com/Davud09)
+- [LinkedIn](https://www.linkedin.com/in/davud-idrisov-333a382b0/)
