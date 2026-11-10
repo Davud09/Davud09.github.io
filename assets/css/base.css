@@ -91,7 +91,7 @@
 }
 
 body {
-  min-width: 320px;
+  min-width: 18rem;
   min-height: 100vh;
   margin: 0;
   background: var(--color-page);

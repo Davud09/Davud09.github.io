@@ -59,26 +59,57 @@
             <a class="button" href="projects.html">See my projects <span class="button__arrow" aria-hidden="true">→</span></a>
             <a class="button button--quiet" href="about.html">More about me</a>
           </div>
+          <div class="home-vitals" aria-label="Built for speed">
+            <div class="home-vitals__metric">
+              <span class="home-vitals__label">Page interactive</span>
+              <strong><output data-page-ready title="Measured by browser Navigation Timing">—</output><span data-page-ready-unit>ms</span></strong>
+              <span class="home-vitals__meter" aria-hidden="true"><span data-page-ready-meter></span></span>
+            </div>
+            <span class="home-vitals__divider" aria-hidden="true"></span>
+            <div class="home-vitals__metric">
+              <span class="home-vitals__label">Runtime</span>
+              <strong>0 <span>frameworks</span></strong>
+              <span class="home-vitals__note">Native HTML · CSS · JS</span>
+            </div>
+          </div>
           <section class="circuit-toy" aria-labelledby="circuit-toy-title">
             <div class="circuit-toy__heading">
-              <p class="eyebrow">A tiny bench test</p>
-              <span class="circuit-toy__status" data-circuit-status aria-live="polite">STANDBY</span>
+              <p class="eyebrow">Signal lab <span aria-hidden="true">/</span> field test</p>
+              <span class="circuit-toy__status" data-circuit-status aria-live="polite">READY</span>
             </div>
-            <h2 id="circuit-toy-title">Can you light the circuit?</h2>
+            <div class="circuit-toy__title-row">
+              <h2 id="circuit-toy-title">Light the signal.</h2>
+              <span class="circuit-toy__stage-count" data-circuit-stage-count>STAGE 01 / 03</span>
+            </div>
+            <ol class="circuit-toy__progress" data-circuit-progress aria-label="Circuit challenge progress">
+              <li class="is-current" aria-current="step"><span>01</span></li>
+              <li><span>02</span></li>
+              <li><span>03</span></li>
+              <li><span>04</span></li>
+            </ol>
+            <p class="circuit-toy__instruction" data-circuit-instruction>Close the switch to send power to the lamp.</p>
+            <div class="circuit-toy__timer" data-circuit-timer-wrap hidden>
+              <span>TIME LEFT</span>
+              <output data-circuit-timer aria-live="off">7.0</output>
+              <span>s</span>
+            </div>
             <div class="circuit-toy__board" data-circuit-board>
-              <svg class="circuit-toy__diagram" viewBox="0 0 320 72" aria-hidden="true">
-                <path class="circuit-toy__trace" d="M22 36h76m0 0 24-18m-24 18 24 18m0-36h64m0 0h44m0 0v36h-44m0 0h-64m0 0h-24" />
-                <circle class="circuit-toy__node circuit-toy__node--start" cx="22" cy="36" r="6" />
-                <circle class="circuit-toy__node circuit-toy__node--end" cx="236" cy="18" r="9" />
-                <path class="circuit-toy__bulb" d="M236 36v9m-7 0h14m-11 5h8m-6 5h4" />
-                <path class="circuit-toy__switch" d="M84 36h14m38-18h22m0 0 14-9m-14 45h22" />
-              </svg>
-              <button class="circuit-toy__switch-button" type="button" role="switch" aria-checked="false" aria-label="Power the circuit" disabled>
-                <span class="circuit-toy__switch-dot" aria-hidden="true"></span>
-              </button>
-              <span class="circuit-toy__board-label">INPUT <span>→</span> OUTPUT</span>
+              <div class="circuit-toy__source" aria-hidden="true"><span>+</span><span>−</span></div>
+              <span class="circuit-toy__wire circuit-toy__wire--top" aria-hidden="true"></span>
+              <div class="circuit-toy__controls" data-circuit-controls role="group" aria-label="Circuit switches"></div>
+              <div class="circuit-toy__lamp" data-circuit-lamp aria-label="Lamp off">
+                <svg viewBox="0 0 40 48" aria-hidden="true">
+                  <path d="M20 3a13 13 0 0 0-8 23.2c1.7 1.4 2.8 3.2 3.1 5.3h9.8c.3-2.1 1.4-3.9 3.1-5.3A13 13 0 0 0 20 3Z" />
+                  <path d="M15.5 36h9m-8 4h7m-5.5 4h4" />
+                </svg>
+                <span>LAMP</span>
+              </div>
+              <span class="circuit-toy__board-label">DC · 5V</span>
             </div>
-            <p class="circuit-toy__hint" data-circuit-hint>Flip the switch and send a little signal.</p>
+            <div class="circuit-toy__footer">
+              <p class="circuit-toy__hint" data-circuit-hint aria-live="polite">One switch. One bright idea.</p>
+              <button class="circuit-toy__next" type="button" data-circuit-next hidden>Next stage <span aria-hidden="true">→</span></button>
+            </div>
           </section>
         </div>
         <figure class="home-portrait" data-reveal>

@@ -28,7 +28,8 @@ from the site.
 - Four responsive pages: Home, About, Projects, and Field Workshop
 - Keyboard-operable mobile navigation with current-page highlighting
 - Dark and light themes with a saved preference
-- Interactive circuit switch on the home page
+- Four-stage interactive circuit challenge with a timed final round
+- Home-page performance readout measured with the browser Navigation Timing API
 - Accessible profile image fallback, visible focus styles, and reduced-motion support
 - About page covering my education, skills, activities, languages, and interests
 - Project cards loaded from JSON, including upcoming course work and the portfolio build
