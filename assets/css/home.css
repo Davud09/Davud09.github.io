@@ -64,6 +64,186 @@
   gap: var(--space-2);
 }
 
+.home-hero .button:not(.button--quiet) {
+  border-color: transparent;
+  border-radius: 0.7rem 1.5rem 0.7rem 1.5rem;
+  background:
+    linear-gradient(120deg, transparent 0 50%, rgb(255 255 255 / 12%) 50% 100%),
+    var(--color-accent);
+  box-shadow: 0 0.5rem 1.5rem rgb(131 183 170 / 18%);
+}
+
+.home-hero .button:not(.button--quiet):hover {
+  box-shadow: 0 0.7rem 1.8rem rgb(131 183 170 / 30%);
+}
+
+.home-hero .button--quiet {
+  border-radius: 1.5rem 0.7rem 1.5rem 0.7rem;
+}
+
+.home-hero .button--quiet:hover {
+  transform: translateY(-2px);
+}
+
+.circuit-toy {
+  width: min(100%, 28rem);
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: 0.65rem 1.15rem 0.65rem 1.15rem;
+  background:
+    linear-gradient(135deg, rgb(131 183 170 / 7%), transparent 58%),
+    var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.circuit-toy__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.circuit-toy__heading .eyebrow {
+  margin: 0;
+  font-size: var(--text-2xs);
+}
+
+.circuit-toy__status {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+}
+
+.circuit-toy h2 {
+  margin: var(--space-2) 0;
+  font-size: var(--text-lg);
+}
+
+.circuit-toy__board {
+  position: relative;
+  display: grid;
+  min-height: 5.5rem;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-page);
+  background-image:
+    linear-gradient(90deg, transparent 49%, rgb(131 183 170 / 7%) 50%, transparent 51%),
+    linear-gradient(transparent 49%, rgb(131 183 170 / 7%) 50%, transparent 51%);
+  background-size: 1rem 1rem;
+}
+
+.circuit-toy__diagram {
+  width: min(100%, 20rem);
+  overflow: visible;
+}
+
+.circuit-toy__trace,
+.circuit-toy__switch {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  transition: stroke 220ms ease, filter 220ms ease;
+}
+
+.circuit-toy__switch {
+  stroke-width: 4;
+}
+
+.circuit-toy__node {
+  fill: var(--color-surface-raised);
+  stroke: var(--color-border);
+  stroke-width: 3;
+  transition: fill 220ms ease, stroke 220ms ease, filter 220ms ease;
+}
+
+.circuit-toy__bulb {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-linecap: round;
+  stroke-width: 3;
+  transition: stroke 220ms ease, filter 220ms ease;
+}
+
+.circuit-toy__switch-button {
+  position: absolute;
+  top: 50%;
+  left: 28%;
+  display: inline-flex;
+  width: 3rem;
+  height: 1.65rem;
+  align-items: center;
+  padding: 0.2rem;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-raised);
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.circuit-toy__switch-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.circuit-toy__switch-button[aria-checked="true"] {
+  justify-content: flex-end;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+}
+
+.circuit-toy__switch-dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--color-text);
+  transition: transform 180ms ease;
+}
+
+.circuit-toy__switch-button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.circuit-toy__board-label {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-2);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+
+.circuit-toy__board-label span {
+  color: var(--color-accent-strong);
+}
+
+.circuit-toy__hint {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.circuit-toy__board.is-powered .circuit-toy__trace,
+.circuit-toy__board.is-powered .circuit-toy__switch {
+  stroke: var(--color-accent-strong);
+  filter: drop-shadow(0 0 5px var(--color-accent));
+}
+
+.circuit-toy__board.is-powered .circuit-toy__node,
+.circuit-toy__board.is-powered .circuit-toy__bulb {
+  fill: var(--color-accent);
+  stroke: var(--color-accent-strong);
+  filter: drop-shadow(0 0 6px var(--color-accent));
+}
+
 .home-portrait {
   position: relative;
   z-index: 1;
@@ -235,6 +415,10 @@ html.reveal-ready [data-reveal].is-revealed {
   .home-portrait {
     width: min(72%, 19rem);
     margin-top: var(--space-4);
+  }
+
+  .circuit-toy {
+    width: 100%;
   }
 
   .home-scroll {
