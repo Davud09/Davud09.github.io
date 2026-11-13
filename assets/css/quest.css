@@ -15,7 +15,7 @@
 .quest-intro h1 {
   max-width: 12ch;
   margin: 0 0 var(--space-4);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: clamp(3rem, 7vw, 5.8rem);
   font-weight: 600;
   letter-spacing: -0.055em;
@@ -46,7 +46,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background:
-    linear-gradient(135deg, var(--color-accent-wash-soft), transparent 42%),
+    linear-gradient(135deg, rgb(143 190 197 / 5%), transparent 42%),
     var(--color-surface);
   box-shadow: var(--shadow-card);
 }
@@ -101,8 +101,8 @@
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: var(--color-signal);
-  transition: width var(--motion-standard) var(--motion-easing);
+  background: var(--color-accent);
+  transition: width 240ms ease;
 }
 
 .workshop__layout {
@@ -131,12 +131,11 @@
   border-radius: var(--radius-md);
   background-color: var(--color-page);
   background-image:
-    linear-gradient(90deg, transparent 48%, var(--color-accent-wash-soft) 49%, var(--color-accent-wash-soft) 51%, transparent 52%),
-    linear-gradient(transparent 48%, var(--color-accent-wash-soft) 49%, var(--color-accent-wash-soft) 51%, transparent 52%),
-    radial-gradient(ellipse at 50% 50%, var(--color-board-haze), transparent 70%);
+    linear-gradient(90deg, transparent 48%, rgb(143 190 197 / 5%) 49%, rgb(143 190 197 / 5%) 51%, transparent 52%),
+    linear-gradient(transparent 48%, rgb(143 190 197 / 5%) 49%, rgb(143 190 197 / 5%) 51%, transparent 52%),
+    radial-gradient(ellipse at 50% 50%, rgb(52 85 77 / 22%), transparent 70%);
   background-size: 4.5rem 4.5rem, 4.5rem 4.5rem, 100% 100%;
-  box-shadow: var(--shadow-map-inset);
-  touch-action: none;
+  box-shadow: inset 0 0 2.5rem rgb(0 0 0 / 14%);
 }
 
 .workshop-map:focus-visible {
@@ -149,9 +148,9 @@
   min-width: 0;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid var(--color-accent-wash);
-  border-radius: var(--radius-sm);
-  background: var(--color-accent-wash-subtle);
+  border: 1px solid rgb(143 190 197 / 8%);
+  border-radius: 0.55rem;
+  background: rgb(143 190 197 / 3%);
 }
 
 .workshop-map__station {
@@ -160,22 +159,22 @@
   height: 78%;
   place-items: center;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: 0.6rem;
   background: linear-gradient(145deg, var(--color-surface-raised), var(--color-green));
   color: var(--color-text);
   font-size: clamp(0.65rem, 1.2vw, 0.9rem);
   font-weight: 800;
-  box-shadow: var(--shadow-tile);
+  box-shadow: 0 0.3rem 0.7rem rgb(0 0 0 / 18%);
   transition:
-    border-color var(--motion-quick) var(--motion-easing),
-    background-color var(--motion-quick) var(--motion-easing),
-    transform var(--motion-quick) var(--motion-easing);
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
 }
 
 .workshop-map__station.is-explored {
-  border-color: var(--color-signal);
-  background: var(--color-signal);
-  color: var(--color-on-signal);
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
   transform: scale(0.94);
 }
 
@@ -185,18 +184,18 @@
   height: 78%;
   place-items: center;
   border: 2px solid var(--color-page);
-  border-radius: var(--radius-circle);
+  border-radius: 50%;
   background: var(--color-accent-strong);
   color: var(--color-on-accent);
   font-size: clamp(0.5rem, 0.9vw, 0.7rem);
   font-weight: 900;
   letter-spacing: -0.04em;
-  box-shadow: var(--shadow-player);
-  animation: player-arrive var(--motion-quick) var(--motion-easing);
+  box-shadow: 0 0 0 3px rgb(143 190 197 / 28%), 0 0.35rem 0.9rem rgb(0 0 0 / 25%);
+  animation: player-arrive 240ms ease-out;
 }
 
 .workshop-map__player.is-at-station {
-  border-radius: var(--radius-marker);
+  border-radius: 25%;
 }
 
 .workshop-key {
@@ -221,26 +220,19 @@
   height: 0.75rem;
   flex: 0 0 auto;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-marker);
+  border-radius: 25%;
   background: var(--color-green);
 }
 
 .workshop-key__marker.is-explored {
-  border-color: var(--color-signal);
-  background: var(--color-signal);
+  border-color: var(--color-accent);
+  background: var(--color-accent);
 }
 
 .workshop__location {
   min-height: 1.7em;
   margin: 0 0 var(--space-4);
   font-weight: 600;
-}
-
-.workshop__gamepad {
-  margin: 0 0 var(--space-3);
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
 }
 
 .workshop-controls {
@@ -390,13 +382,13 @@
 }
 
 .achievement.is-unlocked {
-  border-color: var(--color-signal);
+  border-color: var(--color-accent);
   background: var(--color-surface);
   opacity: 1;
 }
 
 .achievement.is-unlocked .achievement__icon {
-  color: var(--color-on-signal);
+  color: var(--color-on-accent);
 }
 
 .achievement__icon {
@@ -405,14 +397,14 @@
   height: 2rem;
   flex: 0 0 auto;
   place-items: center;
-  border-radius: var(--radius-circle);
+  border-radius: 50%;
   background: var(--color-green);
   color: var(--color-text);
 }
 
 .achievement.is-unlocked .achievement__icon {
-  background: var(--color-signal);
-  color: var(--color-on-signal);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .achievement h3 {
@@ -461,156 +453,6 @@
   color: var(--color-text-muted);
 }
 
-.workshop__options {
-  display: grid;
-  justify-items: end;
-  gap: var(--space-2);
-}
-
-.workshop__options .button {
-  min-height: 2.5rem;
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--text-xs);
-}
-
-.workshop__best-time {
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-}
-
-.station-minigame {
-  display: grid;
-  gap: var(--space-3);
-  margin-top: var(--space-4);
-}
-
-.station-minigame:empty {
-  display: none;
-}
-
-.station-minigame__panel {
-  display: grid;
-  gap: var(--space-2);
-  padding: var(--space-3);
-  border: 1px solid var(--color-glass-border);
-  border-radius: var(--radius-sm);
-  background: var(--color-glass-surface);
-}
-
-.station-minigame__panel h3 {
-  margin: 0;
-  font-size: var(--text-sm);
-}
-
-.station-minigame__panel > p {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
-  line-height: 1.55;
-}
-
-.station-minigame__panel .station-minigame__record {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-}
-
-.station-minigame__status {
-  min-height: 1.5em;
-  color: var(--color-signal) !important;
-}
-
-.station-minigame__prompt {
-  color: var(--color-text) !important;
-}
-
-.station-minigame__choices {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.station-minigame__choices .button,
-.station-minigame__panel > .button,
-.station-minigame__form .button {
-  min-height: 2.5rem;
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--text-xs);
-}
-
-.station-minigame__form {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-2);
-}
-
-.station-minigame__form label {
-  display: grid;
-  gap: var(--space-1);
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
-}
-
-.station-minigame__form select {
-  min-height: 2.5rem;
-  min-width: 0;
-  padding-inline: var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
-  background: var(--color-surface-raised);
-  color: var(--color-text);
-  font: inherit;
-}
-
-.station-minigame__form .button {
-  grid-column: 1 / -1;
-}
-
-.station-minigame__progress {
-  width: 100%;
-  accent-color: var(--color-signal);
-}
-
-.workshop-unlock {
-  margin-top: var(--space-6);
-  padding: var(--space-5);
-  border: 1px solid var(--color-glass-accent-border);
-  border-radius: var(--radius-md);
-  background: var(--color-signal-surface);
-}
-
-.workshop-unlock[hidden] {
-  display: none;
-}
-
-.workshop-unlock h2 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-}
-
-.workshop-unlock > p:not(.eyebrow) {
-  color: var(--color-text-muted);
-}
-
-.workshop.is-accessible {
-  font-size: 1.1rem;
-}
-
-.workshop.is-accessible .workshop-controls button {
-  min-width: 3.75rem;
-  min-height: 3.75rem;
-}
-
-.workshop.is-accessible .workshop-map__tile {
-  border-color: var(--color-glass-accent-border);
-}
-
-.workshop.is-accessible .workshop__best-time,
-.workshop.is-accessible .station-minigame__record {
-  display: none;
-}
-
 .no-script-note {
   margin-top: var(--space-6);
 }
@@ -652,14 +494,20 @@
     text-align: left;
   }
 
-  .workshop__options {
-    width: 100%;
-    justify-items: start;
-  }
-
   .workshop__layout,
   .workshop-panel {
     grid-template-columns: 1fr;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .workshop__progress-fill,
+    .workshop-map__station {
+      transition: none;
+    }
+
+    .workshop-map__player {
+      animation: none;
+    }
   }
 
   .workshop-controls {

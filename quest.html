@@ -4,19 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Explore Davud Idrisov’s resume in the Field Workshop, an interactive repair-bench experience.">
-    <meta name="theme-color" content="#081321">
+    <meta name="theme-color" content="#101a28">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Field Workshop — Davud Idrisov">
     <meta property="og:description" content="An interactive resume built around a hands-on repair workshop.">
     <title>Field Workshop — Davud Idrisov</title>
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/quest.css">
-    <link rel="stylesheet" href="assets/css/effects.css">
+    <link rel="stylesheet" href="assets/css/glass.css">
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
@@ -73,23 +70,14 @@
               <span class="workshop__progress-fill" id="workshop-progress-fill"></span>
             </span>
           </div>
-          <div class="workshop__options">
-            <button type="button" class="button button--quiet" id="workshop-accessibility" aria-pressed="false">
-              Accessibility mode: off
-            </button>
-            <span class="workshop__best-time" id="workshop-best-time">Best time: —</span>
-          </div>
         </div>
 
         <div class="workshop__layout">
           <div class="workshop__play">
             <p class="workshop__instructions" id="workshop-instructions">
-              Use arrow keys, WASD, touch controls, or swipe the map to move. Visit a marked station, then press Enter or select Inspect.
+              Use arrow keys or WASD to move. Visit a marked station, then press Enter or select Inspect.
             </p>
             <div class="workshop-map" id="workshop-map" tabindex="0" aria-describedby="workshop-instructions workshop-location" aria-label="Workshop map. Move with arrow keys or WASD; press Enter to inspect a station."></div>
-            <p class="workshop__gamepad" id="workshop-gamepad" aria-live="polite">
-              Gamepad: connect a controller; use its D-pad or left stick to move and A to inspect.
-            </p>
             <ul class="workshop-key" id="workshop-key"></ul>
             <p class="workshop__location" id="workshop-location" aria-live="polite">You are at the workshop entrance.</p>
 
@@ -108,7 +96,6 @@
               <h2 id="station-title">Choose your first stop</h2>
               <p id="station-description">Move the DI marker to a station, then inspect it to open a story from my portfolio.</p>
               <ul class="station-facts" id="station-facts"></ul>
-              <div class="station-minigame" id="station-minigame"></div>
             </section>
             <section class="achievement-panel" aria-labelledby="achievement-title">
               <div class="achievement-panel__heading">
@@ -119,12 +106,6 @@
             </section>
           </aside>
         </div>
-        <section class="workshop-unlock" id="workshop-unlock" hidden aria-labelledby="workshop-unlock-title">
-          <p class="eyebrow">100 XP · BONUS CIRCUIT COMPLETE</p>
-          <h2 id="workshop-unlock-title">You found the contact panel.</h2>
-          <p>Want to connect? My profile links are ready.</p>
-          <a class="button button--primary" href="about.html#contact">Open contact section <span aria-hidden="true">↗</span></a>
-        </section>
         <p class="workshop__message" id="workshop-message" role="status" aria-live="polite"></p>
       </section>
 

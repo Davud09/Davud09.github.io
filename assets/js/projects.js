@@ -99,12 +99,6 @@ function renderProject(project, index) {
     body.append(links);
   }
 
-  const detailLink = document.createElement("a");
-  detailLink.className = "project-card__link";
-  detailLink.href = `project.html?id=${encodeURIComponent(project.id)}`;
-  detailLink.textContent = "Open project details ↗";
-  body.append(detailLink);
-
   card.append(media, body);
   return card;
 }

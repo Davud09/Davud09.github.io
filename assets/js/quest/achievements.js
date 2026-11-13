@@ -28,24 +28,6 @@ export const achievements = [
     title: "Full tour",
     description: "Explore every stop in the workshop.",
     icon: "✓"
-  },
-  {
-    id: "smoke-test",
-    title: "Smoke Test Passed",
-    description: "Complete a workshop practice simulation.",
-    icon: "OK"
-  },
-  {
-    id: "hot-swap",
-    title: "Hot Swap",
-    description: "Finish a timed practice run without a false start.",
-    icon: "↻"
-  },
-  {
-    id: "perfect-run",
-    title: "Perfect run",
-    description: "Complete a practice sequence without a mistake.",
-    icon: "★"
   }
 ];
 

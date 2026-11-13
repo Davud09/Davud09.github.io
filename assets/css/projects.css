@@ -4,117 +4,6 @@
   padding-bottom: var(--space-16);
 }
 
-.project-detail {
-  width: min(68rem, calc(100% - 2 * var(--space-6)));
-  margin-inline: auto;
-  padding-block: var(--space-8) var(--space-16);
-}
-
-.project-detail__intro {
-  max-width: 56rem;
-  padding-block: var(--space-8);
-}
-
-.project-detail__intro h1 {
-  margin: 0 0 var(--space-4);
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 6rem);
-  letter-spacing: -0.055em;
-  line-height: var(--line-height-heading);
-}
-
-.project-detail__intro > p:last-child {
-  max-width: 65ch;
-  color: var(--color-text-muted);
-  font-size: var(--text-lg);
-}
-
-.project-detail__sections {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-4);
-}
-
-.project-detail__sections section {
-  position: relative;
-  padding: var(--space-5);
-  border: 1px solid var(--color-glass-border);
-  border-radius: var(--radius-md);
-  background: var(--color-glass-surface);
-  box-shadow: var(--shadow-control);
-}
-
-.project-detail__sections section:last-child {
-  grid-column: 1 / -1;
-}
-
-.project-detail__sections .eyebrow {
-  margin: 0 0 var(--space-2);
-}
-
-.project-detail__sections h2 {
-  margin: 0 0 var(--space-3);
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-}
-
-.project-detail__sections p,
-.project-detail__sections ul {
-  margin-bottom: 0;
-  color: var(--color-text-muted);
-}
-
-.project-detail__status {
-  min-height: 1.5em;
-  margin-top: var(--space-4);
-  color: var(--color-accent-strong);
-}
-
-.repair-log__entry {
-  max-width: 56rem;
-  margin-bottom: var(--space-6);
-  padding: clamp(var(--space-4), 4vw, var(--space-8));
-  border: 1px solid var(--color-glass-border);
-  border-radius: var(--radius-md);
-  background: var(--color-glass-surface);
-  box-shadow: var(--shadow-card);
-}
-
-.repair-log__entry h2 {
-  margin: 0 0 var(--space-3);
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-}
-
-.repair-log__entry > p:not(.eyebrow) {
-  color: var(--color-text-muted);
-}
-
-.repair-log__entry dl {
-  display: grid;
-  gap: var(--space-3);
-  margin-bottom: 0;
-}
-
-.repair-log__entry dl > div {
-  display: grid;
-  grid-template-columns: minmax(9rem, 0.7fr) 1.3fr;
-  gap: var(--space-3);
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--color-border);
-}
-
-.repair-log__entry dt {
-  color: var(--color-accent-strong);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-}
-
-.repair-log__entry dd {
-  margin: 0;
-  color: var(--color-text-muted);
-}
-
 .projects-intro {
   max-width: 58rem;
   padding-block: clamp(var(--space-12), 12vh, 8rem) var(--space-12);
@@ -127,7 +16,7 @@
 .projects-intro h1 {
   max-width: 16ch;
   margin: 0 0 var(--space-5, 1.25rem);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: clamp(3rem, 7vw, 5.8rem);
   font-weight: 600;
   letter-spacing: -0.055em;
@@ -181,7 +70,7 @@
   overflow: hidden;
   place-items: center;
   background:
-    radial-gradient(ellipse at 75% 30%, var(--color-accent-spotlight), transparent 40%),
+    radial-gradient(ellipse at 75% 30%, rgb(143 190 197 / 18%), transparent 40%),
     linear-gradient(145deg, var(--color-surface-raised), var(--color-green));
 }
 
@@ -212,7 +101,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--motion-quick) var(--motion-easing);
+  transition: transform 220ms ease;
 }
 
 .project-card__image-button:hover img {
@@ -344,8 +233,8 @@
 }
 
 .lightbox::backdrop {
-  background: var(--color-ink-overlay);
-  backdrop-filter: blur(var(--blur-lightbox));
+  background: rgb(5 10 18 / 82%);
+  backdrop-filter: blur(4px);
 }
 
 .lightbox__panel {
@@ -405,21 +294,6 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-@media (max-width: 42rem) {
-  .project-detail,
-  .projects-page {
-    width: calc(100% - 2 * var(--space-4));
-  }
-
-  .project-detail__sections {
-    grid-template-columns: 1fr;
-  }
-
-  .project-detail__sections section:last-child {
-    grid-column: auto;
-  }
 }
 
 @media (max-width: 48rem) {

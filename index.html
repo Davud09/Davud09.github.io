@@ -4,19 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Davud Idrisov is a first-year electrical and electronics engineering student who enjoys repairing, building, and figuring out how things work.">
-    <meta name="theme-color" content="#081321">
+    <meta name="theme-color" content="#101a28">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Davud Idrisov — Portfolio">
     <meta property="og:description" content="Davud Idrisov is a first-year electrical and electronics engineering student who enjoys repairing, building, and figuring out how things work.">
     <title>Davud Idrisov — Portfolio</title>
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="assets/css/effects.css">
+    <link rel="stylesheet" href="assets/css/glass.css">
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
@@ -26,7 +23,6 @@
     <script src="assets/js/glass-controls.js" defer></script>
   </head>
   <body>
-    <!-- Unlisted route: secret.html. -->
     <header class="site-header">
       <a class="site-header__brand" href="index.html">Davud Idrisov</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
@@ -56,7 +52,6 @@
       <section class="home-hero" aria-labelledby="home-title">
         <div class="home-hero__content" data-reveal>
           <p class="eyebrow">Electrical &amp; electronics engineering · ADA University</p>
-          <p class="home-greeting" data-greeting></p>
           <h1 id="home-title">I like figuring out how things <span>work.</span></h1>
           <p class="home-hero__intro">
             I’m Davud, a first-year electrical and electronics engineering student at ADA
@@ -64,7 +59,7 @@
             the problem, and putting them back together so they work again.
           </p>
           <div class="page-actions">
-            <a class="button button--magnetic" href="projects.html">See my projects <span class="button__arrow" aria-hidden="true">→</span></a>
+            <a class="button" href="projects.html">See my projects <span class="button__arrow" aria-hidden="true">→</span></a>
             <a class="button button--quiet" href="about.html">More about me</a>
           </div>
           <div class="home-vitals" aria-label="Built for speed">
@@ -80,17 +75,21 @@
               <span class="home-vitals__note">Native HTML · CSS · JS</span>
             </div>
           </div>
-          <section class="circuit-toy" id="signal-lab" aria-labelledby="circuit-toy-title">
+          <section class="circuit-toy" aria-labelledby="circuit-toy-title">
             <div class="circuit-toy__heading">
               <p class="eyebrow">Signal lab <span aria-hidden="true">/</span> field test</p>
               <span class="circuit-toy__status" data-circuit-status aria-live="polite">READY</span>
-              <button class="circuit-toy__sound" type="button" data-circuit-sound aria-pressed="false">Sound off</button>
             </div>
             <div class="circuit-toy__title-row">
               <h2 id="circuit-toy-title">Light the signal.</h2>
-              <span class="circuit-toy__stage-count" data-circuit-stage-count>STAGE 01 / 06</span>
+              <span class="circuit-toy__stage-count" data-circuit-stage-count>STAGE 01 / 03</span>
             </div>
-            <ol class="circuit-toy__progress" data-circuit-progress aria-label="Circuit challenge progress"></ol>
+            <ol class="circuit-toy__progress" data-circuit-progress aria-label="Circuit challenge progress">
+              <li class="is-current" aria-current="step"><span>01</span></li>
+              <li><span>02</span></li>
+              <li><span>03</span></li>
+              <li><span>04</span></li>
+            </ol>
             <p class="circuit-toy__instruction" data-circuit-instruction>Close the switch to send power to the lamp.</p>
             <div class="circuit-toy__timer" data-circuit-timer-wrap hidden>
               <span>TIME LEFT</span>
@@ -101,44 +100,19 @@
               <div class="circuit-toy__source" aria-hidden="true"><span>+</span><span>−</span></div>
               <span class="circuit-toy__wire circuit-toy__wire--top" aria-hidden="true"></span>
               <div class="circuit-toy__controls" data-circuit-controls role="group" aria-label="Circuit switches"></div>
-              <button class="circuit-toy__lamp" type="button" data-circuit-lamp aria-label="Lamp off" title="Try clicking the lamp">
+              <div class="circuit-toy__lamp" data-circuit-lamp aria-label="Lamp off">
                 <svg viewBox="0 0 40 48" aria-hidden="true">
                   <path d="M20 3a13 13 0 0 0-8 23.2c1.7 1.4 2.8 3.2 3.1 5.3h9.8c.3-2.1 1.4-3.9 3.1-5.3A13 13 0 0 0 20 3Z" />
                   <path d="M15.5 36h9m-8 4h7m-5.5 4h4" />
                 </svg>
                 <span>LAMP</span>
-              </button>
+              </div>
               <span class="circuit-toy__board-label">DC · 5V</span>
             </div>
-            <section class="circuit-toy__truth" data-circuit-truth hidden aria-label="Live truth table" aria-live="polite"></section>
             <div class="circuit-toy__footer">
               <p class="circuit-toy__hint" data-circuit-hint aria-live="polite">One switch. One bright idea.</p>
-              <button class="circuit-toy__reset" type="button" data-circuit-reset hidden>Reset lamp</button>
               <button class="circuit-toy__next" type="button" data-circuit-next hidden>Next stage <span aria-hidden="true">→</span></button>
             </div>
-            <details class="circuit-fault">
-              <summary>Open the fault-finding bench</summary>
-              <div class="circuit-fault__body">
-                <p>Use the virtual multimeter to diagnose one hidden fault before making a repair call.</p>
-                <button class="button button--quiet" type="button" data-fault-start>Insert a fault</button>
-                <div class="circuit-fault__meter" data-fault-panel hidden>
-                  <div class="circuit-fault__checks" role="group" aria-label="Multimeter tests">
-                    <button class="button button--quiet" type="button" data-meter-check="continuity">Check continuity</button>
-                    <button class="button button--quiet" type="button" data-meter-check="voltage">Measure lamp</button>
-                    <button class="button button--quiet" type="button" data-meter-check="polarity">Check polarity</button>
-                  </div>
-                  <p class="circuit-fault__reading" data-fault-reading aria-live="polite">Select a meter test.</p>
-                  <label for="fault-diagnosis">Diagnosis</label>
-                  <select id="fault-diagnosis" data-fault-diagnosis>
-                    <option value="">Choose a fault…</option>
-                    <option value="open">Open circuit</option>
-                    <option value="bulb">Dead bulb</option>
-                    <option value="reversed">Reversed LED</option>
-                  </select>
-                  <button class="button" type="button" data-fault-submit>Submit diagnosis</button>
-                </div>
-              </div>
-            </details>
           </section>
         </div>
         <figure class="home-portrait" data-reveal>
