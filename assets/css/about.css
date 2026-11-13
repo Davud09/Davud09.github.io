@@ -16,7 +16,7 @@
 .about-intro h1 {
   max-width: 13ch;
   margin: 0 0 var(--space-6);
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-size: clamp(3rem, 7vw, 5.8rem);
   font-weight: 600;
   letter-spacing: -0.055em;
@@ -283,6 +283,268 @@
   line-height: 1.7;
 }
 
+.skill-meter {
+  display: flex;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+
+.skill-meter span {
+  width: 1.65rem;
+  height: 0.3rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+}
+
+.skill-meter .is-filled {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
+  box-shadow: var(--shadow-indicator);
+}
+
+.skills-timeline,
+.hiking-map,
+.fitness-widget,
+.contact-card,
+.squirrel-cameo {
+  grid-column: 2;
+}
+
+.skills-timeline {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skills-timeline li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.skills-timeline li > span,
+.skills-timeline small {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.skills-timeline strong {
+  font-size: var(--text-sm);
+}
+
+.hiking-map,
+.fitness-widget,
+.contact-card {
+  padding: clamp(var(--space-4), 3vw, var(--space-6));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.hiking-map__note,
+.fitness-widget__note,
+.contact-card__note {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.hiking-map svg {
+  width: 100%;
+  overflow: visible;
+}
+
+.hiking-map__trail {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-dasharray: 4 8;
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+.hiking-map__pin {
+  cursor: pointer;
+  outline: none;
+}
+
+.hiking-map__pin circle {
+  fill: var(--color-signal);
+  stroke: var(--color-page);
+  stroke-width: 4;
+  transition:
+    r var(--motion-quick) var(--motion-easing),
+    fill var(--motion-quick) var(--motion-easing);
+}
+
+.hiking-map__pin text {
+  fill: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  text-anchor: middle;
+}
+
+.hiking-map__pin:hover circle,
+.hiking-map__pin:focus-visible circle,
+.hiking-map__pin.is-selected circle {
+  r: 11;
+  fill: var(--color-accent);
+}
+
+.hiking-map__pin:focus-visible circle {
+  stroke: var(--color-focus);
+  stroke-width: 5;
+}
+
+.hiking-map__memory {
+  min-height: 1.5em;
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.fitness-widget {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.fitness-widget__row {
+  display: grid;
+  grid-template-columns: 5rem minmax(3rem, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.fitness-widget__row > span {
+  color: var(--color-text-muted);
+}
+
+.fitness-widget__row strong {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.fitness-widget__track {
+  height: 0.55rem;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-page);
+}
+
+.fitness-widget__track span {
+  display: block;
+  width: var(--fitness-fill);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-signal));
+}
+
+.contact-card > p:first-child {
+  margin-top: 0;
+  color: var(--color-text-muted);
+}
+
+.contact-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.contact-card__actions .button {
+  font-size: var(--text-sm);
+}
+
+.contact-card__note {
+  margin: var(--space-3) 0 0;
+}
+
+.squirrel-cameo {
+  justify-self: end;
+}
+
+.squirrel-cameo__button {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.squirrel-cameo__button svg {
+  width: 2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.squirrel-cameo__button span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+@media print {
+  :root,
+  body {
+    color: #142330;
+    background: #ffffff !important;
+    font-size: 10pt;
+  }
+
+  .site-header,
+  .site-footer,
+  .squirrel-cameo,
+  .contact-card__actions,
+  .hiking-map,
+  .fitness-widget {
+    display: none !important;
+  }
+
+  .about-page {
+    width: 100%;
+    padding: 0;
+  }
+
+  .about-intro,
+  .about-section {
+    padding-block: 0.5rem;
+    break-inside: avoid;
+  }
+
+  .about-section,
+  .education-card,
+  .skill-card,
+  .score-card,
+  .timeline-entry {
+    color: #142330;
+    background: #ffffff;
+    box-shadow: none;
+  }
+
+  .about-section::before {
+    display: none;
+  }
+}
+
 @media (max-width: 48rem) {
   .about-page {
     width: calc(100% - 2 * var(--space-4));
@@ -306,7 +568,12 @@
   .skill-grid,
   .score-grid,
   .language-list,
-  .interest-grid {
+  .interest-grid,
+  .skills-timeline,
+  .hiking-map,
+  .fitness-widget,
+  .contact-card,
+  .squirrel-cameo {
     grid-column: 1;
   }
 
@@ -340,5 +607,21 @@
   .skill-card--wide > p:last-child {
     grid-column: 1;
     grid-row: auto;
+  }
+
+  .skills-timeline li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .skills-timeline small {
+    grid-column: 2;
+  }
+
+  .fitness-widget__row {
+    grid-template-columns: 4rem minmax(2rem, 1fr);
+  }
+
+  .fitness-widget__row strong {
+    grid-column: 2;
   }
 }

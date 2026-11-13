@@ -1,9 +1,12 @@
-export function createInitialState(start) {
+export function createInitialState(start, savedState = {}) {
   return {
     position: { x: start.x, y: start.y },
-    xp: 0,
-    explored: [],
-    achievements: []
+    xp: Number.isSafeInteger(savedState.xp) && savedState.xp > 0 ? savedState.xp : 0,
+    explored: Array.isArray(savedState.explored) ? savedState.explored : [],
+    achievements: Array.isArray(savedState.achievements) ? savedState.achievements : [],
+    games: savedState.games && typeof savedState.games === "object" ? savedState.games : {},
+    bestTimes: savedState.bestTimes && typeof savedState.bestTimes === "object" ? savedState.bestTimes : {},
+    accessibleMode: savedState.accessibleMode === true
   };
 }
 

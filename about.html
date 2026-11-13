@@ -4,18 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Background, education, interests, and activities of an electrical and electronics engineering student.">
-    <meta name="theme-color" content="#101a28">
+    <meta name="theme-color" content="#081321">
     <meta property="og:type" content="website">
     <meta property="og:title" content="About — Davud Idrisov">
     <meta property="og:description" content="My background, education, hands-on skills, activities, languages, and interests.">
     <title>About — Davud Idrisov</title>
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/effects.css">
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
+    <script src="assets/js/easter-eggs.js" defer></script>
+    <script src="assets/js/glass-controls.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -94,14 +100,23 @@
           <article class="skill-card">
             <h3>Python</h3>
             <p class="skill-level">Getting started</p>
+            <div class="skill-meter" role="img" aria-label="Python: basic experience">
+              <span class="is-filled"></span><span></span><span></span>
+            </div>
           </article>
           <article class="skill-card">
             <h3>C++</h3>
             <p class="skill-level">Getting started</p>
+            <div class="skill-meter" role="img" aria-label="C++: basic experience">
+              <span class="is-filled"></span><span></span><span></span>
+            </div>
           </article>
           <article class="skill-card">
             <h3>Assembly</h3>
             <p class="skill-level">New to it</p>
+            <div class="skill-meter" role="img" aria-label="Assembly: very basic experience">
+              <span class="is-filled"></span><span></span><span></span>
+            </div>
           </article>
           <article class="skill-card skill-card--wide">
             <h3>Hands-on repair and assembly</h3>
@@ -234,6 +249,91 @@
           </article>
         </div>
       </section>
+
+      <section class="about-section skills-timeline-section" aria-labelledby="skills-timeline-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">07 / Learning path</p>
+          <h2 id="skills-timeline-title">A step-by-step build.</h2>
+        </div>
+        <ol class="skills-timeline">
+          <li><span>01</span><strong>Python</strong><small>Basic · getting started</small></li>
+          <li><span>02</span><strong>C++</strong><small>Basic · getting started</small></li>
+          <li><span>03</span><strong>Assembly</strong><small>Very basic · new to it</small></li>
+        </ol>
+      </section>
+
+      <section class="about-section hiking-section" id="hiking" aria-labelledby="hiking-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">08 / Field routes</p>
+          <h2 id="hiking-title">Places I’ve hiked.</h2>
+        </div>
+        <div class="hiking-map">
+          <p class="hiking-map__note">Illustrative route map · not to scale</p>
+          <svg viewBox="0 0 640 300" role="img" aria-labelledby="hiking-map-title hiking-map-desc">
+            <title id="hiking-map-title">Hiking locations</title>
+            <desc id="hiking-map-desc">Six named hiking locations connected by a decorative trail line. Positions are illustrative, not geographic.</desc>
+            <path class="hiking-map__trail" d="M56 228 154 173 250 196 343 113 442 139 566 61" />
+            <g class="hiking-map__pin" data-place="Shahdag" tabindex="0" role="button" aria-label="Shahdag, a hiking location">
+              <circle cx="56" cy="228" r="8" /><text x="56" y="257">Shahdag</text>
+            </g>
+            <g class="hiking-map__pin" data-place="Kapaz" tabindex="0" role="button" aria-label="Kapaz, a hiking location">
+              <circle cx="154" cy="173" r="8" /><text x="154" y="155">Kapaz</text>
+            </g>
+            <g class="hiking-map__pin" data-place="Qizilqaya" tabindex="0" role="button" aria-label="Qizilqaya, a hiking location">
+              <circle cx="250" cy="196" r="8" /><text x="250" y="225">Qizilqaya</text>
+            </g>
+            <g class="hiking-map__pin" data-place="Galakhudat" tabindex="0" role="button" aria-label="Galakhudat, a hiking location">
+              <circle cx="343" cy="113" r="8" /><text x="343" y="91">Galakhudat</text>
+            </g>
+            <g class="hiking-map__pin" data-place="Laza" tabindex="0" role="button" aria-label="Laza, a hiking location">
+              <circle cx="442" cy="139" r="8" /><text x="442" y="168">Laza</text>
+            </g>
+            <g class="hiking-map__pin" data-place="Tufandag" tabindex="0" role="button" aria-label="Tufandag, a hiking location">
+              <circle cx="566" cy="61" r="8" /><text x="566" y="39">Tufandag</text>
+            </g>
+          </svg>
+          <p class="hiking-map__memory" aria-live="polite">Select a pin to see a hiking location.</p>
+        </div>
+      </section>
+
+      <section class="about-section fitness-section" id="fitness" aria-labelledby="fitness-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">09 / Strength log</p>
+          <h2 id="fitness-title">A couple of personal records.</h2>
+        </div>
+        <div class="fitness-widget">
+          <p class="fitness-widget__note">Weighted calisthenics · working load shown in kg</p>
+          <div class="fitness-widget__row">
+            <span>Pull-ups</span><div class="fitness-widget__track" role="img" aria-label="24 kilograms for 8 repetitions"><span style="--fitness-fill: 75%"></span></div><strong>24 kg × 8</strong>
+          </div>
+          <div class="fitness-widget__row">
+            <span>Dips</span><div class="fitness-widget__track" role="img" aria-label="32 kilograms for 9 repetitions"><span style="--fitness-fill: 100%"></span></div><strong>32 kg × 9</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="about-section__heading">
+          <p class="eyebrow">10 / Contact</p>
+          <h2 id="contact-title">Let’s build something together.</h2>
+        </div>
+        <div class="contact-card">
+          <p>I’m happy to connect about engineering, repair, coursework, and future projects.</p>
+          <div class="contact-card__actions">
+            <a class="button button--magnetic" href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer">Message me on LinkedIn <span aria-hidden="true">↗</span></a>
+            <a class="button button--quiet" href="https://github.com/Davud09" target="_blank" rel="noopener noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a>
+            <button class="button button--quiet" type="button" data-print-resume>Print / save resume as PDF</button>
+          </div>
+          <p class="contact-card__note">Use your browser’s print dialog and choose “Save as PDF” for a downloadable copy.</p>
+        </div>
+      </section>
+
+      <aside class="squirrel-cameo" aria-label="A little village volunteer cameo">
+        <button class="squirrel-cameo__button" type="button" data-squirrel-egg aria-label="Visit the squirrel house">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 29 32 9l24 20v27H8zM25 56V37h14v19M12 30h40M32 9V3" /><circle cx="47" cy="14" r="5" /><path d="M44 13c-5-7 4-11 7-5 5-1 6 6 1 8-2 1-4 0-5-2" /></svg>
+          <span>Village volunteer bonus</span>
+        </button>
+      </aside>
     </main>
     <footer class="site-footer">
       <div class="site-footer__copy">
@@ -252,5 +352,6 @@
         </a>
       </div>
     </footer>
+    <script src="assets/js/about.js" defer></script>
   </body>
 </html>

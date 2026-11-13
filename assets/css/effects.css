@@ -1,0 +1,461 @@
+body::before,
+body::after {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+body::before {
+  inset: -14%;
+  background:
+    radial-gradient(ellipse 32% 30% at 15% 16%, var(--color-ambient-blue), transparent 100%),
+    radial-gradient(ellipse 30% 34% at 80% 22%, var(--color-ambient-teal), transparent 100%),
+    radial-gradient(ellipse 34% 30% at 70% 82%, var(--color-ambient-cyan), transparent 100%),
+    radial-gradient(ellipse 18% 22% at 91% 68%, var(--color-ambient-amber), transparent 100%);
+  filter: blur(var(--blur-ambient));
+  transform: translate3d(0, 0, 0);
+  animation: ambient-drift var(--motion-drift) var(--motion-easing) infinite alternate;
+  will-change: transform;
+}
+
+body::after {
+  z-index: 3;
+  background: url("../images/grain.svg") repeat;
+  opacity: var(--grain-opacity);
+}
+
+.about-section,
+.projects-section,
+.currently-section,
+.plain-resume-link {
+  position: relative;
+  border-top: 0;
+}
+
+.about-section::before,
+.projects-section::before,
+.currently-section::before,
+.plain-resume-link::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background:
+    radial-gradient(circle at 0.35rem 50%, var(--color-accent) 0 0.16rem, transparent 0.2rem),
+    linear-gradient(
+      90deg,
+      var(--color-accent) 0 2rem,
+      transparent 2rem 2.75rem,
+      var(--color-section-trace) 2.75rem 100%
+    );
+  content: "";
+  pointer-events: none;
+}
+
+.about-section {
+  padding-top: calc(var(--space-12) + var(--space-2));
+}
+
+.projects-section {
+  padding-top: calc(var(--space-8) + var(--space-2));
+}
+
+.plain-resume-link {
+  padding-top: calc(var(--space-6) + var(--space-2));
+}
+
+.site-nav {
+  background: var(--color-glass-nav);
+}
+
+.site-header {
+  -webkit-backdrop-filter: blur(var(--blur-nav)) saturate(150%);
+  backdrop-filter: blur(var(--blur-nav)) saturate(150%);
+}
+
+.site-nav__link[aria-current="page"] {
+  box-shadow: var(--shadow-inset-glass);
+}
+
+.home-hero::before {
+  border-color: var(--color-glass-accent-border);
+  box-shadow: var(--shadow-page-glow);
+  animation: circuit-field var(--motion-orbit) ease-in-out infinite;
+}
+
+.circuit-toy__status::before {
+  background: var(--color-border);
+}
+
+.circuit-toy.is-complete .circuit-toy__status::before {
+  background: var(--color-signal);
+  box-shadow: var(--shadow-status);
+  animation: led-pulse var(--motion-pulse) ease-in-out infinite;
+}
+
+.project-card {
+  transition:
+    border-color var(--motion-quick) var(--motion-easing),
+    box-shadow var(--motion-quick) var(--motion-easing),
+    transform var(--motion-quick) var(--motion-easing);
+}
+
+.home-scroll {
+  padding: 0.35rem 0.9rem 0.35rem 0.35rem;
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-glass-surface);
+  box-shadow: var(--shadow-inset-glass);
+  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+  backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+  transition:
+    border-color var(--motion-quick) var(--motion-easing),
+    color var(--motion-quick) var(--motion-easing),
+    transform var(--motion-quick) var(--motion-easing),
+    box-shadow var(--motion-quick) var(--motion-easing);
+}
+
+.home-scroll span {
+  background: var(--color-glass-surface-raised);
+  transition:
+    background-color var(--motion-quick) var(--motion-easing),
+    color var(--motion-quick) var(--motion-easing),
+    transform var(--motion-quick) var(--motion-easing);
+}
+
+.project-card__media {
+  isolation: isolate;
+}
+
+.project-card__media::after {
+  position: absolute;
+  z-index: 1;
+  inset: -45% -50%;
+  background: linear-gradient(
+    112deg,
+    transparent 42%,
+    var(--color-image-sheen) 50%,
+    transparent 58%
+  );
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-55%) rotate(9deg);
+  transition:
+    opacity var(--motion-quick) var(--motion-easing),
+    transform var(--motion-slow) var(--motion-easing);
+}
+
+.lightbox__close {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-inset-glass);
+  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+  backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+  transition:
+    border-color var(--motion-quick) var(--motion-easing),
+    background-color var(--motion-quick) var(--motion-easing),
+    transform var(--motion-quick) var(--motion-easing);
+}
+
+.workshop-controls button {
+  box-shadow: var(--shadow-control-base);
+  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+  backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+  transition:
+    border-color var(--motion-quick) var(--motion-easing),
+    background-color var(--motion-quick) var(--motion-easing),
+    box-shadow var(--motion-quick) var(--motion-easing),
+    transform var(--motion-quick) var(--motion-easing);
+}
+
+.circuit-toy__switch-button,
+.circuit-toy__next {
+  box-shadow: var(--shadow-control-base);
+  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+  backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+}
+
+.circuit-toy__switch-button,
+.workshop-controls button,
+.lightbox__close,
+.theme-toggle,
+.menu-toggle,
+.icon-link {
+  background-color: var(--color-glass-surface);
+}
+
+.circuit-toy__switch-button:hover,
+.workshop-controls button:hover,
+.lightbox__close:hover {
+  background-color: var(--color-glass-surface-raised);
+}
+
+.circuit-toy__switch-button {
+  transition:
+    border-color var(--motion-quick) var(--motion-easing),
+    background-color var(--motion-quick) var(--motion-easing),
+    color var(--motion-quick) var(--motion-easing),
+    box-shadow var(--motion-quick) var(--motion-easing),
+    transform var(--motion-quick) var(--motion-easing);
+}
+
+.skill-card,
+.interest-card,
+.score-card,
+.education-card,
+.station-panel,
+.achievement-panel {
+  transition:
+    border-color var(--motion-quick) var(--motion-easing),
+    box-shadow var(--motion-quick) var(--motion-easing),
+    transform var(--motion-quick) var(--motion-easing);
+}
+
+.voltage-toast {
+  position: fixed;
+  z-index: 10;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  max-width: min(24rem, calc(100vw - 2rem));
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 650;
+  box-shadow: var(--shadow-toast);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem);
+  visibility: hidden;
+  transition:
+    opacity var(--motion-quick) var(--motion-easing),
+    transform var(--motion-quick) var(--motion-easing),
+    visibility 0s linear var(--motion-quick);
+  -webkit-backdrop-filter: blur(var(--blur-toast)) saturate(150%);
+  backdrop-filter: blur(var(--blur-toast)) saturate(150%);
+}
+
+.voltage-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.voltage-boost .circuit-toy,
+.voltage-boost .workshop {
+  border-color: var(--color-signal);
+  box-shadow: var(--shadow-voltage);
+}
+
+.voltage-boost .home-hero::before {
+  opacity: 0.75;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    border-color: var(--color-glass-hover-border);
+    box-shadow: var(--shadow-project-hover);
+    transform: translateY(-4px);
+  }
+
+  .project-card:hover .project-card__media::after {
+    opacity: 1;
+    transform: translateX(55%) rotate(9deg);
+  }
+
+  .skill-card:hover,
+  .interest-card:hover,
+  .score-card:hover,
+  .education-card:hover,
+  .station-panel:hover,
+  .achievement-panel:hover {
+    border-color: var(--color-glass-focus-border);
+    transform: translateY(-2px);
+  }
+
+  .workshop-controls button:hover,
+  .lightbox__close:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .workshop-controls button:active,
+  .lightbox__close:active {
+    transform: translateY(0) scale(0.96);
+  }
+
+  .home-scroll:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover-control);
+  }
+
+  .home-scroll:hover span {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    transform: translateY(2px);
+  }
+
+  .circuit-toy__switch-button:hover {
+    box-shadow: var(--shadow-hover-switch);
+  }
+}
+
+@keyframes ambient-drift {
+  from {
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(1.5%, 1.5%, 0) scale(1.04);
+  }
+}
+
+@keyframes circuit-field {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.97);
+  }
+
+  50% {
+    opacity: 0.58;
+    transform: scale(1);
+  }
+}
+
+@keyframes led-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+
+  .home-hero::before,
+  .circuit-toy__status::before {
+    animation: none;
+  }
+
+  .project-card,
+  .project-card__media::after,
+  .about-section::before,
+  .projects-section::before,
+  .plain-resume-link::before,
+  .home-scroll,
+  .home-scroll span,
+  .skill-card,
+  .interest-card,
+  .score-card,
+  .education-card,
+  .station-panel,
+  .achievement-panel,
+  .circuit-toy__switch-button,
+  .workshop-controls button,
+  .lightbox__close {
+    transition: none;
+  }
+}
+
+:root.is-oscilloscope {
+  --color-page: #03130d;
+  --color-surface: #071d13;
+  --color-surface-raised: #0c2b1b;
+  --color-text: #e0ffe8;
+  --color-text-muted: #a4d8b1;
+  --color-accent: #65f58a;
+  --color-accent-strong: #a3ffb8;
+  --color-signal: #8dff8d;
+  --color-border: rgb(123 255 156 / 34%);
+  --color-grid: rgb(123 255 156 / 5%);
+  --color-ambient-blue: rgb(25 180 89 / 18%);
+  --color-ambient-teal: rgb(30 220 111 / 14%);
+  --color-ambient-cyan: rgb(38 211 116 / 12%);
+  --color-ambient-amber: rgb(82 255 130 / 10%);
+  --rgb-accent: 101 245 138;
+  --rgb-amber: 141 255 141;
+}
+
+:root.is-oscilloscope body::after {
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Cpath d='M0 80h100c18 0 18-48 38-48s20 96 40 96 20-48 38-48h72c18 0 18-32 38-32s20 64 40 64 20-32 38-32h236' fill='none' stroke='%237bff9c' stroke-opacity='.75' stroke-width='2'/%3E%3C/svg%3E");
+  background-position: 0 0;
+  background-repeat: repeat-y;
+  background-size: 100% 10rem;
+  opacity: 0.22;
+  animation: scope-scroll var(--motion-scope-scroll) linear infinite;
+}
+
+@keyframes scope-scroll {
+  to {
+    background-position-y: 10rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root.is-oscilloscope body::after {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  body::before {
+    filter: none;
+    opacity: 0.22;
+  }
+
+  body::after {
+    display: none;
+  }
+
+  .button,
+  .site-nav,
+  .icon-link,
+  .theme-toggle,
+  .menu-toggle,
+  .home-scroll,
+  .voltage-toast,
+  .lightbox__close,
+  .workshop-controls button,
+  .circuit-toy__switch-button,
+  .circuit-toy__next {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-nav {
+    background: var(--color-page);
+  }
+
+  .home-scroll {
+    background: var(--color-surface);
+  }
+
+  .home-scroll span {
+    background: var(--color-surface-raised);
+  }
+
+  .site-header {
+    background: var(--color-page);
+  }
+}
