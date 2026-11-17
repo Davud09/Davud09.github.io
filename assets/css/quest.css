@@ -247,27 +247,11 @@
   display: grid;
   min-width: 3rem;
   min-height: 3rem;
+  justify-self: center;
   place-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface-raised);
   color: var(--color-text);
-  font: inherit;
   font-size: var(--text-lg);
   font-weight: 700;
-  touch-action: manipulation;
-  cursor: pointer;
-}
-
-.workshop-controls button:hover,
-.workshop-controls button:active {
-  border-color: var(--color-accent);
-  background: var(--color-green);
-}
-
-.workshop-controls button:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
 }
 
 .workshop-controls [data-move="up"] {

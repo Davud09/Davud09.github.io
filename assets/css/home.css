@@ -62,29 +62,8 @@
   margin-top: var(--space-8);
 }
 
-.home-hero .button {
+.home-hero .btn {
   gap: var(--space-2);
-}
-
-.home-hero .button:not(.button--quiet) {
-  border-color: transparent;
-  border-radius: 0.7rem 1.5rem 0.7rem 1.5rem;
-  background:
-    linear-gradient(120deg, transparent 0 50%, rgb(255 255 255 / 12%) 50% 100%),
-    var(--color-accent);
-  box-shadow: 0 0.5rem 1.5rem rgb(131 183 170 / 18%);
-}
-
-.home-hero .button:not(.button--quiet):hover {
-  box-shadow: 0 0.7rem 1.8rem rgb(131 183 170 / 30%);
-}
-
-.home-hero .button--quiet {
-  border-radius: 1.5rem 0.7rem 1.5rem 0.7rem;
-}
-
-.home-hero .button--quiet:hover {
-  transform: translateY(-2px);
 }
 
 .home-vitals {
@@ -401,28 +380,6 @@
   justify-items: center;
   gap: var(--space-1);
   padding: var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: 0.45rem 0.8rem 0.45rem 0.8rem;
-  background: var(--color-surface);
-  color: var(--color-text-muted);
-  font: inherit;
-  cursor: pointer;
-  transition:
-    border-color 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.circuit-toy__switch-button:hover {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-  transform: translateY(-2px);
-}
-
-.circuit-toy__switch-button:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
 }
 
 .circuit-toy__switch-lever {
@@ -538,30 +495,7 @@
 }
 
 .circuit-toy__next {
-  display: inline-flex;
   flex: 0 0 auto;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-pill);
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-  font: inherit;
-  font-size: var(--text-xs);
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 160ms ease, box-shadow 160ms ease;
-}
-
-.circuit-toy__next:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0.4rem 1rem rgb(131 183 170 / 25%);
-}
-
-.circuit-toy__next:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
 }
 
 .circuit-toy__next[hidden] {

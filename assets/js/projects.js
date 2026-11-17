@@ -89,11 +89,15 @@ function renderProject(project, index) {
     links.className = "project-card__links";
     for (const link of project.links) {
       const anchor = document.createElement("a");
-      anchor.className = "project-card__link";
+      anchor.className = "project-card__link btn btn--ghost";
       anchor.href = link.url;
       anchor.target = "_blank";
       anchor.rel = "noopener noreferrer";
-      anchor.textContent = `${link.label} ↗`;
+      anchor.append(
+        document.createTextNode(link.label),
+        createTextElement("span", "btn__arrow", "↗")
+      );
+      anchor.lastElementChild.setAttribute("aria-hidden", "true");
       links.append(anchor);
     }
     body.append(links);

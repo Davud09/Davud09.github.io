@@ -168,7 +168,7 @@ if (
     for (let index = 0; index < stage.switches; index += 1) {
       const control = document.createElement("button");
       const label = `S${index + 1}`;
-      control.className = "circuit-toy__switch-button";
+      control.className = "circuit-toy__switch-button btn btn--secondary";
       control.type = "button";
       control.setAttribute("aria-pressed", "false");
       control.setAttribute("aria-label", `${label}, open`);
@@ -221,6 +221,7 @@ if (
       ? "Run it again"
       : "Next stage";
     const arrow = document.createElement("span");
+    arrow.className = "btn__arrow";
     arrow.setAttribute("aria-hidden", "true");
     arrow.textContent = "→";
     circuitNext.replaceChildren(document.createTextNode(buttonLabel), arrow);

@@ -87,11 +87,12 @@
 .icon-link,
 .theme-toggle,
 .menu-toggle {
-  display: inline-grid;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
   flex: 0 0 auto;
-  place-items: center;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   background: transparent;
@@ -231,7 +232,7 @@
   }
 
   .menu-toggle {
-    display: inline-grid;
+    display: inline-flex;
   }
 
   .js .site-nav {

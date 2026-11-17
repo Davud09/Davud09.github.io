@@ -1,7 +1,7 @@
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 const interactiveSelector = [
-  ".button",
+  ".btn",
   ".icon-link",
   ".theme-toggle",
   ".menu-toggle",
@@ -17,7 +17,7 @@ const glassSurfaceSelector = [
   ".icon-link",
   ".theme-toggle",
   ".menu-toggle",
-  ".button",
+  ".btn",
   ".circuit-toy__switch-button",
   ".circuit-toy__next",
   ".workshop-controls button",
@@ -92,7 +92,7 @@ function decorateControl(control) {
     }
 
     const bounds = control.getBoundingClientRect();
-    if (event.pointerType !== "touch" && control.classList.contains("button--magnetic") && finePointer.matches) {
+    if (event.pointerType !== "touch" && control.classList.contains("btn--magnetic") && finePointer.matches) {
       const offsetX = (event.clientX - bounds.left - bounds.width / 2) / bounds.width;
       const offsetY = (event.clientY - bounds.top - bounds.height / 2) / bounds.height;
       control.style.setProperty("--magnetic-x", `${(offsetX * 5).toFixed(2)}px`);

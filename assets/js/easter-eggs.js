@@ -20,7 +20,7 @@ function createEggDialog(className, title, description) {
   dialog.className = `egg-dialog ${className}`;
   dialog.innerHTML = `
     <div class="egg-dialog__content">
-      <button class="egg-dialog__close" type="button" aria-label="Close">×</button>
+      <button class="egg-dialog__close btn btn--icon btn--secondary" type="button" aria-label="Close">×</button>
       <p class="eyebrow">Hidden feature</p>
       <h2></h2>
       <p class="egg-dialog__description"></p>
@@ -67,7 +67,7 @@ function showResistorQuiz() {
     }
 
     const submit = document.createElement("button");
-    submit.className = "button button--primary";
+    submit.className = "btn btn--primary";
     submit.type = "submit";
     submit.textContent = "Check value";
     const feedback = document.createElement("p");
@@ -98,7 +98,7 @@ function showHireEgg() {
       "Thanks for thinking about building something together."
     );
     const link = document.createElement("a");
-    link.className = "button button--primary";
+    link.className = "btn btn--primary";
     link.href = "about.html#contact";
     link.textContent = "Open resume & contact";
     dialog.querySelector(".egg-dialog__body").append(link);
