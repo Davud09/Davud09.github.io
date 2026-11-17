@@ -525,6 +525,7 @@ body .voltage-toast.voltage-toast {
 
   .project-card,
   .skill-card,
+  .score-card,
   .interest-card,
   .education-card,
   .station-panel,
@@ -536,12 +537,20 @@ body .voltage-toast.voltage-toast {
 
   .project-card:hover,
   .skill-card:hover,
+  .score-card:hover,
   .interest-card:hover,
   .education-card:hover,
   .station-panel:hover,
   .achievement-panel:hover {
     border-color: var(--color-accent);
-    transform: translateY(-2px);
+    transform: perspective(900px) rotateX(1deg) rotateY(-1deg) translateY(-2px);
+  }
+
+  .project-card:nth-child(even):hover,
+  .skill-card:nth-child(even):hover,
+  .score-card:nth-child(even):hover,
+  .interest-card:nth-child(even):hover {
+    transform: perspective(900px) rotateX(1deg) rotateY(1deg) translateY(-2px);
   }
 }
 
@@ -751,5 +760,26 @@ body .voltage-toast.voltage-toast {
 
   .glass-control.is-rippling .glass-control__ripple {
     animation: none;
+  }
+
+  .btn[aria-busy="true"]::before {
+    animation: none;
+  }
+
+  .btn:not(:disabled):not([aria-disabled="true"]):hover,
+  .btn:not(:disabled):not([aria-disabled="true"]):active,
+  .site-nav__link:hover,
+  .project-card:hover,
+  .skill-card:hover,
+  .score-card:hover,
+  .interest-card:hover,
+  .project-card:nth-child(even):hover,
+  .skill-card:nth-child(even):hover,
+  .score-card:nth-child(even):hover,
+  .interest-card:nth-child(even):hover,
+  .education-card:hover,
+  .station-panel:hover,
+  .achievement-panel:hover {
+    transform: none;
   }
 }

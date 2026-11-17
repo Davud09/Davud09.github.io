@@ -5,7 +5,9 @@ const lightboxTitle = document.querySelector("#lightbox-title");
 const lightboxImage = document.querySelector(".lightbox__image");
 const lightboxCaption = document.querySelector(".lightbox__caption");
 const lightboxClose = document.querySelector(".lightbox__close");
+const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 let lastImageTrigger = null;
+let lightboxCloseTimeout;
 
 function createTextElement(tagName, className, text) {
   const element = document.createElement(tagName);
@@ -107,17 +109,53 @@ function renderProject(project, index) {
   return card;
 }
 
+function renderProjectSkeletons() {
+  const fragment = document.createDocumentFragment();
+
+  for (let index = 0; index < 2; index += 1) {
+    const card = document.createElement("div");
+    card.className = "project-skeleton";
+    card.setAttribute("aria-hidden", "true");
+
+    const media = document.createElement("div");
+    media.className = "project-skeleton__media";
+
+    const body = document.createElement("div");
+    body.className = "project-skeleton__body";
+    for (const className of [
+      "project-skeleton__line project-skeleton__line--short",
+      "project-skeleton__line project-skeleton__line--title",
+      "project-skeleton__line",
+      "project-skeleton__line"
+    ]) {
+      const line = document.createElement("span");
+      line.className = className;
+      body.append(line);
+    }
+
+    card.append(media, body);
+    fragment.append(card);
+  }
+
+  projectGrid.replaceChildren(fragment);
+}
+
 function openLightbox(project, trigger) {
   if (!lightbox || !lightboxTitle || !lightboxImage || !lightboxCaption) {
     return;
   }
 
+  window.clearTimeout(lightboxCloseTimeout);
   lastImageTrigger = trigger;
   lightboxTitle.textContent = project.title;
   lightboxImage.src = project.image;
   lightboxImage.alt = project.imageAlt || `${project.title} project image`;
   lightboxCaption.textContent = project.imageAlt || project.title;
-  lightbox.showModal();
+  if (!lightbox.open) {
+    lightbox.showModal();
+  }
+  lightbox.classList.remove("is-visible");
+  window.requestAnimationFrame(() => lightbox.classList.add("is-visible"));
   lightboxClose?.focus();
 }
 
@@ -126,7 +164,14 @@ function closeLightbox() {
     return;
   }
 
-  lightbox.close();
+  lightbox.classList.remove("is-visible");
+  if (reducedMotionPreference.matches) {
+    lightbox.close();
+    return;
+  }
+
+  window.clearTimeout(lightboxCloseTimeout);
+  lightboxCloseTimeout = window.setTimeout(() => lightbox.close(), 220);
 }
 
 lightboxClose?.addEventListener("click", closeLightbox);
@@ -146,6 +191,8 @@ lightbox?.addEventListener("click", (event) => {
   }
 });
 lightbox?.addEventListener("close", () => {
+  window.clearTimeout(lightboxCloseTimeout);
+  lightbox.classList.remove("is-visible");
   lightboxImage?.removeAttribute("src");
   lastImageTrigger?.focus();
 });
@@ -154,6 +201,9 @@ async function loadProjects() {
   if (!projectGrid || !projectStatus) {
     return;
   }
+
+  projectStatus.textContent = "Loading project cards…";
+  renderProjectSkeletons();
 
   try {
     const response = await fetch("assets/data/projects.json");
@@ -174,6 +224,7 @@ async function loadProjects() {
     projectGrid.replaceChildren(fragment);
     projectStatus.remove();
   } catch (error) {
+    projectGrid.replaceChildren();
     projectStatus.textContent = "Project cards couldn’t be loaded. Please try again later.";
     console.error("Unable to load project data.", error);
   }

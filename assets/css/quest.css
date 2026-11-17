@@ -98,11 +98,13 @@
 
 .workshop__progress-fill {
   display: block;
-  width: 0;
+  width: 100%;
   height: 100%;
   border-radius: inherit;
   background: var(--color-accent);
-  transition: width 240ms ease;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 420ms ease;
 }
 
 .workshop__layout {
@@ -165,10 +167,7 @@
   font-size: clamp(0.65rem, 1.2vw, 0.9rem);
   font-weight: 800;
   box-shadow: 0 0.3rem 0.7rem rgb(0 0 0 / 18%);
-  transition:
-    border-color 180ms ease,
-    background-color 180ms ease,
-    transform 180ms ease;
+  animation: station-pulse 2.4s ease-in-out infinite alternate;
 }
 
 .workshop-map__station.is-explored {
@@ -176,6 +175,7 @@
   background: var(--color-accent);
   color: var(--color-on-accent);
   transform: scale(0.94);
+  animation: none;
 }
 
 .workshop-map__player {
@@ -191,7 +191,7 @@
   font-weight: 900;
   letter-spacing: -0.04em;
   box-shadow: 0 0 0 3px rgb(143 190 197 / 28%), 0 0.35rem 0.9rem rgb(0 0 0 / 25%);
-  animation: player-arrive 240ms ease-out;
+  transition: transform 180ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .workshop-map__player.is-at-station {
@@ -301,6 +301,12 @@
 
 .station-panel {
   border-left: 3px solid var(--color-accent);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.station-panel.is-updating {
+  opacity: 0.45;
+  transform: translateY(0.35rem);
 }
 
 .station-panel .eyebrow {
@@ -410,6 +416,14 @@
   color: var(--color-accent-strong);
   font-size: var(--text-sm);
   font-weight: 700;
+  opacity: 0;
+  transform: translateY(0.3rem);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.workshop__message.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .plain-resume-link {
@@ -422,12 +436,14 @@
   border-top: 1px solid var(--color-border);
 }
 
-@keyframes player-arrive {
+@keyframes station-pulse {
   from {
-    transform: scale(0.72);
+    opacity: 0.76;
+    transform: scale(0.96);
   }
 
   to {
+    opacity: 1;
     transform: scale(1);
   }
 }
@@ -517,5 +533,13 @@
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .workshop-map__station {
+    animation: none;
+  }
+
+  .workshop-map__player {
+    transition: none;
   }
 }

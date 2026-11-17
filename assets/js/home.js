@@ -101,6 +101,7 @@ if (
   let switchStates = [];
   let timerInterval;
   let timerDeadline;
+  let stageAnimationTimeout;
 
   function updateProgress() {
     for (const [index, item] of [...circuitProgress.children].entries()) {
@@ -274,16 +275,30 @@ if (
       circuitStatus.textContent = "CHECKING";
     }
 
+    if (!stage.timed) {
+      circuitBoard.classList.remove("is-signaling");
+      if (switchStates[index]) {
+        const signalStage = currentStage;
+        window.requestAnimationFrame(() => {
+          if (signalStage === currentStage && switchStates[index]) {
+            circuitBoard.classList.add("is-signaling");
+          }
+        });
+      }
+    }
+
     updateCircuit();
   }
 
   function loadStage(stageIndex) {
+    circuitToy.classList.remove("is-stage-transitioning");
     currentStage = stageIndex;
     sequenceProgress = 0;
     completed = false;
     const stage = circuitStages[currentStage];
 
     circuitBoard.classList.remove("is-powered");
+    circuitBoard.classList.remove("is-signaling");
     circuitToy.classList.remove("is-complete");
     stopTimer();
     circuitTimerWrap.hidden = !stage.timed;
@@ -297,7 +312,21 @@ if (
     circuitNext.replaceChildren();
     renderSwitches();
     updateProgress();
+    window.requestAnimationFrame(() => {
+      circuitToy.classList.add("is-stage-transitioning");
+      window.clearTimeout(stageAnimationTimeout);
+      stageAnimationTimeout = window.setTimeout(
+        () => circuitToy.classList.remove("is-stage-transitioning"),
+        450
+      );
+    });
   }
+
+  circuitBoard.addEventListener("animationend", (event) => {
+    if (event.animationName === "signal-travel") {
+      circuitBoard.classList.remove("is-signaling");
+    }
+  });
 
   circuitNext.addEventListener("click", () => {
     if (currentStage === circuitStages.length - 1) {

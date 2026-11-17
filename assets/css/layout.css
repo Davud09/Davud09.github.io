@@ -9,10 +9,15 @@
 }
 
 .site-header {
-  position: relative;
-  z-index: 2;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   min-height: 5rem;
   border-bottom: 1px solid var(--color-border);
+}
+
+.site-header.is-scrolled {
+  --glass-blur: 24px;
 }
 
 .site-header__brand {

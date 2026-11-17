@@ -1,4 +1,10 @@
+const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+
 export function renderMap(map, content, state) {
+  const previousPlayer = reducedMotionPreference.matches
+    ? null
+    : map.querySelector(".workshop-map__player");
+  const previousPlayerBounds = previousPlayer?.getBoundingClientRect();
   const fragment = document.createDocumentFragment();
   const stationAt = new Map(content.stations.map((station) => [`${station.x},${station.y}`, station]));
 
@@ -32,6 +38,23 @@ export function renderMap(map, content, state) {
   }
 
   map.replaceChildren(fragment);
+
+  if (previousPlayerBounds) {
+    const player = map.querySelector(".workshop-map__player");
+    const playerBounds = player?.getBoundingClientRect();
+
+    if (player && playerBounds) {
+      const offsetX = previousPlayerBounds.left - playerBounds.left;
+      const offsetY = previousPlayerBounds.top - playerBounds.top;
+
+      if (offsetX !== 0 || offsetY !== 0) {
+        player.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => player.style.removeProperty("transform"));
+        });
+      }
+    }
+  }
 }
 
 export function renderHud(elements, content, state, achievementData) {
@@ -40,7 +63,7 @@ export function renderHud(elements, content, state, achievementData) {
   );
   elements.xp.textContent = `${state.xp} XP`;
   elements.progress.textContent = `${state.explored.length} / ${content.stations.length} stops explored`;
-  elements.progressFill.style.width = `${(state.explored.length / content.stations.length) * 100}%`;
+  elements.progressFill.style.transform = `scaleX(${state.explored.length / content.stations.length})`;
   elements.location.textContent = station
     ? `You’re at: ${station.label}. Select “Inspect station” to read this resume note.`
     : "You are at the workshop entrance. Move to a marked station.";

@@ -68,6 +68,32 @@
   --shadow-card: 0 1rem 2.5rem rgb(32 39 37 / 9%);
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: page-fade-out 160ms ease both;
+}
+
+::view-transition-new(root) {
+  animation: page-fade-in 220ms ease both;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.25rem);
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     color-scheme: light;
@@ -102,6 +128,19 @@ body {
   margin: 0;
   background: var(--color-page);
   color: var(--color-text);
+}
+
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 550ms ease var(--reveal-delay, 0ms),
+    transform 550ms ease var(--reveal-delay, 0ms);
+}
+
+.reveal-ready [data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 body::before {
@@ -317,5 +356,10 @@ h1 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
   }
 }

@@ -6,6 +6,25 @@ const navigationLinks = document.querySelectorAll(".site-nav__link");
 const siteHeader = document.querySelector(".site-header");
 const desktopNavigation = window.matchMedia("(min-width: 58.01rem)");
 
+function updateHeaderOnScroll() {
+  siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
+}
+
+let scrollUpdateScheduled = false;
+window.addEventListener("scroll", () => {
+  if (scrollUpdateScheduled) {
+    return;
+  }
+
+  scrollUpdateScheduled = true;
+  window.requestAnimationFrame(() => {
+    updateHeaderOnScroll();
+    scrollUpdateScheduled = false;
+  });
+}, { passive: true });
+
+updateHeaderOnScroll();
+
 const currentPath = window.location.pathname.endsWith("/")
   ? `${window.location.pathname}index.html`
   : window.location.pathname;
