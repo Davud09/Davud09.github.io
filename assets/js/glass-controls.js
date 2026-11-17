@@ -10,6 +10,52 @@ const interactiveSelector = [
   ".lightbox__close",
   "[data-glass-control]"
 ].join(", ");
+const glassSurfaceSelector = [
+  ".site-header",
+  ".site-nav",
+  ".site-nav__link[aria-current='page']",
+  ".icon-link",
+  ".theme-toggle",
+  ".menu-toggle",
+  ".button",
+  ".circuit-toy__switch-button",
+  ".circuit-toy__next",
+  ".workshop-controls button",
+  ".lightbox",
+  ".lightbox__panel",
+  ".lightbox__close",
+  ".project-card",
+  ".project-card__status",
+  ".project-card__zoom-hint",
+  ".education-card",
+  ".skill-card",
+  ".score-card",
+  ".interest-card",
+  ".currently-section",
+  ".home-vitals",
+  ".circuit-toy",
+  ".workshop",
+  ".station-panel",
+  ".achievement-panel",
+  ".achievement.is-unlocked",
+  ".projects-status",
+  ".no-script-note",
+  ".egg-dialog",
+  ".voltage-toast",
+  ".home-scroll"
+].join(", ");
+
+function markGlassSurfaces(root) {
+  if (root instanceof Element && root.matches(glassSurfaceSelector)) {
+    root.classList.add("glass-surface");
+  }
+
+  if (root.querySelectorAll) {
+    for (const surface of root.querySelectorAll(glassSurfaceSelector)) {
+      surface.classList.add("glass-surface");
+    }
+  }
+}
 
 function decorateControl(control) {
   if (!(control instanceof HTMLElement) || control.dataset.glassReady === "true") {
@@ -46,9 +92,6 @@ function decorateControl(control) {
     }
 
     const bounds = control.getBoundingClientRect();
-    control.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
-    control.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
-
     if (event.pointerType !== "touch" && control.classList.contains("button--magnetic") && finePointer.matches) {
       const offsetX = (event.clientX - bounds.left - bounds.width / 2) / bounds.width;
       const offsetY = (event.clientY - bounds.top - bounds.height / 2) / bounds.height;
@@ -58,8 +101,6 @@ function decorateControl(control) {
   });
 
   control.addEventListener("pointerleave", () => {
-    control.style.removeProperty("--pointer-x");
-    control.style.removeProperty("--pointer-y");
     control.style.removeProperty("--magnetic-x");
     control.style.removeProperty("--magnetic-y");
   });
@@ -87,12 +128,31 @@ for (const control of document.querySelectorAll(interactiveSelector)) {
   decorateControl(control);
 }
 
+markGlassSurfaces(document);
+
+document.addEventListener("pointermove", (event) => {
+  if (reducedMotion.matches || event.pointerType === "touch" || !(event.target instanceof Element)) {
+    return;
+  }
+
+  const surface = event.target.closest(".glass-surface");
+  if (!surface) {
+    return;
+  }
+
+  const bounds = surface.getBoundingClientRect();
+  surface.style.setProperty("--mx", `${event.clientX - bounds.left}px`);
+  surface.style.setProperty("--my", `${event.clientY - bounds.top}px`);
+}, { passive: true });
+
 const controlsObserver = new MutationObserver((records) => {
   for (const record of records) {
     for (const node of record.addedNodes) {
       if (!(node instanceof Element)) {
         continue;
       }
+
+      markGlassSurfaces(node);
 
       if (node.matches(interactiveSelector)) {
         decorateControl(node);

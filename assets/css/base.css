@@ -1,17 +1,18 @@
 :root {
   color-scheme: dark;
 
-  --color-page: #1e2021;
-  --color-surface: #25292a;
-  --color-surface-raised: #2d3233;
-  --color-text: #edf0ed;
-  --color-text-muted: #b8c2be;
-  --color-accent: #83b7aa;
-  --color-accent-strong: #a0cfc2;
-  --color-green: #394b44;
-  --color-border: #757d7b;
-  --color-focus: #a9d8cb;
-  --color-on-accent: #14221e;
+  --color-page: #101a28;
+  --color-surface: #17283b;
+  --color-surface-raised: #1d3148;
+  --color-text: #f1f5fa;
+  --color-text-muted: #bdc9d8;
+  --color-accent: #86d4c2;
+  --color-accent-rgb: 134 212 194;
+  --color-accent-strong: #a0e3d3;
+  --color-green: #26413f;
+  --color-border: #8297a4;
+  --color-focus: #b4f0e2;
+  --color-on-accent: #10211e;
 
   --font-body: system-ui, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-body);
@@ -36,8 +37,9 @@
 
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
+  --radius-lg: 1.5rem;
   --radius-pill: 999px;
-  --shadow-card: 0 1rem 2.5rem rgb(0 0 0 / 20%);
+  --shadow-card: 0 1.25rem 3rem rgb(0 0 0 / 24%);
 
   font-family: var(--font-body);
   font-size: 100%;
@@ -57,6 +59,7 @@
   --color-text: #202725;
   --color-text-muted: #56635f;
   --color-accent: #28695d;
+  --color-accent-rgb: 40 105 93;
   --color-accent-strong: #20594f;
   --color-green: #d8e2dc;
   --color-border: #7f8a84;
@@ -75,6 +78,7 @@
     --color-text: #202725;
     --color-text-muted: #56635f;
     --color-accent: #28695d;
+    --color-accent-rgb: 40 105 93;
     --color-accent-strong: #20594f;
     --color-green: #d8e2dc;
     --color-border: #7f8a84;
@@ -91,11 +95,40 @@
 }
 
 body {
+  position: relative;
+  isolation: isolate;
   min-width: 18rem;
   min-height: 100vh;
   margin: 0;
   background: var(--color-page);
   color: var(--color-text);
+}
+
+body::before {
+  position: fixed;
+  z-index: -1;
+  inset: -18%;
+  background:
+    radial-gradient(ellipse at 18% 22%, rgb(54 111 126 / 22%), transparent 34%),
+    radial-gradient(ellipse at 82% 18%, rgb(67 105 141 / 18%), transparent 36%),
+    radial-gradient(ellipse at 62% 78%, rgb(45 111 100 / 16%), transparent 38%);
+  content: "";
+  opacity: 0.82;
+  pointer-events: none;
+  animation: aurora-drift 28s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes aurora-drift {
+  from {
+    opacity: 0.66;
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
+  }
+
+  to {
+    opacity: 0.92;
+    transform: translate3d(1.5%, 1%, 0) scale(1.04);
+  }
 }
 
 img,
@@ -196,6 +229,13 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+    opacity: 0.66;
+    transform: none;
+    will-change: auto;
+  }
+
   *,
   *::before,
   *::after {

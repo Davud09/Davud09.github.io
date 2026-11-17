@@ -1,28 +1,65 @@
 :root {
-  --glass-surface: color-mix(in srgb, var(--color-surface) 76%, transparent);
-  --glass-surface-raised: color-mix(in srgb, var(--color-surface-raised) 82%, transparent);
-  --glass-border: color-mix(in srgb, var(--color-border) 58%, white 42%);
+  --glass-tint: 16 26 40;
+  --glass-fill: rgb(var(--glass-tint) / 88%);
+  --glass-fill-raised: rgb(29 49 72 / 92%);
+  --glass-fallback: #17283b;
+  --glass-fallback-raised: #1d3148;
+  --glass-border: rgb(199 230 243 / 34%);
+  --glass-top-highlight: rgb(255 255 255 / 54%);
   --glass-highlight: rgb(255 255 255 / 18%);
+  --glass-inner-shadow: rgb(0 0 0 / 20%);
   --glass-blur: 18px;
-  --glass-shadow: 0 1rem 2.5rem rgb(0 0 0 / 18%), inset 0 1px 0 rgb(255 255 255 / 9%);
+  --glass-saturate: 155%;
+  --glass-brightness: 110%;
+  --glass-shadow: 0 1.5rem 4rem rgb(0 0 0 / 28%),
+    inset 0 1px 0 var(--glass-top-highlight),
+    inset 0 -1px 0 rgb(255 255 255 / 6%),
+    inset 0 0 1.5rem var(--glass-inner-shadow);
 }
 
 :root[data-theme="light"] {
-  --glass-border: color-mix(in srgb, var(--color-border) 55%, white 45%);
+  --glass-tint: 255 255 255;
+  --glass-fill: rgb(var(--glass-tint) / 92%);
+  --glass-fill-raised: rgb(248 251 249 / 96%);
+  --glass-fallback: #e9eeea;
+  --glass-fallback-raised: #ffffff;
+  --glass-border: rgb(64 89 81 / 30%);
+  --glass-top-highlight: rgb(255 255 255 / 94%);
   --glass-highlight: rgb(255 255 255 / 68%);
+  --glass-inner-shadow: rgb(32 54 46 / 7%);
+  --glass-shadow: 0 1.5rem 4rem rgb(32 39 37 / 12%),
+    inset 0 1px 0 var(--glass-top-highlight),
+    inset 0 -1px 0 rgb(32 54 46 / 6%),
+    inset 0 0 1.5rem var(--glass-inner-shadow);
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
-    --glass-border: color-mix(in srgb, var(--color-border) 55%, white 45%);
+    --glass-tint: 255 255 255;
+    --glass-fill: rgb(var(--glass-tint) / 92%);
+    --glass-fill-raised: rgb(248 251 249 / 96%);
+    --glass-fallback: #e9eeea;
+    --glass-fallback-raised: #ffffff;
+    --glass-border: rgb(64 89 81 / 30%);
+    --glass-top-highlight: rgb(255 255 255 / 94%);
     --glass-highlight: rgb(255 255 255 / 68%);
+    --glass-inner-shadow: rgb(32 54 46 / 7%);
+    --glass-shadow: 0 1.5rem 4rem rgb(32 39 37 / 12%),
+      inset 0 1px 0 var(--glass-top-highlight),
+      inset 0 -1px 0 rgb(32 54 46 / 6%),
+      inset 0 0 1.5rem var(--glass-inner-shadow);
   }
 }
 
+body {
+  background-color: var(--color-page);
+  background-image: linear-gradient(145deg, rgb(20 37 55 / 18%), transparent 58%);
+}
+
 .site-header {
-  background: var(--glass-surface);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(145%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(145%);
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
 }
 
 .site-nav {
@@ -38,7 +75,7 @@
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-pill);
   background: var(--glass-highlight);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%);
+  box-shadow: inset 0 1px 0 var(--glass-top-highlight);
   content: "";
   pointer-events: none;
   transition:
@@ -52,62 +89,150 @@
   z-index: 1;
 }
 
-.site-nav,
-.site-nav__link[aria-current="page"],
-.icon-link,
-.theme-toggle,
-.menu-toggle,
-.button--quiet,
-.circuit-toy__switch-button,
-.circuit-toy__next,
-.workshop-controls button,
-.lightbox__close,
-.project-card__status,
-.project-card__zoom-hint {
-  background: var(--glass-surface);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(145%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(145%);
-}
-
-.site-nav,
-.icon-link,
-.theme-toggle,
-.menu-toggle,
-.button--quiet,
-.circuit-toy__switch-button,
-.circuit-toy__next,
-.workshop-controls button,
-.lightbox__close,
-.project-card__status,
-.project-card__zoom-hint {
+:is(
+  .site-header,
+  .site-nav,
+  .site-nav__link[aria-current="page"],
+  .icon-link,
+  .theme-toggle,
+  .menu-toggle,
+  .button,
+  .circuit-toy__switch-button,
+  .circuit-toy__next,
+  .workshop-controls button,
+  .lightbox,
+  .lightbox__panel,
+  .lightbox__close,
+  .project-card,
+  .project-card__status,
+  .project-card__zoom-hint,
+  .education-card,
+  .skill-card,
+  .score-card,
+  .interest-card,
+  .currently-section,
+  .home-vitals,
+  .circuit-toy,
+  .workshop,
+  .station-panel,
+  .achievement-panel,
+  .achievement.is-unlocked,
+  .projects-status,
+  .no-script-note,
+  .egg-dialog,
+  .voltage-toast,
+  .home-scroll
+) {
+  position: relative;
+  isolation: isolate;
   border-color: var(--glass-border);
+  border-top-color: var(--glass-top-highlight);
+  background:
+    linear-gradient(145deg, rgb(var(--glass-tint) / 94%), rgb(var(--glass-tint) / 82%));
   box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
 }
 
-.button:not(.button--quiet) {
-  background: color-mix(in srgb, var(--color-accent) 76%, transparent);
-  box-shadow: var(--glass-shadow);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(145%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(145%);
+:is(
+  .site-header,
+  .site-nav,
+  .site-nav__link[aria-current="page"],
+  .icon-link,
+  .theme-toggle,
+  .menu-toggle,
+  .button,
+  .circuit-toy__switch-button,
+  .circuit-toy__next,
+  .workshop-controls button,
+  .lightbox,
+  .lightbox__panel,
+  .lightbox__close,
+  .project-card,
+  .project-card__status,
+  .project-card__zoom-hint,
+  .education-card,
+  .skill-card,
+  .score-card,
+  .interest-card,
+  .currently-section,
+  .home-vitals,
+  .circuit-toy,
+  .workshop,
+  .station-panel,
+  .achievement-panel,
+  .achievement.is-unlocked,
+  .projects-status,
+  .no-script-note,
+  .egg-dialog,
+  .voltage-toast,
+  .home-scroll
+)::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 255 255 / 20%),
+    transparent 58%
+  );
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.project-card,
-.education-card,
-.skill-card,
-.score-card,
-.interest-card,
-.workshop,
-.station-panel,
-.achievement-panel,
-.circuit-toy,
-.projects-status,
-.no-script-note,
-.lightbox__panel {
-  border-color: var(--glass-border);
-  background: var(--glass-surface);
-  box-shadow: var(--glass-shadow);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(135%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+:is(
+  .site-header,
+  .site-nav,
+  .site-nav__link[aria-current="page"],
+  .icon-link,
+  .theme-toggle,
+  .menu-toggle,
+  .button,
+  .circuit-toy__switch-button,
+  .circuit-toy__next,
+  .workshop-controls button,
+  .lightbox,
+  .lightbox__panel,
+  .lightbox__close,
+  .project-card,
+  .project-card__status,
+  .project-card__zoom-hint,
+  .education-card,
+  .skill-card,
+  .score-card,
+  .interest-card,
+  .currently-section,
+  .home-vitals,
+  .circuit-toy,
+  .workshop,
+  .station-panel,
+  .achievement-panel,
+  .achievement.is-unlocked,
+  .projects-status,
+  .no-script-note,
+  .egg-dialog,
+  .voltage-toast,
+  .home-scroll
+) > * {
+  position: relative;
+  z-index: 1;
+}
+
+:is(
+  .button:not(.button--quiet),
+  .home-hero .button:not(.button--quiet),
+  .circuit-toy__next
+) {
+  border-color: var(--color-accent);
+  background: linear-gradient(
+    145deg,
+    rgb(var(--color-accent-rgb) / 96%),
+    rgb(var(--color-accent-rgb) / 90%)
+  );
+  color: var(--color-on-accent);
 }
 
 .glass-control {
@@ -116,27 +241,27 @@
   overflow: hidden;
   transform: translate3d(var(--magnetic-x, 0), var(--magnetic-y, 0), 0);
   transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
-}
-
-.glass-control__light,
-.glass-control__ripple {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
+    border-color 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .glass-control__light {
-  inset: 0;
-  background: radial-gradient(
-    circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
-    var(--glass-highlight),
-    transparent 68%
-  );
+  display: none;
+}
+
+.glass-control__ripple {
+  position: absolute;
+  z-index: 0;
+  top: var(--click-y, 50%);
+  left: var(--click-x, 50%);
+  width: 1rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--glass-highlight);
+  border-radius: 50%;
   opacity: 0;
-  transition: opacity 180ms ease;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
 }
 
 .glass-control__content,
@@ -149,17 +274,6 @@
   position: absolute;
 }
 
-.glass-control__ripple {
-  top: var(--click-y, 50%);
-  left: var(--click-x, 50%);
-  width: 1rem;
-  aspect-ratio: 1;
-  border: 1px solid var(--glass-highlight);
-  border-radius: 50%;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
-}
-
 .glass-control.is-rippling .glass-control__ripple {
   animation: glass-ripple 520ms ease-out;
 }
@@ -168,21 +282,9 @@
 .glass-control:not([aria-disabled="true"]):hover,
 .glass-control:focus-visible {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent), var(--glass-shadow);
-}
-
-.glass-control:not(:disabled):hover .glass-control__light,
-.glass-control:not([aria-disabled="true"]):hover .glass-control__light,
-.glass-control:focus-visible .glass-control__light {
-  opacity: 1;
-}
-
-.home-scroll {
-  border-color: var(--glass-border);
-  background: var(--glass-surface);
-  box-shadow: var(--glass-shadow);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(145%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(145%);
+  box-shadow:
+    0 0 0 1px rgb(134 212 194 / 34%),
+    var(--glass-shadow);
 }
 
 .voltage-toast {
@@ -195,18 +297,28 @@
   padding: 0.85rem 1.1rem;
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  background: var(--glass-surface-raised);
   color: var(--color-text);
   font-size: var(--text-sm);
   font-weight: 650;
-  box-shadow: var(--glass-shadow);
   opacity: 0;
   pointer-events: none;
   transform: translateY(0.75rem);
   visibility: hidden;
   transition: opacity 180ms ease, transform 180ms ease, visibility 0s linear 180ms;
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(145%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(145%);
+}
+
+.home-hero .home-scroll {
+  position: absolute;
+}
+
+body .voltage-toast.voltage-toast {
+  position: fixed;
+}
+
+.egg-dialog[open],
+.lightbox[open] {
+  position: fixed;
+  margin: auto;
 }
 
 .voltage-toast.is-visible {
@@ -223,17 +335,14 @@
   overflow: auto;
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  background: var(--glass-surface-raised);
   color: var(--color-text);
-  box-shadow: var(--glass-shadow);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(145%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(145%);
 }
 
-.egg-dialog::backdrop {
-  background: rgb(0 0 0 / 56%);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+.egg-dialog::backdrop,
+.lightbox::backdrop {
+  background: rgb(4 12 22 / 68%);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
 }
 
 .egg-dialog__content {
@@ -254,12 +363,12 @@
   top: 1rem;
   right: 1rem;
   display: grid;
-  width: 2.5rem;
-  aspect-ratio: 1;
+  width: 2.75rem;
+  min-height: 2.75rem;
   place-items: center;
   border: 1px solid var(--glass-border);
-  border-radius: 50%;
-  background: var(--glass-surface);
+  border-radius: var(--radius-pill);
+  background: var(--glass-fill);
   color: var(--color-text);
   font: inherit;
   font-size: 1.5rem;
@@ -284,7 +393,7 @@
 
 .voltage-boost .circuit-toy {
   border-color: var(--color-accent);
-  box-shadow: 0 0 2rem color-mix(in srgb, var(--color-accent) 40%, transparent), var(--glass-shadow);
+  box-shadow: 0 0 2rem rgb(134 212 194 / 40%), var(--glass-shadow);
 }
 
 :root.is-oscilloscope {
@@ -294,9 +403,20 @@
   --color-text: #e0ffe8;
   --color-text-muted: #a4d8b1;
   --color-accent: #65f58a;
+  --color-accent-rgb: 101 245 138;
   --color-accent-strong: #a3ffb8;
-  --color-border: rgb(123 255 156 / 34%);
-  --glass-border: rgb(123 255 156 / 42%);
+  --color-border: rgb(123 255 156 / 46%);
+  --color-focus: #a3ffb8;
+  --color-on-accent: #071d13;
+  --glass-tint: 7 29 19;
+  --glass-fill: rgb(7 29 19 / 92%);
+  --glass-fill-raised: rgb(12 43 27 / 96%);
+  --glass-fallback: #071d13;
+  --glass-fallback-raised: #0c2b1b;
+  --glass-border: rgb(123 255 156 / 58%);
+  --glass-top-highlight: rgb(191 255 204 / 72%);
+  --glass-highlight: rgb(123 255 156 / 22%);
+  --glass-inner-shadow: rgb(0 0 0 / 28%);
 }
 
 :root.is-oscilloscope body {
@@ -314,14 +434,70 @@
   }
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (hover: hover) {
+  :is(
+    .site-header,
+    .site-nav,
+    .site-nav__link[aria-current="page"],
+    .icon-link,
+    .theme-toggle,
+    .menu-toggle,
+    .button,
+    .circuit-toy__switch-button,
+    .circuit-toy__next,
+    .workshop-controls button,
+    .project-card,
+    .education-card,
+    .skill-card,
+    .score-card,
+    .interest-card,
+    .currently-section,
+    .home-vitals,
+    .circuit-toy,
+    .workshop,
+    .station-panel,
+    .achievement-panel,
+    .achievement.is-unlocked,
+    .home-scroll
+  ):hover::after {
+    opacity: 1;
+  }
+
+  :is(
+    .site-header,
+    .site-nav,
+    .icon-link,
+    .theme-toggle,
+    .menu-toggle,
+    .button,
+    .circuit-toy__switch-button,
+    .circuit-toy__next,
+    .workshop-controls button,
+    .project-card,
+    .education-card,
+    .skill-card,
+    .score-card,
+    .interest-card,
+    .currently-section,
+    .home-vitals,
+    .circuit-toy,
+    .workshop,
+    .station-panel,
+    .achievement-panel,
+    .home-scroll
+  ):hover {
+    --glass-brightness: 120%;
+  }
+
   .project-card,
   .skill-card,
   .interest-card,
   .education-card,
   .station-panel,
   .achievement-panel {
-    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    transition: border-color 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   .project-card:hover,
@@ -335,47 +511,201 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .glass-control,
-  .glass-control__light,
-  .home-scroll,
-  .project-card,
-  .skill-card,
-  .interest-card,
-  .education-card,
-  .station-panel,
-  .achievement-panel,
-  .voltage-toast {
-    transition: none;
+@media (max-width: 38rem) {
+  :root {
+    --glass-blur: 12px;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :is(
+    .site-header,
+    .site-nav,
+    .site-nav__link[aria-current="page"],
+    .icon-link,
+    .theme-toggle,
+    .menu-toggle,
+    .button,
+    .circuit-toy__switch-button,
+    .circuit-toy__next,
+    .workshop-controls button,
+    .lightbox,
+    .lightbox__panel,
+    .lightbox__close,
+    .project-card,
+    .project-card__status,
+    .project-card__zoom-hint,
+    .education-card,
+    .skill-card,
+    .score-card,
+    .interest-card,
+    .currently-section,
+    .home-vitals,
+    .circuit-toy,
+    .workshop,
+    .station-panel,
+    .achievement-panel,
+    .achievement.is-unlocked,
+    .projects-status,
+    .no-script-note,
+    .egg-dialog,
+    .voltage-toast,
+    .home-scroll
+  ) {
+    background: var(--glass-fallback);
   }
 
-  .glass-control.is-rippling .glass-control__ripple {
-    animation: none;
+  .voltage-toast,
+  .egg-dialog,
+  .lightbox__panel {
+    background: var(--glass-fallback-raised);
   }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .site-header,
-  .site-nav,
-  .icon-link,
-  .theme-toggle,
-  .menu-toggle,
-  .button,
-  .project-card,
-  .education-card,
-  .skill-card,
-  .score-card,
-  .interest-card,
-  .workshop,
-  .station-panel,
-  .achievement-panel,
-  .circuit-toy,
-  .projects-status,
-  .no-script-note,
-  .lightbox__panel,
-  .egg-dialog,
-  .voltage-toast {
+  :is(
+    .site-header,
+    .site-nav,
+    .site-nav__link[aria-current="page"],
+    .icon-link,
+    .theme-toggle,
+    .menu-toggle,
+    .button,
+    .circuit-toy__switch-button,
+    .circuit-toy__next,
+    .workshop-controls button,
+    .lightbox,
+    .lightbox__panel,
+    .lightbox__close,
+    .project-card,
+    .project-card__status,
+    .project-card__zoom-hint,
+    .education-card,
+    .skill-card,
+    .score-card,
+    .interest-card,
+    .currently-section,
+    .home-vitals,
+    .circuit-toy,
+    .workshop,
+    .station-panel,
+    .achievement-panel,
+    .achievement.is-unlocked,
+    .projects-status,
+    .no-script-note,
+    .egg-dialog,
+    .voltage-toast,
+    .home-scroll
+  ) {
+    background: var(--glass-fallback);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
+  }
+
+  .voltage-toast,
+  .egg-dialog,
+  .lightbox__panel {
+    background: var(--glass-fallback-raised);
+  }
+}
+
+@media (forced-colors: active) {
+  :is(
+    .site-header,
+    .site-nav,
+    .site-nav__link[aria-current="page"],
+    .icon-link,
+    .theme-toggle,
+    .menu-toggle,
+    .button,
+    .circuit-toy__switch-button,
+    .circuit-toy__next,
+    .workshop-controls button,
+    .lightbox,
+    .lightbox__panel,
+    .lightbox__close,
+    .project-card,
+    .project-card__status,
+    .project-card__zoom-hint,
+    .education-card,
+    .skill-card,
+    .score-card,
+    .interest-card,
+    .currently-section,
+    .home-vitals,
+    .circuit-toy,
+    .workshop,
+    .station-panel,
+    .achievement-panel,
+    .achievement.is-unlocked,
+    .projects-status,
+    .no-script-note,
+    .egg-dialog,
+    .voltage-toast,
+    .home-scroll
+  ) {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    box-shadow: none;
+    color: CanvasText;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  :is(
+    .site-header,
+    .site-nav,
+    .site-nav__link[aria-current="page"],
+    .icon-link,
+    .theme-toggle,
+    .menu-toggle,
+    .button,
+    .circuit-toy__switch-button,
+    .circuit-toy__next,
+    .workshop-controls button,
+    .lightbox,
+    .lightbox__panel,
+    .lightbox__close,
+    .project-card,
+    .project-card__status,
+    .project-card__zoom-hint,
+    .education-card,
+    .skill-card,
+    .score-card,
+    .interest-card,
+    .currently-section,
+    .home-vitals,
+    .circuit-toy,
+    .workshop,
+    .station-panel,
+    .achievement-panel,
+    .achievement.is-unlocked,
+    .projects-status,
+    .no-script-note,
+    .egg-dialog,
+    .voltage-toast,
+    .home-scroll
+  )::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  .glass-control,
+  .project-card,
+  .skill-card,
+  .interest-card,
+  .education-card,
+  .station-panel,
+  .achievement-panel,
+  body .voltage-toast {
+    animation: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .glass-control.is-rippling .glass-control__ripple {
+    animation: none;
   }
 }
