@@ -40,6 +40,8 @@
   --radius-lg: 1.5rem;
   --radius-pill: 999px;
   --shadow-card: 0 1.25rem 3rem rgb(0 0 0 / 24%);
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-ui: 240ms;
 
   font-family: var(--font-body);
   font-size: 100%;
@@ -143,19 +145,31 @@ body {
   transform: translateY(0);
 }
 
-body::before {
+body::before,
+body::after {
   position: fixed;
   z-index: -1;
-  inset: -18%;
-  background:
-    radial-gradient(ellipse at 18% 22%, rgb(54 111 126 / 22%), transparent 34%),
-    radial-gradient(ellipse at 82% 18%, rgb(67 105 141 / 18%), transparent 36%),
-    radial-gradient(ellipse at 62% 78%, rgb(45 111 100 / 16%), transparent 38%);
+  inset: -22%;
   content: "";
-  opacity: 0.82;
   pointer-events: none;
-  animation: aurora-drift 28s ease-in-out infinite alternate;
   will-change: transform, opacity;
+}
+
+body::before {
+  background:
+    radial-gradient(ellipse at 18% 22%, rgb(54 111 126 / 28%), transparent 36%),
+    radial-gradient(ellipse at 82% 18%, rgb(67 105 141 / 22%), transparent 38%),
+    radial-gradient(ellipse at 62% 78%, rgb(45 111 100 / 20%), transparent 40%);
+  opacity: 0.88;
+  animation: aurora-drift 28s ease-in-out infinite alternate;
+}
+
+body::after {
+  background:
+    radial-gradient(ellipse at 8% 72%, rgb(134 212 194 / 14%), transparent 32%),
+    radial-gradient(ellipse at 92% 58%, rgb(88 130 176 / 16%), transparent 34%);
+  opacity: 0.7;
+  animation: aurora-drift 36s ease-in-out infinite alternate-reverse;
 }
 
 @keyframes aurora-drift {
@@ -216,6 +230,12 @@ h1 {
   margin-top: var(--space-8);
 }
 
+.page-actions .btn,
+.circuit-toy__next,
+.workshop-controls button {
+  white-space: nowrap;
+}
+
 .btn {
   appearance: none;
   display: inline-flex;
@@ -237,11 +257,11 @@ h1 {
   touch-action: manipulation;
   cursor: pointer;
   transition:
-    background 240ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    border-color 240ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    box-shadow 240ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    color 240ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    background var(--duration-ui) var(--ease-standard),
+    border-color var(--duration-ui) var(--ease-standard),
+    box-shadow var(--duration-ui) var(--ease-standard),
+    color var(--duration-ui) var(--ease-standard),
+    transform var(--duration-ui) var(--ease-standard);
 }
 
 .btn--primary {
@@ -330,7 +350,7 @@ h1 {
   font-size: 1.4em;
   font-weight: 800;
   line-height: 0.7;
-  transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: transform var(--duration-ui) var(--ease-standard);
 }
 
 .btn:hover .btn__arrow {
@@ -342,7 +362,8 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body::before {
+  body::before,
+  body::after {
     animation: none;
     opacity: 0.66;
     transform: none;

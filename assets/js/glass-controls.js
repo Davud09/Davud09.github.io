@@ -130,6 +130,25 @@ for (const control of document.querySelectorAll(interactiveSelector)) {
 
 markGlassSurfaces(document);
 
+let pendingSheenPointer;
+let sheenFrame;
+
+function updateGlassSheen() {
+  sheenFrame = undefined;
+  const pointer = pendingSheenPointer;
+  pendingSheenPointer = undefined;
+
+  if (!pointer || reducedMotion.matches || !pointer.surface.isConnected) {
+    return;
+  }
+
+  const bounds = pointer.surface.getBoundingClientRect();
+  const x = ((pointer.clientX - bounds.left) / Math.max(bounds.width, 1)) * 100;
+  const y = ((pointer.clientY - bounds.top) / Math.max(bounds.height, 1)) * 100;
+  pointer.surface.style.setProperty("--mx", `${x.toFixed(2)}%`);
+  pointer.surface.style.setProperty("--my", `${y.toFixed(2)}%`);
+}
+
 document.addEventListener("pointermove", (event) => {
   if (reducedMotion.matches || event.pointerType === "touch" || !(event.target instanceof Element)) {
     return;
@@ -140,9 +159,15 @@ document.addEventListener("pointermove", (event) => {
     return;
   }
 
-  const bounds = surface.getBoundingClientRect();
-  surface.style.setProperty("--mx", `${event.clientX - bounds.left}px`);
-  surface.style.setProperty("--my", `${event.clientY - bounds.top}px`);
+  pendingSheenPointer = {
+    surface,
+    clientX: event.clientX,
+    clientY: event.clientY
+  };
+
+  if (sheenFrame === undefined) {
+    sheenFrame = window.requestAnimationFrame(updateGlassSheen);
+  }
 }, { passive: true });
 
 const controlsObserver = new MutationObserver((records) => {
@@ -174,7 +199,7 @@ if (siteNavigation) {
   const activeLink = () => siteNavigation.querySelector('.site-nav__link[aria-current="page"]');
 
   function moveNavIndicator(link) {
-    if (!link || !finePointer.matches) {
+    if (!link) {
       return;
     }
 

@@ -45,10 +45,6 @@
   padding: clamp(var(--space-4), 3vw, var(--space-8));
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background:
-    linear-gradient(135deg, rgb(143 190 197 / 5%), transparent 42%),
-    var(--color-surface);
-  box-shadow: var(--shadow-card);
 }
 
 .workshop__hud {
@@ -244,11 +240,13 @@
 }
 
 .workshop-controls button {
-  display: grid;
+  display: inline-flex;
+  width: 100%;
   min-width: 3rem;
-  min-height: 3rem;
-  justify-self: center;
-  place-items: center;
+  min-height: 3.25rem;
+  justify-self: stretch;
+  align-items: center;
+  justify-content: center;
   color: var(--color-text);
   font-size: var(--text-lg);
   font-weight: 700;
@@ -280,9 +278,12 @@
 }
 
 .workshop-controls__inspect {
+  min-width: 0;
   padding-inline: var(--space-2);
-  font-size: var(--text-xs) !important;
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
   line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .workshop-panel {
@@ -296,7 +297,6 @@
   padding: var(--space-5, 1.25rem);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: var(--color-page);
 }
 
 .station-panel {

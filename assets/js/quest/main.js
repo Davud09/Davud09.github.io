@@ -98,9 +98,13 @@ function showAchievementToast(achievementIds) {
 
   window.clearTimeout(toastTimeout);
   toast.textContent = `Achievement unlocked: ${titles.join(" · ")}`;
+  toast.setAttribute("aria-hidden", "false");
   toast.classList.remove("is-visible");
   window.requestAnimationFrame(() => toast.classList.add("is-visible"));
-  toastTimeout = window.setTimeout(() => toast.classList.remove("is-visible"), 3600);
+  toastTimeout = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+    toast.setAttribute("aria-hidden", "true");
+  }, 3600);
 }
 
 function move(direction) {
@@ -131,7 +135,7 @@ function inspect() {
   render();
   animateXp(previousXp, state.xp);
   message.textContent = result.newlyExplored
-    ? `Station explored: +25 XP${newAchievements.length ? " · achievement unlocked!" : ""}`
+    ? `Station explored: +25 XP. Total: ${state.xp} XP${newAchievements.length ? " · achievement unlocked!" : ""}`
     : `${station.label} is already in your workshop notes.`;
   message.classList.add("is-visible");
   showAchievementToast(newAchievements);

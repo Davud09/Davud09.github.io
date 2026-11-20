@@ -27,17 +27,17 @@ if (pageReady && pageReadyUnit && pageReadyMeter && navigationTiming) {
       : (interactiveTime / 1000).toFixed(1);
     pageReadyUnit.textContent = isUnderOneSecond ? "ms" : "s";
     pageReady.title = `Browser Navigation Timing: the page became interactive in ${Math.round(interactiveTime)} milliseconds.`;
-    pageReadyMeter.style.width = `${Math.min(interactiveTime / 250, 1) * 100}%`;
+    pageReadyMeter.style.transform = `scaleX(${Math.min(interactiveTime / 250, 1)})`;
   } else {
     pageReady.textContent = "Ready";
     pageReadyUnit.textContent = "";
-    pageReadyMeter.style.width = "100%";
+    pageReadyMeter.style.transform = "scaleX(1)";
     pageReady.title = "Interactive timing is unavailable for this page load.";
   }
 } else if (pageReady && pageReadyUnit && pageReadyMeter) {
   pageReady.textContent = "Ready";
   pageReadyUnit.textContent = "";
-  pageReadyMeter.style.width = "100%";
+  pageReadyMeter.style.transform = "scaleX(1)";
   pageReady.title = "This browser does not provide Navigation Timing data.";
 }
 

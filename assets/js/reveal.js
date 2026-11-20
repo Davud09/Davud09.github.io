@@ -22,7 +22,10 @@ const revealGroups = [
   { selector: ".station-panel" },
   { selector: ".achievement-panel" },
   { selector: ".plain-resume-link" },
-  { selector: ".project-card", stagger: true }
+  { selector: ".contact-section" },
+  { selector: ".currently-section" },
+  { selector: ".project-card", stagger: true },
+  { selector: ".project-skeleton", stagger: true }
 ];
 const revealTargets = new Set();
 const activeCountAnimations = new Map();
@@ -60,12 +63,13 @@ function prepareRevealTargets(root = document) {
 }
 
 function animateCount(element) {
-  const target = Number(element.textContent.trim());
+  const source = element.dataset.countTo ?? element.textContent.trim();
+  const target = Number(source);
   if (!Number.isFinite(target)) {
     return;
   }
 
-  const decimalPlaces = element.textContent.includes(".") ? 1 : 0;
+  const decimalPlaces = String(source).includes(".") ? 1 : 0;
   const formattedTarget = target.toFixed(decimalPlaces);
   const duration = 720;
   const startedAt = performance.now();

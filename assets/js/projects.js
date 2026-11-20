@@ -5,7 +5,7 @@ const lightboxTitle = document.querySelector("#lightbox-title");
 const lightboxImage = document.querySelector(".lightbox__image");
 const lightboxCaption = document.querySelector(".lightbox__caption");
 const lightboxClose = document.querySelector(".lightbox__close");
-const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const projectsReducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const staticCards = projectGrid
   ? [...projectGrid.children].map((node) => node.cloneNode(true))
   : [];
@@ -202,13 +202,29 @@ function closeLightbox() {
   }
 
   lightbox.classList.remove("is-visible");
-  if (reducedMotionPreference.matches) {
-    lightbox.close();
+  if (projectsReducedMotionPreference.matches) {
+    finalizeLightboxClose();
     return;
   }
 
   window.clearTimeout(lightboxCloseTimeout);
-  lightboxCloseTimeout = window.setTimeout(() => lightbox.close(), 220);
+  lightboxCloseTimeout = window.setTimeout(finalizeLightboxClose, 220);
+}
+
+function finalizeLightboxClose() {
+  if (!lightbox || (lightbox.hidden && lightbox.inert)) {
+    return;
+  }
+
+  window.clearTimeout(lightboxCloseTimeout);
+  if (lightbox.open) {
+    lightbox.close();
+  }
+  lightbox.classList.remove("is-visible");
+  lightboxImage?.removeAttribute("src");
+  lightbox.hidden = true;
+  lightbox.inert = true;
+  lastImageTrigger?.focus();
 }
 
 projectGrid?.addEventListener("click", (event) => {
@@ -244,14 +260,7 @@ lightbox?.addEventListener("click", (event) => {
     closeLightbox();
   }
 });
-lightbox?.addEventListener("close", () => {
-  window.clearTimeout(lightboxCloseTimeout);
-  lightbox.classList.remove("is-visible");
-  lightboxImage?.removeAttribute("src");
-  lightbox.hidden = true;
-  lightbox.inert = true;
-  lastImageTrigger?.focus();
-});
+lightbox?.addEventListener("close", finalizeLightboxClose);
 
 async function loadProjects() {
   if (!projectGrid || !projectStatus) {
