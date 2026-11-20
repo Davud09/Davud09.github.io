@@ -14,39 +14,67 @@ resume game.
 
 ![Desktop screenshot of the homepage, showing my introduction, profile photo, live page-interactive timing, and four-stage Signal Lab circuit challenge](assets/images/homepage.png)
 
-The homepage includes the **Signal Lab**, a four-stage circuit puzzle. The final
+The homepage includes the **Signal Lab**, a four-stage circuit puzzle. Its
+accessible voltage controls adjust the circuit from 1 to 12 volts, and the final
 stage adds a countdown and a switch sequence. The performance readout uses the
-browser's Navigation Timing API to show when the page became interactive; the
-result depends on the device and browser.
+browser's Navigation Timing API to show when the page became interactive; it
+shows a ready state when timing data is unavailable.
 
 ### Projects
 
 ![Desktop screenshot of the projects page with the completed breadboard project, upcoming Hour of Code and Robotics projects, and portfolio project](assets/images/projects.png)
 
-The projects page is populated from [`assets/data/projects.json`](assets/data/projects.json).
-The SITE 1101 breadboard project is complete; Hour of Code and Robotics are listed
-as upcoming. Photos for those course projects have not been added yet, so the page
-labels the missing images rather than presenting placeholders as finished work.
-The breadboard team project video is linked from its project card.
+Project cards are present in the HTML first, so the page still has content when
+JavaScript is unavailable. JavaScript enhances them with
+[`assets/data/projects.json`](assets/data/projects.json); if that data cannot be
+loaded, the static cards remain visible with a retry option. The page includes
+the SITE 1101 breadboard project and photos, Hour of Code and Robotics cards
+marked **In progress**, and a project entry for this portfolio. The breadboard
+team project video is linked from its card. Project photos open in a
+keyboard-operable image viewer.
 
 ## What’s here
 
 - **Home:** introduction, profile photo, browser-measured interactive timing, and
   the four-stage Signal Lab challenge
 - **About:** education, practical repair experience, programming skills, activities,
-  test scores, languages, and interests
-- **Projects:** project cards loaded from JSON and a keyboard-operable image viewer
+  visible skill-level indicators, animated test scores, languages, interests, and
+  contact information
+- **Projects:** static project cards enhanced from JSON, in-progress project cards,
+  photo gallery, and a retry message if project data cannot be loaded
 - **Field Workshop:** a keyboard- and touch-operable interactive resume with map
-  stations, XP, achievements, and a link to the plain resume
-- Liquid-glass styling across the site, with pointer-responsive highlights and
-  click ripples on interactive controls
+  stations, arrow-key or WASD movement, Inspect controls, XP, achievements, live
+  announcements, and a link to the plain resume
 - Hidden keyboard, logo-click, and theme-toggle easter eggs
-- Responsive layout, dark/light themes, keyboard focus styles, reduced-motion support,
-  and profile-image fallback
 
-The glass effects respect reduced-motion and reduced-transparency preferences.
-The easter eggs are small optional interactions and do not change the site's
-pages or core features.
+## Design, accessibility, and performance
+
+- Shared CSS custom properties keep the color palette, spacing, radii, shadows,
+  glass effects, and motion timing consistent.
+- A reusable liquid-glass treatment is used for navigation, cards, buttons,
+  dialogs, the Signal Lab, and Workshop panels. It combines translucent fills,
+  blur, borders, highlights, layered shadows, and pointer-following specular
+  sheen.
+- The glass system has opaque fallbacks for browsers without `backdrop-filter`,
+  reduced-transparency support, and forced-colors styling. Blur is reduced on
+  narrow screens.
+- One button system provides primary, secondary, ghost, and icon variants with
+  hover, pressed, focus-visible, disabled, and loading states.
+- Page-load and scroll reveals, card interactions, skill indicators, score
+  count-ups, circuit stages, Workshop movement, XP, and achievement notices use
+  restrained transform/opacity motion. Page navigation uses the View Transitions
+  API when available, with a CSS fallback. Motion preferences are respected, and
+  pointer sheen updates are scheduled with `requestAnimationFrame`.
+- Semantic landmarks, a skip link, visible keyboard focus, labeled controls, and
+  keyboard-operable dialogs support accessible navigation. The project image
+  dialog restores focus and is hidden from assistive technology while closed.
+- Dark and light themes, responsive layouts, canonical and theme-color metadata,
+  Open Graph and Twitter cards, a favicon, and an Apple touch icon are included.
+- The added project photos and portfolio screenshot are compressed. Page images
+  have dimensions to reduce layout shifts, below-the-fold images are lazy loaded,
+  and the homepage portrait is preloaded.
+
+The easter eggs are optional and do not change the site's pages or core features.
 
 ## Built with
 
@@ -55,6 +83,14 @@ pages or core features.
 - GitHub Pages
 
 There is no build step, framework, or package installation.
+
+## Validation
+
+The pages were checked in Chromium at 360, 768, 1280, and 1920 pixels wide for
+horizontal overflow and basic page metadata. JavaScript syntax and project JSON
+were checked, and the project-data fallback, Workshop keyboard controls, and
+image-dialog keyboard behavior were exercised. Safari and Firefox have not yet
+been tested.
 
 ## Run locally
 
