@@ -1,70 +1,70 @@
-const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-
 export function renderMap(map, content, state) {
-  const previousPlayer = reducedMotionPreference.matches
-    ? null
-    : map.querySelector(".workshop-map__player");
-  const previousPlayerBounds = previousPlayer?.getBoundingClientRect();
-  const fragment = document.createDocumentFragment();
-  const stationAt = new Map(content.stations.map((station) => [`${station.x},${station.y}`, station]));
+  if (!map.querySelector(".workshop-map__player")) {
+    const fragment = document.createDocumentFragment();
+    const stationAt = new Map(content.stations.map((station) => [`${station.x},${station.y}`, station]));
 
-  for (let y = 0; y < content.rows; y += 1) {
-    for (let x = 0; x < content.columns; x += 1) {
-      const station = stationAt.get(`${x},${y}`);
-      const tile = document.createElement(station ? "button" : "span");
-      const isExplored = station ? state.explored.includes(station.id) : false;
-      tile.className = `workshop-map__tile${station ? " workshop-map__tile--station" : ""}`;
+    for (let y = 0; y < content.rows; y += 1) {
+      for (let x = 0; x < content.columns; x += 1) {
+        const station = stationAt.get(`${x},${y}`);
+        const tile = document.createElement(station ? "button" : "span");
+        tile.className = `workshop-map__tile${station ? " workshop-map__tile--station" : ""}`;
+        tile.dataset.x = x;
+        tile.dataset.y = y;
 
-      if (station) {
-        tile.type = "button";
-        tile.dataset.stationId = station.id;
-        tile.setAttribute(
-          "aria-label",
-          `${station.label}${isExplored ? ", explored" : ""}${state.position.x === x && state.position.y === y ? ", current location" : ""}`
-        );
-        tile.setAttribute("aria-pressed", String(state.position.x === x && state.position.y === y));
-        const marker = document.createElement("span");
-        marker.className = `workshop-map__station${isExplored ? " is-explored" : ""}`;
-        marker.setAttribute("aria-hidden", "true");
-        marker.textContent = station.symbol;
-        marker.style.gridArea = "1 / 1";
-        tile.append(marker);
-      } else {
-        tile.setAttribute("aria-hidden", "true");
+        if (station) {
+          tile.type = "button";
+          tile.dataset.stationId = station.id;
+          const marker = document.createElement("span");
+          marker.className = "workshop-map__station";
+          marker.setAttribute("aria-hidden", "true");
+          marker.textContent = station.symbol;
+          tile.append(marker);
+        } else {
+          tile.setAttribute("aria-hidden", "true");
+        }
+
+        tile.style.gridColumn = String(x + 1);
+        tile.style.gridRow = String(y + 1);
+        fragment.append(tile);
       }
-
-      if (state.position.x === x && state.position.y === y) {
-        const player = document.createElement("span");
-        player.className = `workshop-map__player${station ? " is-at-station" : ""}`;
-        player.textContent = "DI";
-        player.style.gridArea = "1 / 1";
-        tile.append(player);
-      }
-
-      tile.style.gridColumn = String(x + 1);
-      tile.style.gridRow = String(y + 1);
-      fragment.append(tile);
+    }
+    const player = document.createElement("span");
+    player.className = "workshop-map__player";
+    player.setAttribute("aria-hidden", "true");
+    player.textContent = "DI";
+    fragment.append(player);
+    map.replaceChildren(fragment);
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(() => positionPlayer(map)).observe(map);
+    } else {
+      window.addEventListener("resize", () => positionPlayer(map));
     }
   }
 
-  map.replaceChildren(fragment);
-
-  if (previousPlayerBounds) {
-    const player = map.querySelector(".workshop-map__player");
-    const playerBounds = player?.getBoundingClientRect();
-
-    if (player && playerBounds) {
-      const offsetX = previousPlayerBounds.left - playerBounds.left;
-      const offsetY = previousPlayerBounds.top - playerBounds.top;
-
-      if (offsetX !== 0 || offsetY !== 0) {
-        player.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
-        window.requestAnimationFrame(() => {
-          window.requestAnimationFrame(() => player.style.removeProperty("transform"));
-        });
-      }
-    }
+  map.dataset.playerX = state.position.x;
+  map.dataset.playerY = state.position.y;
+  for (const station of content.stations) {
+    const tile = map.querySelector(`[data-station-id="${station.id}"]`);
+    const explored = state.explored.includes(station.id);
+    const current = state.position.x === station.x && state.position.y === station.y;
+    tile.setAttribute("aria-label", `${station.label}${explored ? ", explored" : ""}${current ? ", current location" : ""}`);
+    tile.setAttribute("aria-pressed", String(current));
+    tile.querySelector(".workshop-map__station").classList.toggle("is-explored", explored);
   }
+  map.querySelector(".workshop-map__player").classList.toggle("is-at-station", content.stations.some(
+    (station) => station.x === state.position.x && station.y === state.position.y
+  ));
+  positionPlayer(map);
+}
+
+function positionPlayer(map) {
+  const tile = map.querySelector(`[data-x="${map.dataset.playerX}"][data-y="${map.dataset.playerY}"]`);
+  const player = map.querySelector(".workshop-map__player");
+  if (!tile || !player) return;
+  const size = tile.offsetWidth * 0.78;
+  player.style.width = `${size}px`;
+  player.style.height = `${size}px`;
+  player.style.transform = `translate3d(${tile.offsetLeft + (tile.offsetWidth - size) / 2}px, ${tile.offsetTop + (tile.offsetHeight - size) / 2}px, 0)`;
 }
 
 export function renderHud(elements, content, state, achievementData) {

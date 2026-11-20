@@ -191,32 +191,3 @@ const controlsObserver = new MutationObserver((records) => {
 });
 
 controlsObserver.observe(document.body, { childList: true, subtree: true });
-
-const siteNavigation = document.querySelector(".site-nav");
-
-if (siteNavigation) {
-  const navLinks = [...siteNavigation.querySelectorAll(".site-nav__link")];
-  const activeLink = () => siteNavigation.querySelector('.site-nav__link[aria-current="page"]');
-
-  function moveNavIndicator(link) {
-    if (!link) {
-      return;
-    }
-
-    const navBounds = siteNavigation.getBoundingClientRect();
-    const linkBounds = link.getBoundingClientRect();
-    siteNavigation.style.setProperty("--nav-indicator-x", `${linkBounds.left - navBounds.left}px`);
-    siteNavigation.style.setProperty("--nav-indicator-y", `${linkBounds.top - navBounds.top}px`);
-    siteNavigation.style.setProperty("--nav-indicator-width", `${linkBounds.width}px`);
-    siteNavigation.style.setProperty("--nav-indicator-height", `${linkBounds.height}px`);
-  }
-
-  for (const link of navLinks) {
-    link.addEventListener("pointerenter", () => moveNavIndicator(link));
-    link.addEventListener("focus", () => moveNavIndicator(link));
-  }
-
-  siteNavigation.addEventListener("pointerleave", () => moveNavIndicator(activeLink()));
-  window.addEventListener("resize", () => moveNavIndicator(activeLink()));
-  moveNavIndicator(activeLink());
-}

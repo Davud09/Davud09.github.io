@@ -423,7 +423,7 @@
   background: var(--color-text-muted);
   content: "";
   transform-origin: bottom center;
-  transition: transform 180ms ease;
+  transition: transform 220ms var(--ease-ios-sheet);
 }
 
 .circuit-toy__switch-lever::before {
@@ -478,11 +478,11 @@
   width: 3.8rem;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(var(--color-accent-rgb) / 24%), transparent 68%);
+  background: radial-gradient(circle, rgb(255 218 164 / 28%), transparent 68%);
   content: "";
   opacity: 0;
   transform: translateX(-50%);
-  transition: opacity 180ms ease;
+  transition: opacity 220ms var(--ease-ios-sheet);
 }
 
 .circuit-toy__lamp svg,
@@ -528,6 +528,7 @@
 }
 
 .circuit-toy__telemetry {
+  position: relative;
   display: block;
   margin-top: var(--space-3);
   padding-top: var(--space-2);
@@ -538,6 +539,12 @@
   letter-spacing: 0.035em;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
+}
+
+.circuit-toy__telemetry-old {
+  position: absolute;
+  inset: var(--space-2) 0 auto;
+  pointer-events: none;
 }
 
 .circuit-toy__footer {

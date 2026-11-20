@@ -45,7 +45,7 @@ function prepareRevealTargets(root = document) {
 
     matches.forEach((element, index) => {
       element.setAttribute("data-reveal", "");
-      const delay = group.delay ?? (group.stagger ? Math.min(index * 70, 280) : 0);
+      const delay = group.delay ?? (group.stagger ? index * 50 : 0);
       element.style.setProperty("--reveal-delay", `${delay}ms`);
       revealTargets.add(element);
     });
@@ -151,7 +151,7 @@ if (reducedMotionPreference.matches || !("IntersectionObserver" in window)) {
             if (node === element || node.contains(element)) {
               if (element.matches(".project-card")) {
                 const index = projectCards.indexOf(element);
-                element.style.setProperty("--reveal-delay", `${Math.min(index * 70, 280)}ms`);
+                element.style.setProperty("--reveal-delay", `${index * 50}ms`);
               }
 
               if (motionIsReduced) {

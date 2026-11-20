@@ -24,8 +24,7 @@ export function connectInput({ map, controls, onMove, onInspect, onVisit }) {
       return;
     }
 
-    onVisit(stationButton.dataset.stationId);
-    map.focus({ preventScroll: true });
+    onVisit(stationButton.dataset.stationId, stationButton);
   });
 
   map.addEventListener("keydown", (event) => {

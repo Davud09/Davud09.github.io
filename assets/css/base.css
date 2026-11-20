@@ -1,16 +1,16 @@
 :root {
   color-scheme: dark;
 
-  --bg-primary: #111214;
-  --bg-elevated: #181a1d;
-  --bg-subtle: #202327;
+  --bg-primary: #0c1713;
+  --bg-elevated: #12231c;
+  --bg-subtle: #1b3025;
   --border-hairline: rgb(255 255 255 / 8%);
   --border-strong: rgb(255 255 255 / 16%);
-  --text-primary: #f3f1ed;
-  --text-secondary: #9c9a94;
-  --accent-primary: #d99b52;
-  --accent-primary-rgb: 217 155 82;
-  --accent-soft: rgb(217 155 82 / 12%);
+  --text-primary: #eff7f1;
+  --text-secondary: #a4b9aa;
+  --accent-primary: #78c995;
+  --accent-primary-rgb: 120 201 149;
+  --accent-soft: rgb(120 201 149 / 12%);
   --status-active: #529e72;
   --status-active-rgb: 82 158 114;
   --color-page: var(--bg-primary);
@@ -20,8 +20,8 @@
   --color-text-muted: var(--text-secondary);
   --color-accent: var(--accent-primary);
   --color-accent-rgb: var(--accent-primary-rgb);
-  --color-accent-strong: #e6b16d;
-  --color-green: #252a26;
+  --color-accent-strong: #a0e3b5;
+  --color-green: #1d3828;
   --color-border: var(--border-hairline);
   --color-border-strong: var(--border-strong);
   --color-focus: var(--accent-primary);
@@ -59,6 +59,8 @@
   --radius-pill: 999px;
   --shadow-card: 0 0.75rem 2rem rgb(0 0 0 / 18%);
   --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-ios-sheet: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-apple-out: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-ui: 180ms;
 
   font-family: var(--font-body);
@@ -73,21 +75,21 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --bg-primary: #f6f4ef;
+  --bg-primary: #edf4ee;
   --bg-elevated: #ffffff;
-  --bg-subtle: #ece9e1;
+  --bg-subtle: #e0ebe2;
   --border-hairline: #e2dfd7;
   --border-strong: #c9c4b8;
-  --text-primary: #171716;
-  --text-secondary: #5c5a54;
-  --accent-primary: #b4732a;
-  --accent-primary-rgb: 180 115 42;
-  --accent-soft: rgb(180 115 42 / 12%);
+  --text-primary: #12261a;
+  --text-secondary: #4a6251;
+  --accent-primary: #17683d;
+  --accent-primary-rgb: 23 104 61;
+  --accent-soft: rgb(23 104 61 / 12%);
   --status-active: #2f7a50;
   --status-active-rgb: 47 122 80;
-  --color-accent-strong: #8b551b;
-  --color-green: #e5e9e2;
-  --color-on-accent: #171716;
+  --color-accent-strong: #145a35;
+  --color-green: #dcebe0;
+  --color-on-accent: #fff;
   --color-grid-rgb: 92 90 84;
   --shadow-card: 0 0.75rem 2rem rgb(38 34 27 / 8%);
 }
@@ -136,15 +138,15 @@ body {
 
 .reveal-ready [data-reveal] {
   opacity: 0;
-  transform: translateY(1.25rem);
+  transform: translate3d(0, 12px, 0);
   transition:
-    opacity 550ms ease var(--reveal-delay, 0ms),
-    transform 550ms ease var(--reveal-delay, 0ms);
+    opacity 450ms var(--ease-apple-out) var(--reveal-delay, 0ms),
+    transform 450ms var(--ease-apple-out) var(--reveal-delay, 0ms);
 }
 
 .reveal-ready [data-reveal].is-revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 body::before,
@@ -258,12 +260,7 @@ h1 {
   text-decoration: none;
   touch-action: manipulation;
   cursor: pointer;
-  transition:
-    background var(--duration-ui) var(--ease-standard),
-    border-color var(--duration-ui) var(--ease-standard),
-    box-shadow var(--duration-ui) var(--ease-standard),
-    color var(--duration-ui) var(--ease-standard),
-    transform var(--duration-ui) var(--ease-standard);
+  transition: transform var(--duration-ui) var(--ease-ios-sheet);
 }
 
 .btn--primary {

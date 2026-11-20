@@ -133,7 +133,7 @@ function move(direction) {
   }
 }
 
-function visitStation(stationId) {
+function visitStation(stationId, trigger) {
   const station = workshopContent.stations.find((item) => item.id === stationId);
 
   if (!station) {
@@ -145,6 +145,18 @@ function visitStation(stationId) {
     position: { x: station.x, y: station.y }
   };
   exploreStation(station);
+  const content = document.createDocumentFragment();
+  const description = document.createElement("p");
+  description.textContent = station.description;
+  const facts = document.createElement("ul");
+  facts.className = "station-facts";
+  for (const fact of station.facts) {
+    const item = document.createElement("li");
+    item.textContent = fact;
+    facts.append(item);
+  }
+  content.append(description, facts);
+  window.liquidSheet.open(trigger, station.title, content);
 }
 
 function inspect() {

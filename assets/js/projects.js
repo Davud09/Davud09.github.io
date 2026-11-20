@@ -1,17 +1,10 @@
 const projectGrid = document.querySelector("#project-grid");
 const projectStatus = document.querySelector("#projects-status");
-const lightbox = document.querySelector("#project-lightbox");
-const lightboxTitle = document.querySelector("#lightbox-title");
-const lightboxImage = document.querySelector(".lightbox__image");
-const lightboxCaption = document.querySelector(".lightbox__caption");
-const lightboxClose = document.querySelector(".lightbox__close");
 const projectsReducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const svgNamespace = "http://www.w3.org/2000/svg";
 const staticCards = projectGrid
   ? [...projectGrid.children].map((node) => node.cloneNode(true))
   : [];
-let lastImageTrigger = null;
-let lightboxCloseTimeout;
 
 const projectIllustrations = {
   "code-workshop": [
@@ -109,15 +102,8 @@ function setCarouselSlide(gallery, requestedIndex) {
   }
 
   const index = (requestedIndex + slides.length) % slides.length;
-  slides.forEach((slide, slideIndex) => {
-    slide.hidden = slideIndex !== index;
-  });
-
-  for (const dot of gallery.querySelectorAll("[data-carousel-dot]")) {
-    const isCurrent = Number(dot.dataset.carouselDot) === index;
-    dot.setAttribute("aria-current", String(isCurrent));
-    dot.textContent = isCurrent ? "●" : "○";
-  }
+  const track = gallery.querySelector(".project-card__track");
+  if (track) track.scrollTo({ left: slides[index].offsetLeft, behavior: projectsReducedMotionPreference.matches ? "auto" : "smooth" });
 }
 
 function renderProject(project, index) {
@@ -294,57 +280,51 @@ function renderProjectSkeletons() {
   projectGrid.replaceChildren(fragment);
 }
 
-function openLightbox(project, trigger) {
-  if (!project.image || !lightbox || !lightboxTitle || !lightboxImage || !lightboxCaption) {
-    console.error("Unable to open the project image viewer: required image or dialog content is missing.");
-    return;
+function enhanceProjects() {
+  for (const card of projectGrid.querySelectorAll(".project-card")) {
+    const body = card.querySelector(".project-card__body");
+    const button = createTextElement("button", "btn btn--secondary project-card__open", "Explore case study");
+    button.type = "button";
+    button.setAttribute("aria-label", `Explore case study: ${card.querySelector(".project-card__title").textContent}`);
+    body.append(button);
+    for (const gallery of card.querySelectorAll(".project-card__gallery")) {
+      const slides = [...gallery.querySelectorAll("[data-project-image]")];
+      const track = document.createElement("div");
+      track.className = "project-card__track";
+      for (const slide of slides) {
+        slide.hidden = false;
+        slide.setAttribute("aria-label", `Explore case study: ${card.querySelector(".project-card__title").textContent}`);
+        track.append(slide);
+      }
+      gallery.prepend(track);
+      const updateDots = () => {
+        const index = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+        gallery.querySelectorAll("[data-carousel-dot]").forEach((dot, i) => {
+          dot.setAttribute("aria-current", String(i === index));
+        });
+      };
+      track.addEventListener("scroll", updateDots, { passive: true });
+      updateDots();
+    }
   }
-
-  window.clearTimeout(lightboxCloseTimeout);
-  lastImageTrigger = trigger;
-  lightboxTitle.textContent = project.title;
-  lightboxImage.src = project.image;
-  lightboxImage.alt = project.imageAlt || `${project.title} project image`;
-  lightboxCaption.textContent = project.imageAlt || project.title;
-  if (!lightbox.open) {
-    lightbox.hidden = false;
-    lightbox.inert = false;
-    lightbox.showModal();
-  }
-  lightbox.classList.remove("is-visible");
-  window.requestAnimationFrame(() => lightbox.classList.add("is-visible"));
-  lightboxClose?.focus();
 }
 
-function closeLightbox() {
-  if (!lightbox?.open) {
-    return;
+function openProject(card, trigger) {
+  const content = document.createDocumentFragment();
+  const description = card.querySelector(".project-card__description");
+  const metadata = card.querySelector(".project-card__metadata");
+  const links = card.querySelector(".project-card__links");
+  if (description) {
+    content.append(createTextElement("h3", "", "Build notes"), description.cloneNode(true));
   }
-
-  lightbox.classList.remove("is-visible");
-  if (projectsReducedMotionPreference.matches) {
-    finalizeLightboxClose();
-    return;
+  if (metadata) content.append(metadata.cloneNode(true));
+  for (const image of card.querySelectorAll("[data-project-image] img")) {
+    const fullImage = image.cloneNode();
+    fullImage.loading = "eager";
+    content.append(fullImage);
   }
-
-  window.clearTimeout(lightboxCloseTimeout);
-  lightboxCloseTimeout = window.setTimeout(finalizeLightboxClose, 220);
-}
-
-function finalizeLightboxClose() {
-  if (!lightbox || (lightbox.hidden && lightbox.inert)) {
-    return;
-  }
-
-  window.clearTimeout(lightboxCloseTimeout);
-  if (lightbox.open) {
-    lightbox.close();
-  }
-  lightbox.classList.remove("is-visible");
-  lightboxImage?.removeAttribute("src");
-  lightbox.hidden = true;
-  lightbox.inert = true;
-  lastImageTrigger?.focus();
+  if (links) content.append(links.cloneNode(true));
+  window.liquidSheet.open(card, card.querySelector(".project-card__title").textContent, content, trigger);
 }
 
 projectGrid?.addEventListener("click", (event) => {
@@ -360,7 +340,8 @@ projectGrid?.addEventListener("click", (event) => {
     }
 
     const slides = [...gallery.querySelectorAll("[data-project-image]")];
-    const activeIndex = slides.findIndex((slide) => !slide.hidden);
+    const track = gallery.querySelector(".project-card__track");
+    const activeIndex = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
     if (carouselControl.hasAttribute("data-carousel-dot")) {
       setCarouselSlide(gallery, Number(carouselControl.dataset.carouselDot));
     } else {
@@ -370,35 +351,11 @@ projectGrid?.addEventListener("click", (event) => {
     return;
   }
 
-  const trigger = event.target.closest("[data-project-image]");
-  if (!(trigger instanceof HTMLButtonElement)) {
-    return;
-  }
-
-  openLightbox({
-    title: trigger.dataset.projectTitle,
-    image: trigger.dataset.imageSrc,
-    imageAlt: trigger.dataset.imageAlt
-  }, trigger);
+  const card = event.target.closest(".project-card");
+  if (!card || event.target.closest("a")) return;
+  const trigger = event.target.closest("button") || card.querySelector(".project-card__open");
+  openProject(card, trigger);
 });
-
-lightboxClose?.addEventListener("click", closeLightbox);
-lightbox?.addEventListener("cancel", (event) => {
-  event.preventDefault();
-  closeLightbox();
-});
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && lightbox?.open) {
-    event.preventDefault();
-    closeLightbox();
-  }
-});
-lightbox?.addEventListener("click", (event) => {
-  if (event.target === lightbox) {
-    closeLightbox();
-  }
-});
-lightbox?.addEventListener("close", finalizeLightboxClose);
 
 async function loadProjects() {
   if (!projectGrid || !projectStatus) {
@@ -426,10 +383,12 @@ async function loadProjects() {
     });
 
     projectGrid.replaceChildren(fragment);
+    enhanceProjects();
     projectStatus.remove();
   } catch (error) {
     if (staticCards.length > 0) {
       projectGrid.replaceChildren(...staticCards.map((node) => node.cloneNode(true)));
+      enhanceProjects();
     } else {
       projectGrid.replaceChildren();
     }

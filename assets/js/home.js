@@ -25,7 +25,21 @@ function renderCircuitTelemetry() {
   const voltage = Number.parseFloat(voltageReadout?.textContent ?? "5");
   const isClosed = document.querySelector("[data-circuit-board]")?.classList.contains("is-powered") ?? false;
   const current = isClosed ? "FLOWING" : "NO FLOW";
-  circuitTelemetry.textContent = `CIRCUIT: ${isClosed ? "CLOSED" : "OPEN"} · V_CC: ${voltage.toFixed(1)}V · CURRENT: ${current}`;
+  const next = `CIRCUIT: ${isClosed ? "CLOSED" : "OPEN"} · V_CC: ${voltage.toFixed(1)}V · CURRENT: ${current}`;
+  const previous = circuitTelemetry.dataset.value ?? circuitTelemetry.textContent;
+  if (previous === next) return;
+  circuitTelemetry.dataset.value = next;
+  circuitTelemetry.textContent = next;
+  if (previous && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const old = document.createElement("span");
+    old.className = "circuit-toy__telemetry-old";
+    old.setAttribute("aria-hidden", "true");
+    old.textContent = previous;
+    circuitTelemetry.append(old);
+    const fade = old.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220 });
+    circuitTelemetry.animate([{ opacity: 0.45 }, { opacity: 1 }], { duration: 220 });
+    fade.onfinish = () => old.remove();
+  }
 }
 
 if (voltageReadout && boardVoltageReadout && voltageButtons.length > 0) {
