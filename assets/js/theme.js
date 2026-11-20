@@ -3,8 +3,13 @@ const themeStorageKey = "davud-portfolio-theme";
 const themeColor = document.querySelector('meta[name="theme-color"]');
 
 function getStoredTheme() {
-  const theme = window.localStorage.getItem(themeStorageKey);
-  return theme === "light" || theme === "dark" ? theme : null;
+  try {
+    const theme = window.localStorage.getItem(themeStorageKey);
+    return theme === "light" || theme === "dark" ? theme : null;
+  } catch (error) {
+    console.warn("The saved theme is unavailable.", error);
+    return null;
+  }
 }
 
 function getActiveTheme() {
@@ -13,7 +18,7 @@ function getActiveTheme() {
 
 function updateThemeToggle(theme) {
   const nextTheme = theme === "dark" ? "light" : "dark";
-  themeColor?.setAttribute("content", theme === "light" ? "#F6F4EF" : "#111214");
+  themeColor?.setAttribute("content", theme === "light" ? "#edf4ee" : "#0c1713");
 
   if (!themeToggle) {
     return;
@@ -36,7 +41,11 @@ if (themeToggle) {
   themeToggle.addEventListener("click", () => {
     const nextTheme = getActiveTheme() === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = nextTheme;
-    window.localStorage.setItem(themeStorageKey, nextTheme);
     updateThemeToggle(nextTheme);
+    try {
+      window.localStorage.setItem(themeStorageKey, nextTheme);
+    } catch (error) {
+      console.warn("The theme could not be saved.", error);
+    }
   });
 }

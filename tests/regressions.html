@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio regression checks</title>
+</head>
+<body>
+  <h1>Portfolio regression checks</h1>
+  <p>Run this page through the local HTTP server described in the README.</p>
+  <pre id="results" role="status">Running…</pre>
+  <iframe title="Test page" width="1024" height="768"></iframe>
+  <script>
+    const results = document.querySelector("#results");
+    const frame = document.querySelector("iframe");
+    const lines = [];
+
+    function check(condition, message) {
+      if (!condition) throw new Error(message);
+      lines.push(`PASS: ${message}`);
+      results.textContent = lines.join("\n");
+    }
+
+    async function waitFor(predicate, message) {
+      const deadline = performance.now() + 5000;
+      while (!predicate()) {
+        if (performance.now() > deadline) throw new Error(`Timed out: ${message}`);
+        await new Promise((resolve) => setTimeout(resolve, 25));
+      }
+    }
+
+    function loadPage(path) {
+      return new Promise((resolve) => {
+        frame.onload = () => resolve(frame.contentWindow);
+        frame.src = path;
+      });
+    }
+
+    async function run() {
+      let site = await loadPage("../index.html");
+      let doc = site.document;
+      const press = (index) => doc.querySelectorAll(".circuit-toy__switch-button")[index].click();
+      const next = () => doc.querySelector("[data-circuit-next]").click();
+      press(0);
+      next();
+      press(0);
+      press(1);
+      next();
+      press(0);
+      check(doc.querySelector("[data-circuit-status]").textContent === "SEQUENCE RESET",
+        "Wrong Signal Lab sequence resets the stage");
+      press(1);
+      press(0);
+      press(2);
+      next();
+      press(2);
+      press(0);
+      press(1);
+      check(doc.querySelector("[data-circuit-next]").hidden
+        && doc.querySelector("[data-circuit-status]").textContent === "STEP 3 / 5",
+        "Final Signal Lab stage stays active until all five steps");
+      press(2);
+      press(1);
+      check(doc.querySelector("[data-circuit-stage-count]").textContent === "ALL STAGES CLEAR",
+        "Final Signal Lab sequence completes");
+      next();
+      check(doc.querySelector("[data-circuit-stage-count]").textContent === "STAGE 01 / 04",
+        "Signal Lab restarts");
+
+      site = await loadPage("../projects.html");
+      doc = site.document;
+      await waitFor(() => doc.querySelector(".project-card__track"), "project data");
+      const gallery = doc.querySelector(".project-card__gallery");
+      const track = gallery.querySelector(".project-card__track");
+      track.append(track.lastElementChild.cloneNode(true));
+      gallery.querySelector("img").dispatchEvent(new site.Event("error"));
+      check(gallery.querySelectorAll("[data-project-image]").length === 2
+        && gallery.querySelectorAll("[data-carousel-dot]").length === 2
+        && gallery.querySelector(".project-card__zoom-hint").textContent === "View photo 1 of 2",
+        "Gallery updates slides, controls, and labels after an image fails");
+      gallery.querySelector("img").dispatchEvent(new site.Event("error"));
+      check(!gallery.querySelector(".project-card__carousel-controls")
+        && gallery.querySelector(".project-card__zoom-hint").textContent === "View image",
+        "Gallery removes controls and updates its label when one image remains");
+      const grid = doc.querySelector("#project-grid");
+      const replacement = grid.querySelector(".project-card").cloneNode(true);
+      replacement.classList.remove("is-revealed");
+      grid.replaceChildren(replacement);
+      replacement.scrollIntoView();
+      await waitFor(() => replacement.classList.contains("is-revealed"), "replacement project reveal");
+      check(replacement.classList.contains("is-revealed"),
+        "Replacement project cards reveal with the current motion preference");
+
+      site = await loadPage("../quest.html");
+      doc = site.document;
+      await waitFor(() => doc.querySelectorAll("[data-station-id]").length >= 2, "workshop stations");
+      const stations = doc.querySelectorAll("[data-station-id]");
+      stations[0].click();
+      site.liquidSheet.close();
+      await waitFor(() => !doc.querySelector(".glass-backdrop").open, "station sheet close");
+      const xp = doc.querySelector("#workshop-xp");
+      const previous = Number.parseInt(xp.textContent, 10);
+      stations[1].click();
+      const immediate = Number.parseInt(xp.textContent, 10);
+      check(site.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? immediate === 50 : immediate === previous,
+        "A new Workshop XP animation starts from the displayed value");
+      await waitFor(() => xp.textContent === "50 XP", "workshop XP");
+      site.liquidSheet.close();
+      await waitFor(() => !doc.querySelector(".glass-backdrop").open, "station sheet close");
+      stations[0].click();
+      check(xp.textContent === "50 XP", "Revisiting a Workshop station does not award XP again");
+      lines.push("All checks passed.");
+      results.textContent = lines.join("\n");
+      document.documentElement.dataset.result = "passed";
+    }
+
+    run().catch((error) => {
+      lines.push(`FAIL: ${error.message}`);
+      results.textContent = lines.join("\n");
+      document.documentElement.dataset.result = "failed";
+      console.error(error);
+    });
+  </script>
+</body>
+</html>

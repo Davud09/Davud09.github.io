@@ -57,7 +57,7 @@ plain resume is also available on the About page.
   stations, arrow-key or WASD movement, clickable station tiles, automatic note
   opening and XP, visited markers, a Re-read control, consolidated live feedback,
   achievements, and a link to the plain resume
-- **Contact actions:** an email link in the footer and a Resume (PDF) link on
+- **Contact actions:** an email link in the footer and a link to the About page on
   every page
 - Hidden keyboard, logo-click, and theme-toggle easter eggs
 
@@ -108,6 +108,9 @@ and desktop layouts, the project-data fallback and retry, carousel, case-study
 and station sheets, reduced motion, Signal Lab telemetry, and Workshop movement
 and XP. Safari, Firefox, and 120 fps performance have not been verified.
 
+For focused regression checks, run the local server below and open
+`http://localhost:8000/tests/regressions.html`.
+
 ## Run locally
 
 The projects page loads its content from JSON, so run the site through a local HTTP
@@ -129,6 +132,7 @@ Open [http://localhost:8000](http://localhost:8000) and stop the server with
 ├── projects.html
 ├── quest.html
 ├── content.md
+├── tests/         # Browser regression checks
 └── assets/
     ├── css/       # Shared and page-specific styles
     ├── data/      # Project-card data
@@ -141,5 +145,3 @@ Open [http://localhost:8000](http://localhost:8000) and stop the server with
 - [GitHub profile](https://github.com/Davud09)
 - [LinkedIn](https://www.linkedin.com/in/davud-idrisov-333a382b0/)
 - Email: [didrisov28062@ada.edu.az](mailto:didrisov28062@ada.edu.az)
-
-To enable the Resume (PDF) links, add `assets/Davud_Idrisov_CV.pdf`.

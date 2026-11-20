@@ -220,7 +220,9 @@ if (
   }
 
   function updateCircuit() {
-    const isPowered = switchStates.every(Boolean);
+    const stage = circuitStages[currentStage];
+    const isPowered = switchStates.every(Boolean)
+      && (!stage.sequence || sequenceProgress === stage.sequence.length);
     circuitBoard.classList.toggle("is-powered", isPowered);
     circuitLamp.classList.toggle("is-lit", isPowered);
     circuitLamp.setAttribute("aria-label", isPowered ? "Lamp on" : "Lamp off");
@@ -272,7 +274,7 @@ if (
   function activateSwitch(index) {
     const stage = circuitStages[currentStage];
 
-    if (completed || circuitNext.hidden === false && switchStates.every(Boolean)) {
+    if (completed || !circuitNext.hidden) {
       return;
     }
 

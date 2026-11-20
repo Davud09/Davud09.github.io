@@ -71,7 +71,6 @@ export function renderHud(elements, content, state, achievementData) {
   const station = content.stations.find(
     (item) => item.x === state.position.x && item.y === state.position.y
   );
-  elements.xp.textContent = `${state.xp} XP`;
   elements.progress.textContent = `${state.explored.length} / ${content.stations.length} stops explored`;
   elements.progressFill.style.transform = `scaleX(${state.explored.length / content.stations.length})`;
   elements.location.textContent = station

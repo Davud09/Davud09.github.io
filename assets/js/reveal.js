@@ -117,12 +117,7 @@ function revealImmediately(element) {
 
 prepareRevealTargets();
 
-if (reducedMotionPreference.matches || !("IntersectionObserver" in window)) {
-  for (const element of revealTargets) {
-    revealImmediately(element);
-  }
-} else {
-  document.documentElement.classList.add("reveal-ready");
+if ("IntersectionObserver" in window) {
   revealObserver = new IntersectionObserver((entries, observer) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
@@ -131,21 +126,37 @@ if (reducedMotionPreference.matches || !("IntersectionObserver" in window)) {
       }
     }
   }, { threshold: 0.12, rootMargin: "0px 0px -24px 0px" });
+}
 
+if (motionIsReduced || !revealObserver) {
+  for (const element of revealTargets) {
+    revealImmediately(element);
+  }
+} else {
+  document.documentElement.classList.add("reveal-ready");
   for (const element of revealTargets) {
     revealObserver.observe(element);
   }
+}
 
+{
   const projectGrid = document.querySelector("#project-grid");
   if (projectGrid) {
     const projectObserver = new MutationObserver((records) => {
       for (const record of records) {
+        for (const node of record.removedNodes) {
+          if (!(node instanceof Element)) continue;
+          for (const element of revealTargets) {
+            if (node === element || node.contains(element)) {
+              revealObserver?.unobserve(element);
+              revealTargets.delete(element);
+            }
+          }
+        }
+
         const projectCards = [...projectGrid.querySelectorAll(".project-card")];
         for (const node of record.addedNodes) {
-          if (!(node instanceof Element)) {
-            continue;
-          }
-
+          if (!(node instanceof Element) || !node.isConnected) continue;
           prepareRevealTargets(node);
           for (const element of revealTargets) {
             if (node === element || node.contains(element)) {
@@ -153,9 +164,8 @@ if (reducedMotionPreference.matches || !("IntersectionObserver" in window)) {
                 const index = projectCards.indexOf(element);
                 element.style.setProperty("--reveal-delay", `${index * 50}ms`);
               }
-
-              if (motionIsReduced) {
-                element.classList.add("is-revealed");
+              if (motionIsReduced || !revealObserver) {
+                revealImmediately(element);
               } else {
                 revealObserver.observe(element);
               }
@@ -164,19 +174,14 @@ if (reducedMotionPreference.matches || !("IntersectionObserver" in window)) {
         }
       }
     });
-
     projectObserver.observe(projectGrid, { childList: true });
   }
 }
 
 reducedMotionPreference.addEventListener?.("change", (event) => {
   motionIsReduced = event.matches;
-  if (!revealObserver) {
-    return;
-  }
-
   if (motionIsReduced) {
-    revealObserver.disconnect();
+    revealObserver?.disconnect();
     for (const element of revealTargets) {
       revealImmediately(element);
     }
@@ -184,6 +189,11 @@ reducedMotionPreference.addEventListener?.("change", (event) => {
       window.cancelAnimationFrame(animation.frame);
       element.textContent = animation.value;
       activeCountAnimations.delete(element);
+    }
+  } else if (revealObserver) {
+    document.documentElement.classList.add("reveal-ready");
+    for (const element of revealTargets) {
+      if (!element.classList.contains("is-revealed")) revealObserver.observe(element);
     }
   }
 });

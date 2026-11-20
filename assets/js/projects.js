@@ -149,14 +149,33 @@ function renderProject(project, index) {
 
       image.addEventListener("error", () => {
         console.error(`Unable to load project image for "${project.title}".`);
+        const track = gallery.querySelector(".project-card__track");
+        const slides = [...gallery.querySelectorAll("[data-project-image]")];
+        const activeIndex = track ? Math.round(track.scrollLeft / Math.max(track.clientWidth, 1)) : 0;
+        const activeSlide = slides[activeIndex];
+        const removedIndex = slides.indexOf(imageButton);
         imageButton.remove();
-        const remainingSlides = gallery.querySelectorAll("[data-project-image]").length;
-        if (remainingSlides === 0) {
+        const remaining = [...gallery.querySelectorAll("[data-project-image]")];
+        if (remaining.length === 0) {
           gallery.remove();
           media.append(createTextElement("p", "project-card__media-label", "Project image unavailable."));
-        } else if (remainingSlides === 1) {
-          gallery.querySelector("[data-project-image]").hidden = false;
+        } else {
+          const nextIndex = activeSlide === imageButton
+            ? Math.min(removedIndex, remaining.length - 1)
+            : Math.max(remaining.indexOf(activeSlide), 0);
+          for (const [index, slide] of remaining.entries()) {
+            slide.dataset.carouselSlide = String(index);
+            slide.hidden = !track && index !== nextIndex;
+            slide.querySelector(".project-card__zoom-hint").textContent = remaining.length > 1
+              ? `View photo ${index + 1} of ${remaining.length}`
+              : "View image";
+          }
           gallery.querySelector(".project-card__carousel-controls")?.remove();
+          createCarouselControls(gallery, remaining.length);
+          gallery.querySelectorAll("[data-carousel-dot]").forEach((dot, index) => {
+            dot.setAttribute("aria-current", String(index === nextIndex));
+          });
+          if (track) track.scrollTo({ left: remaining[nextIndex].offsetLeft, behavior: "auto" });
         }
       }, { once: true });
 

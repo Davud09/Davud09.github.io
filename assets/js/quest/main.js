@@ -25,15 +25,22 @@ const elements = {
 let state = createInitialState(workshopContent.start);
 let xpAnimationFrame;
 let stationUpdateTimeout;
+let pendingStation;
 
 reducedMotionPreference.addEventListener?.("change", (event) => {
-  if (!event.matches || xpAnimationFrame === undefined) {
-    return;
-  }
+  if (!event.matches) return;
 
-  window.cancelAnimationFrame(xpAnimationFrame);
-  xpAnimationFrame = undefined;
-  elements.xp.textContent = `${state.xp} XP`;
+  if (xpAnimationFrame !== undefined) {
+    window.cancelAnimationFrame(xpAnimationFrame);
+    xpAnimationFrame = undefined;
+    elements.xp.textContent = `${state.xp} XP`;
+  }
+  if (pendingStation) {
+    window.clearTimeout(stationUpdateTimeout);
+    renderStation(elements, pendingStation);
+    pendingStation = undefined;
+  }
+  stationPanel.classList.remove("is-updating");
 });
 
 function render() {
@@ -73,15 +80,19 @@ function animateXp(from, to) {
 
 function updateStation(station) {
   window.clearTimeout(stationUpdateTimeout);
+  pendingStation = station;
 
   if (reducedMotionPreference.matches) {
     renderStation(elements, station);
+    pendingStation = undefined;
+    stationPanel.classList.remove("is-updating");
     return;
   }
 
   stationPanel.classList.add("is-updating");
   stationUpdateTimeout = window.setTimeout(() => {
     renderStation(elements, station);
+    pendingStation = undefined;
     window.requestAnimationFrame(() => stationPanel.classList.remove("is-updating"));
   }, 110);
 }
@@ -98,13 +109,16 @@ function getCurrentStation() {
 
 function exploreStation(station, action = "visit") {
   const previousXp = state.xp;
+  const displayedXp = Number.parseInt(elements.xp.textContent, 10);
   const result = inspectStation(state, station);
   state = result.state;
   const newAchievements = findNewAchievements(state, workshopContent.stations.length);
   state = addAchievements(state, newAchievements);
   updateStation(station);
   render();
-  animateXp(previousXp, state.xp);
+  if (state.xp !== previousXp) {
+    animateXp(displayedXp, state.xp);
+  }
 
   if (result.newlyExplored) {
     const achievementNote = newAchievements.length
@@ -171,4 +185,5 @@ function inspect() {
 }
 
 connectInput({ map, controls, onMove: move, onInspect: inspect, onVisit: visitStation });
+elements.xp.textContent = `${state.xp} XP`;
 render();
