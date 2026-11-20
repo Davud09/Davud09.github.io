@@ -144,12 +144,6 @@
   padding: clamp(var(--space-4), 3vw, var(--space-6));
   border: 1px solid color-mix(in srgb, var(--color-accent) 48%, var(--color-border));
   border-radius: 0.7rem 1.4rem 0.7rem 1.4rem;
-  background:
-    radial-gradient(ellipse at 100% 0%, rgb(131 183 170 / 13%), transparent 55%),
-    linear-gradient(145deg, var(--color-surface-raised), var(--color-surface));
-  box-shadow:
-    0 1.25rem 3rem rgb(0 0 0 / 16%),
-    inset 0 1px rgb(255 255 255 / 5%);
 }
 
 .circuit-toy__heading,
@@ -297,11 +291,40 @@
   display: none;
 }
 
+.circuit-toy__voltage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.circuit-toy__voltage-label {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.circuit-toy__voltage-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.circuit-toy__voltage-readout {
+  min-width: 3.5ch;
+  color: var(--color-accent-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
 .circuit-toy__board {
   position: relative;
   display: grid;
   min-height: 7rem;
-  grid-template-columns: 2rem minmax(0, 1fr) 3.5rem;
+  grid-template-columns: minmax(0, 1fr) 3.5rem;
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-4);
@@ -314,22 +337,6 @@
     linear-gradient(transparent 49%, rgb(131 183 170 / 7%) 50%, transparent 51%);
   background-size: 1rem 1rem;
   box-shadow: inset 0 0.5rem 1.5rem rgb(0 0 0 / 12%);
-}
-
-.circuit-toy__source {
-  z-index: 1;
-  display: grid;
-  width: 1.65rem;
-  height: 2.4rem;
-  align-content: center;
-  justify-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: 0.3rem;
-  background: var(--color-surface-raised);
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  line-height: 1.1;
 }
 
 .circuit-toy__wire {
@@ -649,8 +656,6 @@
   padding: var(--space-8);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
 }
 
 .currently-section__label .eyebrow {

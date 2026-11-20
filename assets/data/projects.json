@@ -8,9 +8,21 @@
       "I built the NOT gate and learned to use a breadboard and correctly connect LEDs, transistors, resistors, and a battery."
     ],
     "tools": ["Breadboard", "LED", "Transistor", "Resistor", "Battery"],
-    "image": null,
-    "imageAlt": "",
-    "mediaTodo": "[TODO: Add a photo or screenshot of the breadboard project.]",
+    "images": [
+      {
+        "src": "assets/images/site1101-team.jpg",
+        "alt": "Four students standing together in a university lab.",
+        "width": 1357,
+        "height": 768
+      },
+      {
+        "src": "assets/images/site1101-breadboard.jpg",
+        "alt": "Hands assembling a breadboard circuit with jumper wires and a red LED.",
+        "width": 1202,
+        "height": 768
+      }
+    ],
+    "mediaTodo": "",
     "links": [
       {
         "label": "Watch the team project video",
@@ -21,7 +33,7 @@
   {
     "id": "hour-of-code",
     "title": "Project 2: Hour of Code",
-    "status": "Coming up",
+    "status": "In progress",
     "description": [
       "I’m preparing to learn more Python and try Microsoft MakeCode for this project.",
       "I also plan to put together a presentation; I’ll add the finished work and what I learned once the project is complete."
@@ -35,7 +47,7 @@
   {
     "id": "robotics",
     "title": "Project 3: Robotics",
-    "status": "Coming up",
+    "status": "In progress",
     "description": [
       "For this project, I plan to work with a LEGO EV3 robot and use Microsoft MakeCode.",
       "The work will also involve drawing and problem solving; I’ll add the robot and my completed work when it is ready."
@@ -59,6 +71,11 @@
     "image": "assets/images/homepage.png",
     "imageAlt": "Home page of my portfolio, with my introduction and profile photo.",
     "mediaTodo": "",
-    "links": []
+    "links": [
+      {
+        "label": "View the source on GitHub",
+        "url": "https://github.com/Davud09/Davud09.github.io"
+      }
+    ]
   }
 ]

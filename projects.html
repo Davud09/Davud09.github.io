@@ -4,12 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Course projects by Davud Idrisov, including a SITE 1101 breadboard logic-gates project and upcoming projects.">
-    <meta name="theme-color" content="#101a28">
+    <meta name="theme-color" content="#101a28" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f4f6f3" media="(prefers-color-scheme: light)">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Projects — Davud Idrisov">
     <meta property="og:description" content="Course projects by Davud Idrisov, including a SITE 1101 breadboard logic-gates project and upcoming projects.">
+    <meta property="og:url" content="https://davud09.github.io/projects.html">
+    <meta property="og:image" content="https://davud09.github.io/assets/images/davud-idrisov.jpeg">
+    <meta property="og:image:alt" content="Davud Idrisov in an electronics laboratory">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Projects — Davud Idrisov">
+    <meta name="twitter:description" content="Course projects by Davud Idrisov, including a SITE 1101 breadboard logic-gates project and upcoming projects.">
+    <meta name="twitter:image" content="https://davud09.github.io/assets/images/davud-idrisov.jpeg">
     <title>Projects — Davud Idrisov</title>
+    <link rel="canonical" href="https://davud09.github.io/projects.html">
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" sizes="180x180">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/projects.css">
@@ -23,6 +33,7 @@
     <script src="assets/js/glass-controls.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="site-header__brand" href="index.html">Davud Idrisov</a>
       <button class="menu-toggle btn btn--icon btn--secondary" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
@@ -48,7 +59,7 @@
         </button>
       </div>
     </header>
-    <main class="projects-page">
+    <main id="main" class="projects-page">
       <header class="projects-intro">
         <p class="eyebrow">Selected work</p>
         <h1>What I’ve built—and what’s next.</h1>
@@ -59,19 +70,156 @@
       </header>
       <section class="projects-section" aria-labelledby="projects-heading">
         <h2 class="visually-hidden" id="projects-heading">Project cards</h2>
-        <p class="projects-status" id="projects-status" role="status">
-          Project cards load from the project data file when JavaScript is available.
-        </p>
-        <div class="project-grid" id="project-grid" aria-live="polite"></div>
-        <noscript>
-          <p class="no-script-note">
-            Project cards need JavaScript to load from the project data file.
-            Enable JavaScript to view them; project details are also available in
-            <a href="content.md">content.md</a>.
-          </p>
-        </noscript>
+        <p class="projects-status" id="projects-status" role="status" hidden></p>
+        <div class="project-grid" id="project-grid">
+            <article class="project-card">
+              <div class="project-card__media">
+                <div class="project-card__gallery" role="group" aria-label="SITE 1101 Project 1 photos">
+                  <button
+                    class="project-card__image-button"
+                    type="button"
+                    data-project-image
+                    data-project-title="SITE 1101 Project 1"
+                    data-image-src="assets/images/site1101-team.jpg"
+                    data-image-alt="Four students standing together in a university lab."
+                    aria-label="Enlarge team photo for SITE 1101 Project 1"
+                  >
+                    <img
+                      src="assets/images/site1101-team.jpg"
+                      alt="Four students standing together in a university lab."
+                      width="1357"
+                      height="768"
+                      loading="lazy"
+                    >
+                    <span class="project-card__zoom-hint">View photo 1 of 2</span>
+                  </button>
+                  <button
+                    class="project-card__image-button"
+                    type="button"
+                    data-project-image
+                    data-project-title="SITE 1101 Project 1"
+                    data-image-src="assets/images/site1101-breadboard.jpg"
+                    data-image-alt="Hands assembling a breadboard circuit with jumper wires and a red LED."
+                    aria-label="Enlarge breadboard photo for SITE 1101 Project 1"
+                  >
+                    <img
+                      src="assets/images/site1101-breadboard.jpg"
+                      alt="Hands assembling a breadboard circuit with jumper wires and a red LED."
+                      width="1202"
+                      height="768"
+                      loading="lazy"
+                    >
+                    <span class="project-card__zoom-hint">View photo 2 of 2</span>
+                  </button>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__topline">
+                  <p class="project-card__number">Project 01</p>
+                  <p class="project-card__status">Completed</p>
+                </div>
+                <h3 class="project-card__title">SITE 1101 Project 1</h3>
+                <div class="project-card__description">
+                  <p>Our team built NAND, OR, and NOT gates on a breadboard.</p>
+                  <p>I built the NOT gate and learned to use a breadboard and correctly connect LEDs, transistors, resistors, and a battery.</p>
+                </div>
+                <div class="project-card__tools">
+                  <p class="project-card__tools-label">Tools &amp; focus</p>
+                  <ul class="project-card__tags">
+                    <li>Breadboard</li><li>LED</li><li>Transistor</li><li>Resistor</li><li>Battery</li>
+                  </ul>
+                </div>
+                <div class="project-card__links">
+                  <a class="project-card__link btn btn--ghost" href="https://youtu.be/rQI84usunvg" target="_blank" rel="noopener noreferrer">Watch the team project video <span class="btn__arrow" aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-card__media">
+                <p class="project-card__media-label">[TODO: Add an Hour of Code screenshot after the project is complete.]</p>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__topline">
+                  <p class="project-card__number">Project 02</p>
+                  <p class="project-card__status">In progress</p>
+                </div>
+                <h3 class="project-card__title">Project 2: Hour of Code</h3>
+                <div class="project-card__description">
+                  <p>I’m preparing to learn more Python and try Microsoft MakeCode for this project.</p>
+                  <p>I also plan to put together a presentation; I’ll add the finished work and what I learned once the project is complete.</p>
+                </div>
+                <div class="project-card__tools">
+                  <p class="project-card__tools-label">Tools &amp; focus</p>
+                  <ul class="project-card__tags">
+                    <li>Learning Python</li><li>Microsoft MakeCode</li><li>Presentation</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-card__media">
+                <p class="project-card__media-label">[TODO: Add a robotics project photo or screenshot when available.]</p>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__topline">
+                  <p class="project-card__number">Project 03</p>
+                  <p class="project-card__status">In progress</p>
+                </div>
+                <h3 class="project-card__title">Project 3: Robotics</h3>
+                <div class="project-card__description">
+                  <p>For this project, I plan to work with a LEGO EV3 robot and use Microsoft MakeCode.</p>
+                  <p>The work will also involve drawing and problem solving; I’ll add the robot and my completed work when it is ready.</p>
+                </div>
+                <div class="project-card__tools">
+                  <p class="project-card__tools-label">Tools &amp; focus</p>
+                  <ul class="project-card__tags">
+                    <li>LEGO EV3</li><li>Microsoft MakeCode</li><li>Drawing</li><li>Problem solving</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-card__media">
+                <div class="project-card__gallery" role="group" aria-label="Portfolio project screenshot">
+                  <button
+                    class="project-card__image-button"
+                    type="button"
+                    data-project-image
+                    data-project-title="Project 4: The Workshop on the Web"
+                    data-image-src="assets/images/homepage.png"
+                    data-image-alt="Home page of my portfolio, with my introduction and profile photo."
+                    aria-label="Enlarge portfolio home page screenshot"
+                  >
+                    <img src="assets/images/homepage.png" alt="Home page of my portfolio, with my introduction and profile photo." width="1200" height="675" loading="lazy">
+                    <span class="project-card__zoom-hint">View image</span>
+                  </button>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__topline">
+                  <p class="project-card__number">Project 04</p>
+                  <p class="project-card__status">Course portfolio</p>
+                </div>
+                <h3 class="project-card__title">Project 4: The Workshop on the Web</h3>
+                <div class="project-card__description">
+                  <p>I planned and built this portfolio to bring my coursework, interests, and experience into one place.</p>
+                  <p>I used plain HTML, CSS, and JavaScript to make responsive pages and the Field Workshop resume game.</p>
+                  <p>Building it gave me practice organizing a site and making interactive features work with a keyboard and on mobile.</p>
+                </div>
+                <div class="project-card__tools">
+                  <p class="project-card__tools-label">Tools &amp; focus</p>
+                  <ul class="project-card__tags">
+                    <li>HTML5</li><li>CSS3</li><li>Vanilla JavaScript</li><li>Git and GitHub Pages</li>
+                  </ul>
+                </div>
+                <div class="project-card__links">
+                  <a class="project-card__link btn btn--ghost" href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer">View the source on GitHub <span class="btn__arrow" aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+        </div>
       </section>
-      <dialog class="lightbox" id="project-lightbox" aria-labelledby="lightbox-title">
+      <dialog class="lightbox" id="project-lightbox" aria-labelledby="lightbox-title" hidden inert>
         <div class="lightbox__panel">
           <div class="lightbox__header">
             <h2 id="lightbox-title"></h2>
@@ -85,19 +233,13 @@
     <footer class="site-footer">
       <div class="site-footer__copy">
         <p>&copy; <span data-current-year></span> Davud Idrisov</p>
-        <p>Made for SITE 1101: Principles of Information Systems.</p>
+        <p>Designed and built by Davud Idrisov.</p>
       </div>
-      <div class="site-footer__social" aria-label="Social and source links">
-        <a class="icon-link btn btn--icon btn--secondary" href="https://github.com/Davud09" target="_blank" rel="noopener noreferrer" aria-label="Davud Idrisov on GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.3-1.24-1.64-1.24-1.64-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.2 4.93 1.57.1-.73.39-1.23.7-1.51-2.47-.28-5.06-1.24-5.06-5.5 0-1.22.43-2.22 1.15-3-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.43 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.78 1.15 3 0 4.27-2.6 5.21-5.08 5.49.4.34.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
-        </a>
-        <a class="icon-link btn btn--icon btn--secondary" href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer" aria-label="Portfolio source code on GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.3-1.24-1.64-1.24-1.64-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.2 4.93 1.57.1-.73.39-1.23.7-1.51-2.47-.28-5.06-1.24-5.06-5.5 0-1.22.43-2.22 1.15-3-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.43 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.78 1.15 3 0 4.27-2.6 5.21-5.08 5.49.4.34.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
-        </a>
-        <a class="icon-link btn btn--icon btn--secondary" href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer" aria-label="Davud Idrisov on LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.53v16.94c0 .85.69 1.53 1.55 1.53h16.9c.86 0 1.55-.68 1.55-1.53V3.53c0-.85-.69-1.53-1.55-1.53ZM7.93 18.34H4.97V9.02h2.96v9.32ZM6.45 7.75a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm11.89 10.59h-2.96v-4.53c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.61H9.2V9.02h2.84v1.27h.04c.4-.73 1.36-1.5 2.8-1.5 3 0 3.56 1.97 3.56 4.53v5.02Z"/></svg>
-        </a>
-      </div>
+      <nav class="site-footer__social" aria-label="Social and source links">
+        <a href="https://github.com/Davud09" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer">Portfolio source</a>
+      </nav>
     </footer>
   </body>
 </html>

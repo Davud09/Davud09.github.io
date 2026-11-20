@@ -113,8 +113,6 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
 }
 
 .project-card__media {
@@ -139,6 +137,17 @@
   text-align: center;
 }
 
+.project-card__gallery {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+}
+
 .project-card__image-button {
   position: absolute;
   inset: 0;
@@ -150,6 +159,19 @@
   border: 0;
   background: transparent;
   cursor: zoom-in;
+}
+
+.project-card__gallery .project-card__image-button {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  flex: 0 0 100%;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-page);
+  scroll-snap-align: start;
 }
 
 .project-card__image-button img {
@@ -297,7 +319,8 @@
 
 .lightbox::backdrop {
   background: rgb(5 10 18 / 82%);
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   opacity: 0;
   transition: opacity 220ms ease;
 }

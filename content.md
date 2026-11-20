@@ -43,8 +43,6 @@ worked on car engines, motors, and electronics.
 - Village volunteering: built small homes for squirrels
 - Helped create a village community that repairs electronics and mechanical
   items, including cars
-- Swimming since age 7.
-- Participated in a regional swimming championship in Qusar in 2024.
 
 ## Test scores
 
@@ -69,10 +67,9 @@ worked on car engines, motors, and electronics.
 ## Interests
 
 - Hiking: Shahdag, Kapaz, Qizilqaya, Galakhudat, Laza, and Tufandag
-- Calisthenics and street lifting: 24 kg weighted pull-ups for 8 reps and
+- Calisthenics, street lifting & gym: 24 kg weighted pull-ups for 8 reps and
   32 kg dips for 9 reps
-- Swimming
-- Gym
+- Swimming since age 7, including a regional championship in Qusar in 2024
 - Skiing
 - Volleyball
 

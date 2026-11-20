@@ -1,5 +1,5 @@
 export const workshopContent = {
-  title: "The Repair Bench",
+  title: "Field Workshop",
   rows: 5,
   columns: 7,
   start: { x: 3, y: 4 },

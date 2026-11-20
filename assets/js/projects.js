@@ -6,6 +6,9 @@ const lightboxImage = document.querySelector(".lightbox__image");
 const lightboxCaption = document.querySelector(".lightbox__caption");
 const lightboxClose = document.querySelector(".lightbox__close");
 const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const staticCards = projectGrid
+  ? [...projectGrid.children].map((node) => node.cloneNode(true))
+  : [];
 let lastImageTrigger = null;
 let lightboxCloseTimeout;
 
@@ -23,32 +26,63 @@ function renderProject(project, index) {
   const media = document.createElement("div");
   media.className = "project-card__media";
 
-  if (project.image) {
-    const imageButton = document.createElement("button");
-    imageButton.className = "project-card__image-button";
-    imageButton.type = "button";
-    imageButton.setAttribute("aria-label", `Enlarge image: ${project.title}`);
+  const projectImages = Array.isArray(project.images)
+    ? project.images
+    : project.image
+      ? [{ src: project.image, alt: project.imageAlt }]
+      : [];
 
-    const image = document.createElement("img");
-    image.src = project.image;
-    image.alt = project.imageAlt || `${project.title} project image`;
-    image.loading = "lazy";
-    image.width = 1200;
-    image.height = 675;
+  if (projectImages.length > 0) {
+    const gallery = document.createElement("div");
+    gallery.className = "project-card__gallery";
+    gallery.setAttribute("role", "group");
+    gallery.setAttribute("aria-label", `${project.title} images`);
 
-    image.addEventListener("error", () => {
-      console.error(`Unable to load project image for "${project.title}".`);
-      imageButton.remove();
-      media.append(createTextElement(
-        "p",
-        "project-card__media-label",
-        project.mediaTodo || "[TODO: Replace the unavailable project image.]"
-      ));
-    }, { once: true });
+    for (const [imageIndex, projectImage] of projectImages.entries()) {
+      const imageButton = document.createElement("button");
+      imageButton.className = "project-card__image-button";
+      imageButton.type = "button";
+      imageButton.dataset.projectImage = "";
+      imageButton.dataset.projectTitle = project.title;
+      imageButton.dataset.imageSrc = projectImage.src;
+      imageButton.dataset.imageAlt = projectImage.alt || `${project.title} project image`;
+      imageButton.setAttribute(
+        "aria-label",
+        `Enlarge image ${imageIndex + 1} of ${projectImages.length} for ${project.title}`
+      );
 
-    imageButton.append(image, createTextElement("span", "project-card__zoom-hint", "View image"));
-    imageButton.addEventListener("click", () => openLightbox(project, imageButton));
-    media.append(imageButton);
+      const image = document.createElement("img");
+      image.src = projectImage.src;
+      image.alt = projectImage.alt || `${project.title} project image`;
+      image.loading = "lazy";
+      image.width = projectImage.width || 1200;
+      image.height = projectImage.height || 675;
+
+      image.addEventListener("error", () => {
+        console.error(`Unable to load project image for "${project.title}".`);
+        imageButton.remove();
+        if (gallery.childElementCount === 0) {
+          gallery.remove();
+          media.append(createTextElement(
+            "p",
+            "project-card__media-label",
+            project.mediaTodo || "[TODO: Replace the unavailable project image.]"
+          ));
+        }
+      }, { once: true });
+
+      imageButton.append(
+        image,
+        createTextElement(
+          "span",
+          "project-card__zoom-hint",
+          projectImages.length > 1 ? `View photo ${imageIndex + 1} of ${projectImages.length}` : "View image"
+        )
+      );
+      gallery.append(imageButton);
+    }
+
+    media.append(gallery);
   } else {
     media.append(createTextElement("p", "project-card__media-label", project.mediaTodo));
   }
@@ -141,7 +175,8 @@ function renderProjectSkeletons() {
 }
 
 function openLightbox(project, trigger) {
-  if (!lightbox || !lightboxTitle || !lightboxImage || !lightboxCaption) {
+  if (!project.image || !lightbox || !lightboxTitle || !lightboxImage || !lightboxCaption) {
+    console.error("Unable to open the project image viewer: required image or dialog content is missing.");
     return;
   }
 
@@ -152,6 +187,8 @@ function openLightbox(project, trigger) {
   lightboxImage.alt = project.imageAlt || `${project.title} project image`;
   lightboxCaption.textContent = project.imageAlt || project.title;
   if (!lightbox.open) {
+    lightbox.hidden = false;
+    lightbox.inert = false;
     lightbox.showModal();
   }
   lightbox.classList.remove("is-visible");
@@ -174,6 +211,23 @@ function closeLightbox() {
   lightboxCloseTimeout = window.setTimeout(() => lightbox.close(), 220);
 }
 
+projectGrid?.addEventListener("click", (event) => {
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const trigger = event.target.closest("[data-project-image]");
+  if (!(trigger instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  openLightbox({
+    title: trigger.dataset.projectTitle,
+    image: trigger.dataset.imageSrc,
+    imageAlt: trigger.dataset.imageAlt
+  }, trigger);
+});
+
 lightboxClose?.addEventListener("click", closeLightbox);
 lightbox?.addEventListener("cancel", (event) => {
   event.preventDefault();
@@ -194,6 +248,8 @@ lightbox?.addEventListener("close", () => {
   window.clearTimeout(lightboxCloseTimeout);
   lightbox.classList.remove("is-visible");
   lightboxImage?.removeAttribute("src");
+  lightbox.hidden = true;
+  lightbox.inert = true;
   lastImageTrigger?.focus();
 });
 
@@ -202,6 +258,7 @@ async function loadProjects() {
     return;
   }
 
+  projectStatus.hidden = false;
   projectStatus.textContent = "Loading project cards…";
   renderProjectSkeletons();
 
@@ -224,8 +281,22 @@ async function loadProjects() {
     projectGrid.replaceChildren(fragment);
     projectStatus.remove();
   } catch (error) {
-    projectGrid.replaceChildren();
-    projectStatus.textContent = "Project cards couldn’t be loaded. Please try again later.";
+    if (staticCards.length > 0) {
+      projectGrid.replaceChildren(...staticCards.map((node) => node.cloneNode(true)));
+    } else {
+      projectGrid.replaceChildren();
+    }
+
+    projectStatus.hidden = false;
+    projectStatus.replaceChildren(
+      "Project cards couldn’t be refreshed from the data file. Showing the built-in list instead. "
+    );
+    const retryButton = document.createElement("button");
+    retryButton.className = "btn btn--secondary projects-retry";
+    retryButton.type = "button";
+    retryButton.textContent = "Retry";
+    retryButton.addEventListener("click", loadProjects);
+    projectStatus.append(retryButton);
     console.error("Unable to load project data.", error);
   }
 }

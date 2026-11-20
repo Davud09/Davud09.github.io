@@ -29,16 +29,50 @@ if (pageReady && pageReadyUnit && pageReadyMeter && navigationTiming) {
     pageReady.title = `Browser Navigation Timing: the page became interactive in ${Math.round(interactiveTime)} milliseconds.`;
     pageReadyMeter.style.width = `${Math.min(interactiveTime / 250, 1) * 100}%`;
   } else {
-    pageReady.textContent = "—";
+    pageReady.textContent = "Ready";
     pageReadyUnit.textContent = "";
-    pageReadyMeter.style.width = "0";
+    pageReadyMeter.style.width = "100%";
     pageReady.title = "Interactive timing is unavailable for this page load.";
   }
 } else if (pageReady && pageReadyUnit && pageReadyMeter) {
-  pageReady.textContent = "—";
+  pageReady.textContent = "Ready";
   pageReadyUnit.textContent = "";
-  pageReadyMeter.style.width = "0";
+  pageReadyMeter.style.width = "100%";
   pageReady.title = "This browser does not provide Navigation Timing data.";
+}
+
+const voltageReadout = document.querySelector("[data-circuit-voltage]");
+const boardVoltageReadout = document.querySelector("[data-circuit-board-voltage]");
+const voltageButtons = document.querySelectorAll("[data-voltage-step]");
+
+if (voltageReadout && boardVoltageReadout && voltageButtons.length > 0) {
+  let voltage = 5;
+
+  function renderVoltage() {
+    const label = `${voltage} V`;
+    voltageReadout.textContent = label;
+    boardVoltageReadout.textContent = label;
+
+    for (const button of voltageButtons) {
+      const step = Number(button.dataset.voltageStep);
+      button.disabled = step < 0 ? voltage <= 1 : voltage >= 12;
+    }
+  }
+
+  for (const button of voltageButtons) {
+    button.addEventListener("click", () => {
+      const step = Number(button.dataset.voltageStep);
+      if (!Number.isFinite(step) || ![-1, 1].includes(step)) {
+        console.error("Ignoring an invalid signal-lab voltage step.", button.dataset.voltageStep);
+        return;
+      }
+
+      voltage = Math.min(12, Math.max(1, voltage + step));
+      renderVoltage();
+    });
+  }
+
+  renderVoltage();
 }
 
 const circuitBoard = document.querySelector("[data-circuit-board]");
