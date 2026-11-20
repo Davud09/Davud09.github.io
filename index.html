@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Davud Idrisov is a first-year electrical and electronics engineering student who enjoys repairing, building, and figuring out how things work.">
-    <meta name="theme-color" content="#101a28" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#f4f6f3" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111214">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Davud Idrisov — Portfolio">
     <meta property="og:description" content="Davud Idrisov is a first-year electrical and electronics engineering student who enjoys repairing, building, and figuring out how things work.">
@@ -28,6 +27,7 @@
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
+    <script src="assets/js/copy-email.js" defer></script>
     <script src="assets/js/easter-eggs.js" defer></script>
     <script src="assets/js/home.js" defer></script>
     <script src="assets/js/reveal.js" defer></script>
@@ -55,6 +55,10 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.53v16.94c0 .85.69 1.53 1.55 1.53h16.9c.86 0 1.55-.68 1.55-1.53V3.53c0-.85-.69-1.53-1.55-1.53ZM7.93 18.34H4.97V9.02h2.96v9.32ZM6.45 7.75a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm11.89 10.59h-2.96v-4.53c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.61H9.2V9.02h2.84v1.27h.04c.4-.73 1.36-1.5 2.8-1.5 3 0 3.56 1.97 3.56 4.53v5.02Z"/></svg>
           </a>
         </div>
+        <div class="site-header__copy-email">
+          <button class="copy-email-button btn btn--secondary" type="button" data-copy-email="didrisov28062@ada.edu.az" aria-describedby="copy-email-feedback" aria-label="Copy email address">Copy email</button>
+          <span class="copy-email-feedback" id="copy-email-feedback" role="status" aria-live="polite"></span>
+        </div>
         <button class="theme-toggle btn btn--icon btn--secondary" type="button" aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 12a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM4 11h1a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2Zm15 0h1a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2ZM5.64 4.22l.71.71a1 1 0 0 1-1.41 1.41l-.71-.71a1 1 0 0 1 1.41-1.41Zm13.42 13.42.71.71a1 1 0 0 1-1.41 1.41l-.71-.71a1 1 0 0 1 1.41-1.41Zm0-11.3-.71.71a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 1.41ZM5.64 19.78a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 1.41l-.71.71Z"/></svg>
         </button>
@@ -74,23 +78,23 @@
             <a class="btn btn--primary" href="projects.html">See my projects <span class="btn__arrow" aria-hidden="true">→</span></a>
             <a class="btn btn--secondary" href="about.html">More about me</a>
           </div>
-          <div class="home-vitals" aria-label="Built for speed">
+          <div class="home-vitals" aria-label="Engineering focus">
             <div class="home-vitals__metric">
-              <span class="home-vitals__label">Page interactive</span>
-              <strong><output data-page-ready title="Measured by browser Navigation Timing">Ready</output><span data-page-ready-unit></span></strong>
-              <span class="home-vitals__meter" aria-hidden="true"><span data-page-ready-meter></span></span>
+              <span class="home-vitals__label">Discipline</span>
+              <strong>Electrical &amp; Electronics</strong>
+              <span class="home-vitals__note">Engineering · ADA University</span>
             </div>
             <span class="home-vitals__divider" aria-hidden="true"></span>
             <div class="home-vitals__metric">
-              <span class="home-vitals__label">Runtime</span>
-              <strong>0 <span>frameworks</span></strong>
-              <span class="home-vitals__note">Native HTML · CSS · JS</span>
+              <span class="home-vitals__label">Interactive</span>
+              <strong>Bench schematic</strong>
+              <span class="home-vitals__note">Signal Lab · Field Workshop</span>
             </div>
           </div>
           <section class="circuit-toy" aria-labelledby="circuit-toy-title">
             <div class="circuit-toy__heading">
               <p class="eyebrow">Signal lab <span aria-hidden="true">/</span> field test</p>
-              <span class="circuit-toy__status" data-circuit-status aria-live="polite">READY</span>
+              <span class="circuit-toy__status" data-circuit-status>READY</span>
             </div>
             <div class="circuit-toy__title-row">
               <h2 id="circuit-toy-title">Light the signal.</h2>
@@ -102,7 +106,7 @@
               <li><span>03</span></li>
               <li><span>04</span></li>
             </ol>
-            <p class="circuit-toy__instruction" data-circuit-instruction>Close the switch to send power to the lamp.</p>
+            <p class="circuit-toy__instruction" data-circuit-instruction aria-live="polite">Close the switch to send power to the lamp.</p>
             <div class="circuit-toy__timer" data-circuit-timer-wrap hidden>
               <span>TIME LEFT</span>
               <output data-circuit-timer aria-live="off">7.0</output>
@@ -128,8 +132,9 @@
               </div>
               <span class="circuit-toy__board-label">DC · <span data-circuit-board-voltage aria-hidden="true">5 V</span></span>
             </div>
+            <output class="circuit-toy__telemetry" data-circuit-telemetry aria-live="polite">CIRCUIT: OPEN · V_CC: 5.0V · CURRENT: NO FLOW</output>
             <div class="circuit-toy__footer">
-              <p class="circuit-toy__hint" data-circuit-hint aria-live="polite">One switch. One bright idea.</p>
+              <p class="circuit-toy__hint" data-circuit-hint>One switch. One bright idea.</p>
               <button class="circuit-toy__next btn btn--primary" type="button" data-circuit-next hidden>Next stage <span class="btn__arrow" aria-hidden="true">→</span></button>
             </div>
           </section>
@@ -148,9 +153,6 @@
           </div>
           <figcaption>Davud Idrisov <span>·</span> First-year engineering student</figcaption>
         </figure>
-        <a class="home-scroll" href="#currently" aria-label="Scroll to currently">
-          <span aria-hidden="true">↓</span> A little more
-        </a>
       </section>
 
       <section class="currently-section" id="currently" aria-labelledby="currently-title" data-reveal>
@@ -172,9 +174,11 @@
         <p>Designed and built by Davud Idrisov.</p>
       </div>
       <nav class="site-footer__social" aria-label="Social and source links">
+        <a href="mailto:didrisov28062@ada.edu.az">Email</a>
         <a href="https://github.com/Davud09" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer">Portfolio source</a>
+        <a href="assets/Davud_Idrisov_CV.pdf" download>Resume (PDF)</a>
       </nav>
     </footer>
   </body>

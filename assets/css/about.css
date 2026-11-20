@@ -131,6 +131,13 @@
   font-size: var(--text-xs);
 }
 
+.skill-card .skill-description {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
 .skill-level-meter {
   display: flex;
   width: max-content;

@@ -13,13 +13,34 @@ const keyDirections = new Map([
   ["D", "right"]
 ]);
 
-export function connectInput({ map, controls, onMove, onInspect }) {
+export function connectInput({ map, controls, onMove, onInspect, onVisit }) {
+  map.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+
+    const stationButton = event.target.closest("[data-station-id]");
+    if (!(stationButton instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    onVisit(stationButton.dataset.stationId);
+    map.focus({ preventScroll: true });
+  });
+
   map.addEventListener("keydown", (event) => {
     const direction = keyDirections.get(event.key);
     if (direction) {
       event.preventDefault();
       onMove(direction);
-    } else if (event.key === "Enter" || event.key === " ") {
+      map.focus({ preventScroll: true });
+    } else if (
+      (event.key === "Enter" || event.key === " ")
+      && event.target instanceof Element
+      && event.target.closest("[data-station-id]")
+    ) {
+      return;
+    } else if ((event.key === "Enter" || event.key === " ") && event.target === map) {
       event.preventDefault();
       onInspect();
     }

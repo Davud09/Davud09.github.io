@@ -67,7 +67,7 @@ export const workshopContent = {
       description: "Python and C++ are where I’m getting started; Assembly is still very new to me.",
       facts: [
         "Python — basic; C++ — basic; Assembly — very basic.",
-        "Azerbaijani, English, Turkish, Russian, and Lezgi — C1.",
+        "Azerbaijani — native; English, Turkish, Russian, and Lezgi — C1.",
         "French — A2."
       ]
     },

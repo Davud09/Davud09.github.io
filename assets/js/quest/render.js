@@ -10,24 +10,34 @@ export function renderMap(map, content, state) {
 
   for (let y = 0; y < content.rows; y += 1) {
     for (let x = 0; x < content.columns; x += 1) {
-      const tile = document.createElement("span");
-      tile.className = "workshop-map__tile";
-      tile.setAttribute("aria-hidden", "true");
-
       const station = stationAt.get(`${x},${y}`);
+      const tile = document.createElement(station ? "button" : "span");
+      const isExplored = station ? state.explored.includes(station.id) : false;
+      tile.className = `workshop-map__tile${station ? " workshop-map__tile--station" : ""}`;
+
       if (station) {
+        tile.type = "button";
+        tile.dataset.stationId = station.id;
+        tile.setAttribute(
+          "aria-label",
+          `${station.label}${isExplored ? ", explored" : ""}${state.position.x === x && state.position.y === y ? ", current location" : ""}`
+        );
+        tile.setAttribute("aria-pressed", String(state.position.x === x && state.position.y === y));
         const marker = document.createElement("span");
-        marker.className = `workshop-map__station${state.explored.includes(station.id) ? " is-explored" : ""}`;
+        marker.className = `workshop-map__station${isExplored ? " is-explored" : ""}`;
+        marker.setAttribute("aria-hidden", "true");
         marker.textContent = station.symbol;
-        marker.style.gridColumn = String(x + 1);
-        marker.style.gridRow = String(y + 1);
+        marker.style.gridArea = "1 / 1";
         tile.append(marker);
+      } else {
+        tile.setAttribute("aria-hidden", "true");
       }
 
       if (state.position.x === x && state.position.y === y) {
         const player = document.createElement("span");
         player.className = `workshop-map__player${station ? " is-at-station" : ""}`;
         player.textContent = "DI";
+        player.style.gridArea = "1 / 1";
         tile.append(player);
       }
 
@@ -65,8 +75,9 @@ export function renderHud(elements, content, state, achievementData) {
   elements.progress.textContent = `${state.explored.length} / ${content.stations.length} stops explored`;
   elements.progressFill.style.transform = `scaleX(${state.explored.length / content.stations.length})`;
   elements.location.textContent = station
-    ? `You’re at: ${station.label}. Select “Inspect station” to read this resume note.`
-    : "You are at the workshop entrance. Move to a marked station.";
+    ? `Current station: ${station.label}. Its note opens automatically; use Re-read to open it again.`
+    : "Open tile. Move to a marked station to explore its note.";
+  elements.inspectButton.disabled = !station;
 
   const stationKey = document.createDocumentFragment();
   for (const [index, item] of content.stations.entries()) {

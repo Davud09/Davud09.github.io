@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Explore Davud Idrisov’s resume in the Field Workshop, an interactive repair-bench experience.">
-    <meta name="theme-color" content="#101a28" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#f4f6f3" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111214">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Field Workshop — Davud Idrisov">
     <meta property="og:description" content="An interactive resume built around a hands-on repair workshop.">
@@ -27,6 +26,7 @@
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
+    <script src="assets/js/copy-email.js" defer></script>
     <script src="assets/js/easter-eggs.js" defer></script>
     <script type="module" src="assets/js/quest/main.js"></script>
     <script src="assets/js/reveal.js" defer></script>
@@ -53,6 +53,10 @@
           <a class="icon-link btn btn--icon btn--secondary" href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer" aria-label="Davud Idrisov on LinkedIn">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.53v16.94c0 .85.69 1.53 1.55 1.53h16.9c.86 0 1.55-.68 1.55-1.53V3.53c0-.85-.69-1.53-1.55-1.53ZM7.93 18.34H4.97V9.02h2.96v9.32ZM6.45 7.75a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm11.89 10.59h-2.96v-4.53c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.61H9.2V9.02h2.84v1.27h.04c.4-.73 1.36-1.5 2.8-1.5 3 0 3.56 1.97 3.56 4.53v5.02Z"/></svg>
           </a>
+        </div>
+        <div class="site-header__copy-email">
+          <button class="copy-email-button btn btn--secondary" type="button" data-copy-email="didrisov28062@ada.edu.az" aria-describedby="copy-email-feedback" aria-label="Copy email address">Copy email</button>
+          <span class="copy-email-feedback" id="copy-email-feedback" role="status" aria-live="polite"></span>
         </div>
         <button class="theme-toggle btn btn--icon btn--secondary" type="button" aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 12a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM4 11h1a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2Zm15 0h1a1 1 0 1 1 0 2h-1a1 1 0 0 1 0-2ZM5.64 4.22l.71.71a1 1 0 0 1-1.41 1.41l-.71-.71a1 1 0 0 1 1.41-1.41Zm13.42 13.42.71.71a1 1 0 0 1-1.41 1.41l-.71-.71a1 1 0 0 1 1.41-1.41Zm0-11.3-.71.71a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 1.41ZM5.64 19.78a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 1.41l-.71.71Z"/></svg>
@@ -84,29 +88,30 @@
           </div>
         </div>
 
+        <p class="workshop__message" id="workshop-message" role="status" aria-live="polite">Choose a station on the map. Its notes and XP update as you explore.</p>
         <div class="workshop__layout">
           <div class="workshop__play">
             <p class="workshop__instructions" id="workshop-instructions">
-              Use arrow keys or WASD to move. Visit a marked station, then press Enter or select Inspect.
+              Use arrow keys or WASD to move. Stations open automatically when reached. Click a station to travel there, or use Re-read for its notes.
             </p>
-            <div class="workshop-map" id="workshop-map" tabindex="0" aria-describedby="workshop-instructions workshop-location" aria-label="Workshop map. Move with arrow keys or WASD; press Enter to inspect a station."></div>
+            <div class="workshop-map" id="workshop-map" tabindex="0" aria-describedby="workshop-instructions workshop-location" aria-label="Workshop map. Move with arrow keys or WASD; use Enter to re-read the current station."></div>
             <ul class="workshop-key" id="workshop-key"></ul>
-            <p class="workshop__location" id="workshop-location" aria-live="polite">You are at the workshop entrance.</p>
+            <p class="workshop__location" id="workshop-location">Open tile. Move to a marked station to explore its note.</p>
 
             <div class="workshop-controls" aria-label="Workshop touch controls">
               <button class="btn btn--icon btn--secondary" type="button" data-move="up" aria-label="Move up">↑</button>
               <button class="btn btn--icon btn--secondary" type="button" data-move="left" aria-label="Move left">←</button>
-              <button class="workshop-controls__inspect btn btn--secondary" type="button" data-inspect aria-label="Inspect current station">Inspect</button>
+              <button class="workshop-controls__inspect btn btn--secondary" id="workshop-re-read" type="button" data-inspect aria-label="Re-read current station notes" disabled>Re-read</button>
               <button class="btn btn--icon btn--secondary" type="button" data-move="right" aria-label="Move right">→</button>
               <button class="btn btn--icon btn--secondary" type="button" data-move="down" aria-label="Move down">↓</button>
             </div>
           </div>
 
           <aside class="workshop-panel" aria-label="Resume station and achievements">
-            <section class="station-panel" aria-labelledby="station-title" aria-live="polite">
+            <section class="station-panel" aria-labelledby="station-title">
               <p class="eyebrow">Station notes</p>
               <h2 id="station-title">Choose your first stop</h2>
-              <p id="station-description">Move the DI marker to a station, then inspect it to open a story from my portfolio.</p>
+              <p id="station-description">Move the DI marker to a station or select a station tile to open a story from my portfolio.</p>
               <ul class="station-facts" id="station-facts"></ul>
             </section>
             <section class="achievement-panel" aria-labelledby="achievement-title">
@@ -118,8 +123,6 @@
             </section>
           </aside>
         </div>
-        <p class="workshop__message" id="workshop-message" role="status" aria-live="polite"></p>
-        <p class="voltage-toast" id="workshop-toast" aria-hidden="true"></p>
       </section>
 
       <section class="plain-resume-link" aria-label="Plain resume option">
@@ -139,9 +142,11 @@
         <p>Designed and built by Davud Idrisov.</p>
       </div>
       <nav class="site-footer__social" aria-label="Social and source links">
+        <a href="mailto:didrisov28062@ada.edu.az">Email</a>
         <a href="https://github.com/Davud09" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer">Portfolio source</a>
+        <a href="assets/Davud_Idrisov_CV.pdf" download>Resume (PDF)</a>
       </nav>
     </footer>
   </body>

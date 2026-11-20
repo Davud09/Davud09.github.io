@@ -12,38 +12,21 @@ if (profileImage && profileFallback) {
   }
 }
 
-const pageReady = document.querySelector("[data-page-ready]");
-const pageReadyUnit = document.querySelector("[data-page-ready-unit]");
-const pageReadyMeter = document.querySelector("[data-page-ready-meter]");
-const navigationTiming = performance.getEntriesByType("navigation")[0];
-
-if (pageReady && pageReadyUnit && pageReadyMeter && navigationTiming) {
-  const interactiveTime = navigationTiming.domInteractive - navigationTiming.startTime;
-
-  if (Number.isFinite(interactiveTime) && interactiveTime >= 0) {
-    const isUnderOneSecond = interactiveTime < 1000;
-    pageReady.textContent = isUnderOneSecond
-      ? String(Math.round(interactiveTime))
-      : (interactiveTime / 1000).toFixed(1);
-    pageReadyUnit.textContent = isUnderOneSecond ? "ms" : "s";
-    pageReady.title = `Browser Navigation Timing: the page became interactive in ${Math.round(interactiveTime)} milliseconds.`;
-    pageReadyMeter.style.transform = `scaleX(${Math.min(interactiveTime / 250, 1)})`;
-  } else {
-    pageReady.textContent = "Ready";
-    pageReadyUnit.textContent = "";
-    pageReadyMeter.style.transform = "scaleX(1)";
-    pageReady.title = "Interactive timing is unavailable for this page load.";
-  }
-} else if (pageReady && pageReadyUnit && pageReadyMeter) {
-  pageReady.textContent = "Ready";
-  pageReadyUnit.textContent = "";
-  pageReadyMeter.style.transform = "scaleX(1)";
-  pageReady.title = "This browser does not provide Navigation Timing data.";
-}
-
 const voltageReadout = document.querySelector("[data-circuit-voltage]");
 const boardVoltageReadout = document.querySelector("[data-circuit-board-voltage]");
 const voltageButtons = document.querySelectorAll("[data-voltage-step]");
+const circuitTelemetry = document.querySelector("[data-circuit-telemetry]");
+
+function renderCircuitTelemetry() {
+  if (!circuitTelemetry) {
+    return;
+  }
+
+  const voltage = Number.parseFloat(voltageReadout?.textContent ?? "5");
+  const isClosed = document.querySelector("[data-circuit-board]")?.classList.contains("is-powered") ?? false;
+  const current = isClosed ? "FLOWING" : "NO FLOW";
+  circuitTelemetry.textContent = `CIRCUIT: ${isClosed ? "CLOSED" : "OPEN"} · V_CC: ${voltage.toFixed(1)}V · CURRENT: ${current}`;
+}
 
 if (voltageReadout && boardVoltageReadout && voltageButtons.length > 0) {
   let voltage = 5;
@@ -57,6 +40,7 @@ if (voltageReadout && boardVoltageReadout && voltageButtons.length > 0) {
       const step = Number(button.dataset.voltageStep);
       button.disabled = step < 0 ? voltage <= 1 : voltage >= 12;
     }
+    renderCircuitTelemetry();
   }
 
   for (const button of voltageButtons) {
@@ -234,6 +218,8 @@ if (
       control.setAttribute("aria-label", `S${index + 1}, ${isClosed ? "closed" : "open"}`);
     }
 
+    renderCircuitTelemetry();
+
     if (isPowered) {
       completeStage();
     }
@@ -346,6 +332,7 @@ if (
     circuitNext.replaceChildren();
     renderSwitches();
     updateProgress();
+    renderCircuitTelemetry();
     window.requestAnimationFrame(() => {
       circuitToy.classList.add("is-stage-transitioning");
       window.clearTimeout(stageAnimationTimeout);

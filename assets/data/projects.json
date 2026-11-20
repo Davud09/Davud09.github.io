@@ -3,6 +3,7 @@
     "id": "site1101-logic-gates",
     "title": "SITE 1101 Project 1",
     "status": "Completed",
+    "focus": "Digital logic and basic circuits",
     "description": [
       "Our team built NAND, OR, and NOT gates on a breadboard.",
       "I built the NOT gate and learned to use a breadboard and correctly connect LEDs, transistors, resistors, and a battery."
@@ -10,19 +11,18 @@
     "tools": ["Breadboard", "LED", "Transistor", "Resistor", "Battery"],
     "images": [
       {
-        "src": "assets/images/site1101-team.jpg",
-        "alt": "Four students standing together in a university lab.",
-        "width": 1357,
-        "height": 768
-      },
-      {
         "src": "assets/images/site1101-breadboard.jpg",
         "alt": "Hands assembling a breadboard circuit with jumper wires and a red LED.",
         "width": 1202,
         "height": 768
+      },
+      {
+        "src": "assets/images/site1101-team.jpg",
+        "alt": "Our four-person team in the university electronics lab.",
+        "width": 1357,
+        "height": 768
       }
     ],
-    "mediaTodo": "",
     "links": [
       {
         "label": "Watch the team project video",
@@ -33,7 +33,8 @@
   {
     "id": "hour-of-code",
     "title": "Project 2: Hour of Code",
-    "status": "In progress",
+    "status": "In Progress",
+    "focus": "Introductory programming",
     "description": [
       "I’m preparing to learn more Python and try Microsoft MakeCode for this project.",
       "I also plan to put together a presentation; I’ll add the finished work and what I learned once the project is complete."
@@ -41,13 +42,14 @@
     "tools": ["Learning Python", "Microsoft MakeCode", "Presentation"],
     "image": null,
     "imageAlt": "",
-    "mediaTodo": "[TODO: Add an Hour of Code screenshot after the project is complete.]",
+    "mediaPlaceholder": "code-workshop",
     "links": []
   },
   {
     "id": "robotics",
     "title": "Project 3: Robotics",
-    "status": "In progress",
+    "status": "In Progress",
+    "focus": "Robotics and problem solving",
     "description": [
       "For this project, I plan to work with a LEGO EV3 robot and use Microsoft MakeCode.",
       "The work will also involve drawing and problem solving; I’ll add the robot and my completed work when it is ready."
@@ -55,13 +57,14 @@
     "tools": ["LEGO EV3", "Microsoft MakeCode", "Drawing", "Problem solving"],
     "image": null,
     "imageAlt": "",
-    "mediaTodo": "[TODO: Add a robotics project photo or screenshot when available.]",
+    "mediaPlaceholder": "robotics",
     "links": []
   },
   {
     "id": "personal-portfolio",
     "title": "Project 4: The Workshop on the Web",
     "status": "Course portfolio",
+    "focus": "Responsive web design and interaction",
     "description": [
       "I planned and built this portfolio to bring my coursework, interests, and experience into one place.",
       "I used plain HTML, CSS, and JavaScript to make responsive pages and the Field Workshop resume game.",
@@ -76,7 +79,6 @@
         "height": 1450
       }
     ],
-    "mediaTodo": "",
     "links": [
       {
         "label": "View the source on GitHub",

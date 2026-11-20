@@ -7,7 +7,6 @@ import { addAchievements, createInitialState, inspectStation, movePlayer } from 
 const map = document.querySelector("#workshop-map");
 const controls = document.querySelector(".workshop-controls");
 const message = document.querySelector("#workshop-message");
-const toast = document.querySelector("#workshop-toast");
 const stationPanel = document.querySelector(".station-panel");
 const reducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const elements = {
@@ -15,6 +14,7 @@ const elements = {
   progress: document.querySelector("#workshop-progress"),
   progressFill: document.querySelector("#workshop-progress-fill"),
   location: document.querySelector("#workshop-location"),
+  inspectButton: document.querySelector("#workshop-re-read"),
   stationKey: document.querySelector("#workshop-key"),
   title: document.querySelector("#station-title"),
   description: document.querySelector("#station-description"),
@@ -24,7 +24,6 @@ const elements = {
 };
 let state = createInitialState(workshopContent.start);
 let xpAnimationFrame;
-let toastTimeout;
 let stationUpdateTimeout;
 
 reducedMotionPreference.addEventListener?.("change", (event) => {
@@ -87,45 +86,17 @@ function updateStation(station) {
   }, 110);
 }
 
-function showAchievementToast(achievementIds) {
-  const titles = achievements
-    .filter((achievement) => achievementIds.includes(achievement.id))
-    .map((achievement) => achievement.title);
-
-  if (titles.length === 0) {
-    return;
-  }
-
-  window.clearTimeout(toastTimeout);
-  toast.textContent = `Achievement unlocked: ${titles.join(" · ")}`;
-  toast.setAttribute("aria-hidden", "false");
-  toast.classList.remove("is-visible");
-  window.requestAnimationFrame(() => toast.classList.add("is-visible"));
-  toastTimeout = window.setTimeout(() => {
-    toast.classList.remove("is-visible");
-    toast.setAttribute("aria-hidden", "true");
-  }, 3600);
+function setFeedback(text) {
+  message.textContent = text;
 }
 
-function move(direction) {
-  state = movePlayer(state, direction, workshopContent);
-  message.textContent = "";
-  message.classList.remove("is-visible");
-  render();
-}
-
-function inspect() {
-  const station = workshopContent.stations.find(
+function getCurrentStation() {
+  return workshopContent.stations.find(
     (item) => item.x === state.position.x && item.y === state.position.y
   );
+}
 
-  if (!station) {
-    updateStation(null);
-    message.textContent = "Move to a marked station before inspecting.";
-    message.classList.add("is-visible");
-    return;
-  }
-
+function exploreStation(station, action = "visit") {
   const previousXp = state.xp;
   const result = inspectStation(state, station);
   state = result.state;
@@ -134,12 +105,58 @@ function inspect() {
   updateStation(station);
   render();
   animateXp(previousXp, state.xp);
-  message.textContent = result.newlyExplored
-    ? `Station explored: +25 XP. Total: ${state.xp} XP${newAchievements.length ? " · achievement unlocked!" : ""}`
-    : `${station.label} is already in your workshop notes.`;
-  message.classList.add("is-visible");
-  showAchievementToast(newAchievements);
+
+  if (result.newlyExplored) {
+    const achievementNote = newAchievements.length
+      ? ` Achievement unlocked: ${achievements
+        .filter((achievement) => newAchievements.includes(achievement.id))
+        .map((achievement) => achievement.title)
+        .join(", ")}.`
+      : "";
+    setFeedback(`Explored: ${station.label} (+25 XP). Total: ${state.xp} XP.${achievementNote}`);
+  } else if (action === "re-read") {
+    setFeedback(`Re-read: ${station.label}. Total: ${state.xp} XP.`);
+  } else {
+    setFeedback(`Visited: ${station.label}. Already explored · ${state.xp} XP total.`);
+  }
 }
 
-connectInput({ map, controls, onMove: move, onInspect: inspect });
+function move(direction) {
+  state = movePlayer(state, direction, workshopContent);
+  const station = getCurrentStation();
+
+  if (station) {
+    exploreStation(station);
+  } else {
+    render();
+    setFeedback("Moved to an open tile. Keep going to a marked station.");
+  }
+}
+
+function visitStation(stationId) {
+  const station = workshopContent.stations.find((item) => item.id === stationId);
+
+  if (!station) {
+    return;
+  }
+
+  state = {
+    ...state,
+    position: { x: station.x, y: station.y }
+  };
+  exploreStation(station);
+}
+
+function inspect() {
+  const station = getCurrentStation();
+
+  if (!station) {
+    setFeedback("Choose a marked station on the map to open its notes.");
+    return;
+  }
+
+  exploreStation(station, "re-read");
+}
+
+connectInput({ map, controls, onMove: move, onInspect: inspect, onVisit: visitStation });
 render();

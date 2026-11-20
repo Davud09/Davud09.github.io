@@ -6,11 +6,33 @@ const lightboxImage = document.querySelector(".lightbox__image");
 const lightboxCaption = document.querySelector(".lightbox__caption");
 const lightboxClose = document.querySelector(".lightbox__close");
 const projectsReducedMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const svgNamespace = "http://www.w3.org/2000/svg";
 const staticCards = projectGrid
   ? [...projectGrid.children].map((node) => node.cloneNode(true))
   : [];
 let lastImageTrigger = null;
 let lightboxCloseTimeout;
+
+const projectIllustrations = {
+  "code-workshop": [
+    ["rect", { x: 94, y: 58, width: 214, height: 244, rx: 18, class: "illustration-frame" }],
+    ["path", { d: "M94 104h214M130 82h82M130 145h142M130 179h102M130 213h126M130 247h76", class: "illustration-line" }],
+    ["rect", { x: 358, y: 92, width: 164, height: 58, rx: 12, class: "illustration-block" }],
+    ["rect", { x: 404, y: 185, width: 164, height: 58, rx: 12, class: "illustration-block" }],
+    ["path", { d: "M308 173h40v-52h10M348 173v41h56", class: "illustration-wire" }],
+    ["circle", { cx: 348, cy: 173, r: 7, class: "illustration-node" }],
+    ["path", { d: "m532 120 18 18-18 18", class: "illustration-arrow" }]
+  ],
+  robotics: [
+    ["path", { d: "M156 264h356M196 264V132h288v132M230 132V92h220v40", class: "illustration-frame" }],
+    ["circle", { cx: 235, cy: 278, r: 28, class: "illustration-wheel" }],
+    ["circle", { cx: 434, cy: 278, r: 28, class: "illustration-wheel" }],
+    ["rect", { x: 265, y: 160, width: 154, height: 72, rx: 12, class: "illustration-block" }],
+    ["circle", { cx: 304, cy: 194, r: 12, class: "illustration-node" }],
+    ["path", { d: "M338 194h52M340 92V62h82v30M360 160v-24M385 160v-24", class: "illustration-wire" }],
+    ["path", { d: "M186 112h-30M494 112h30M340 296v20M386 296v20", class: "illustration-line" }]
+  ]
+};
 
 function createTextElement(tagName, className, text) {
   const element = document.createElement(tagName);
@@ -19,12 +41,91 @@ function createTextElement(tagName, className, text) {
   return element;
 }
 
+function createProjectPlaceholder(type, status) {
+  const media = document.createElement("div");
+  media.className = "project-card__media project-card__media--placeholder";
+  const illustration = document.createElementNS(svgNamespace, "svg");
+  illustration.setAttribute("class", "project-card__illustration");
+  illustration.setAttribute("viewBox", "0 0 680 380");
+  illustration.setAttribute("aria-hidden", "true");
+  illustration.setAttribute("focusable", "false");
+
+  for (const [tagName, attributes] of projectIllustrations[type] ?? []) {
+    const shape = document.createElementNS(svgNamespace, tagName);
+    for (const [name, value] of Object.entries(attributes)) {
+      shape.setAttribute(name, String(value));
+    }
+    illustration.append(shape);
+  }
+
+  const statusPill = createTextElement("span", "project-card__placeholder-status", status);
+  media.append(illustration, statusPill);
+  return media;
+}
+
+function createCarouselControls(gallery, count) {
+  if (count < 2) {
+    return;
+  }
+
+  const controls = document.createElement("div");
+  controls.className = "project-card__carousel-controls";
+  controls.setAttribute("aria-label", "Project photos");
+
+  const previous = createTextElement("button", "project-card__carousel-arrow", "←");
+  previous.type = "button";
+  previous.dataset.carouselPrev = "";
+  previous.setAttribute("aria-label", "Previous photo");
+
+  const dots = document.createElement("div");
+  dots.className = "project-card__carousel-dots";
+  dots.setAttribute("role", "group");
+  dots.setAttribute("aria-label", "Choose a project photo");
+  for (let index = 0; index < count; index += 1) {
+    const dot = createTextElement(
+      "button",
+      "project-card__carousel-dot",
+      index === 0 ? "●" : "○"
+    );
+    dot.type = "button";
+    dot.dataset.carouselDot = String(index);
+    dot.setAttribute("aria-label", `Show photo ${index + 1} of ${count}`);
+    dot.setAttribute("aria-current", String(index === 0));
+    dots.append(dot);
+  }
+
+  const next = createTextElement("button", "project-card__carousel-arrow", "→");
+  next.type = "button";
+  next.dataset.carouselNext = "";
+  next.setAttribute("aria-label", "Next photo");
+  controls.append(previous, dots, next);
+  gallery.append(controls);
+}
+
+function setCarouselSlide(gallery, requestedIndex) {
+  const slides = [...gallery.querySelectorAll("[data-project-image]")];
+  if (slides.length === 0) {
+    return;
+  }
+
+  const index = (requestedIndex + slides.length) % slides.length;
+  slides.forEach((slide, slideIndex) => {
+    slide.hidden = slideIndex !== index;
+  });
+
+  for (const dot of gallery.querySelectorAll("[data-carousel-dot]")) {
+    const isCurrent = Number(dot.dataset.carouselDot) === index;
+    dot.setAttribute("aria-current", String(isCurrent));
+    dot.textContent = isCurrent ? "●" : "○";
+  }
+}
+
 function renderProject(project, index) {
   const card = document.createElement("article");
-  card.className = "project-card";
+  card.className = `project-card${project.id === "personal-portfolio" ? " project-card--portfolio" : ""}`;
 
-  const media = document.createElement("div");
-  media.className = "project-card__media";
+  let media = document.createElement("div");
+  media.className = `project-card__media${project.id === "personal-portfolio" ? " project-card__media--portfolio" : ""}`;
 
   const projectImages = Array.isArray(project.images)
     ? project.images
@@ -45,6 +146,8 @@ function renderProject(project, index) {
       imageButton.dataset.projectImage = "";
       imageButton.dataset.projectTitle = project.title;
       imageButton.dataset.imageSrc = projectImage.src;
+      imageButton.dataset.carouselSlide = String(imageIndex);
+      imageButton.hidden = imageIndex !== 0;
       imageButton.dataset.imageAlt = projectImage.alt || `${project.title} project image`;
       imageButton.setAttribute(
         "aria-label",
@@ -61,13 +164,13 @@ function renderProject(project, index) {
       image.addEventListener("error", () => {
         console.error(`Unable to load project image for "${project.title}".`);
         imageButton.remove();
-        if (gallery.childElementCount === 0) {
+        const remainingSlides = gallery.querySelectorAll("[data-project-image]").length;
+        if (remainingSlides === 0) {
           gallery.remove();
-          media.append(createTextElement(
-            "p",
-            "project-card__media-label",
-            project.mediaTodo || "[TODO: Replace the unavailable project image.]"
-          ));
+          media.append(createTextElement("p", "project-card__media-label", "Project image unavailable."));
+        } else if (remainingSlides === 1) {
+          gallery.querySelector("[data-project-image]").hidden = false;
+          gallery.querySelector(".project-card__carousel-controls")?.remove();
         }
       }, { once: true });
 
@@ -82,9 +185,12 @@ function renderProject(project, index) {
       gallery.append(imageButton);
     }
 
+    createCarouselControls(gallery, projectImages.length);
     media.append(gallery);
+  } else if (project.mediaPlaceholder) {
+    media = createProjectPlaceholder(project.mediaPlaceholder, project.status);
   } else {
-    media.append(createTextElement("p", "project-card__media-label", project.mediaTodo));
+    media.append(createTextElement("p", "project-card__media-label", "Project preview coming soon."));
   }
 
   const body = document.createElement("div");
@@ -93,8 +199,7 @@ function renderProject(project, index) {
   const topLine = document.createElement("div");
   topLine.className = "project-card__topline";
   topLine.append(
-    createTextElement("p", "project-card__number", `Project ${String(index + 1).padStart(2, "0")}`),
-    createTextElement("p", "project-card__status", project.status)
+    createTextElement("p", "project-card__number", `Project ${String(index + 1).padStart(2, "0")}`)
   );
 
   const title = createTextElement("h3", "project-card__title", project.title);
@@ -104,19 +209,34 @@ function renderProject(project, index) {
     description.append(createTextElement("p", "", sentence));
   }
 
-  const tools = document.createElement("div");
-  tools.className = "project-card__tools";
-  tools.append(createTextElement("p", "project-card__tools-label", "Tools & focus"));
+  const tools = document.createElement("dl");
+  tools.className = "project-card__metadata";
+
+  function addMetadataRow(label, value) {
+    const row = document.createElement("div");
+    row.append(
+      createTextElement("dt", "", label),
+      createTextElement("dd", "", value)
+    );
+    tools.append(row);
+  }
+
+  addMetadataRow("Focus", project.focus || "Project focus");
   const tags = document.createElement("ul");
   tags.className = "project-card__tags";
 
-  const toolLabels = project.tools.length > 0
-    ? project.tools
-    : [project.toolsTodo || "[TODO: Add tools and materials.]"];
+  const toolLabels = project.tools.length > 0 ? project.tools : ["Details coming soon"];
   for (const tool of toolLabels) {
     tags.append(createTextElement("li", "", tool));
   }
-  tools.append(tags);
+  const toolsRow = document.createElement("div");
+  toolsRow.append(
+    createTextElement("dt", "", "Tools / Components"),
+    document.createElement("dd")
+  );
+  toolsRow.lastElementChild.append(tags);
+  tools.append(toolsRow);
+  addMetadataRow("Status", project.status);
 
   body.append(topLine, title, description, tools);
 
@@ -229,6 +349,24 @@ function finalizeLightboxClose() {
 
 projectGrid?.addEventListener("click", (event) => {
   if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const carouselControl = event.target.closest("[data-carousel-prev], [data-carousel-next], [data-carousel-dot]");
+  if (carouselControl instanceof HTMLButtonElement) {
+    const gallery = carouselControl.closest(".project-card__gallery");
+    if (!gallery) {
+      return;
+    }
+
+    const slides = [...gallery.querySelectorAll("[data-project-image]")];
+    const activeIndex = slides.findIndex((slide) => !slide.hidden);
+    if (carouselControl.hasAttribute("data-carousel-dot")) {
+      setCarouselSlide(gallery, Number(carouselControl.dataset.carouselDot));
+    } else {
+      const direction = carouselControl.hasAttribute("data-carousel-next") ? 1 : -1;
+      setCarouselSlide(gallery, activeIndex + direction);
+    }
     return;
   }
 

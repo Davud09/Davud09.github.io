@@ -12,13 +12,12 @@ resume game.
 
 ### Home
 
-![Desktop screenshot of the homepage, showing my introduction, profile photo, live page-interactive timing, and four-stage Signal Lab circuit challenge](assets/images/homepage.png)
+![Desktop screenshot of the homepage, showing my introduction, profile photo, engineering focus, and four-stage Signal Lab circuit challenge](assets/images/homepage.png)
 
 The homepage includes the **Signal Lab**, a four-stage circuit puzzle. Its
 accessible voltage controls adjust the circuit from 1 to 12 volts, and the final
-stage adds a countdown and a switch sequence. The performance readout uses the
-browser's Navigation Timing API to show when the page became interactive; it
-shows a ready state when timing data is unavailable.
+stage adds a countdown and a switch sequence. A live readout reports the circuit
+state, supply voltage, and whether current is flowing.
 
 ### Projects
 
@@ -29,22 +28,28 @@ JavaScript is unavailable. JavaScript enhances them with
 [`assets/data/projects.json`](assets/data/projects.json); if that data cannot be
 loaded, the static cards remain visible with a retry option. The page includes
 the SITE 1101 breadboard project and photos, Hour of Code and Robotics cards
-marked **In progress**, and a project entry for this portfolio. The breadboard
-team project video is linked from its card. Project photos open in a
-keyboard-operable image viewer.
+marked **In Progress**, and a project entry for this portfolio. The breadboard
+team project video is linked from its card. Project cards show their focus, tools
+or components, and status; planned projects use original inline SVG illustrations.
+The SITE 1101 carousel starts with the breadboard photo and includes previous/next
+controls and pagination dots. Project photos open in a keyboard-operable image
+viewer.
 
 ## What’s here
 
-- **Home:** introduction, profile photo, browser-measured interactive timing, and
-  the four-stage Signal Lab challenge
+- **Home:** introduction, profile photo, engineering focus, and the four-stage
+  Signal Lab challenge with circuit telemetry
 - **About:** education, practical repair experience, programming skills, activities,
   visible skill-level indicators, animated test scores, languages, interests, and
   contact information
 - **Projects:** static project cards enhanced from JSON, in-progress project cards,
   photo gallery, and a retry message if project data cannot be loaded
 - **Field Workshop:** a keyboard- and touch-operable interactive resume with map
-  stations, arrow-key or WASD movement, Inspect controls, XP, achievements, live
-  announcements, and a link to the plain resume
+  stations, arrow-key or WASD movement, clickable station tiles, automatic note
+  opening and XP, visited markers, a Re-read control, consolidated live feedback,
+  achievements, and a link to the plain resume
+- **Contact actions:** a shared Copy email control with a compatibility fallback
+  and a Resume (PDF) link on every page
 - Hidden keyboard, logo-click, and theme-toggle easter eggs
 
 ## Design, accessibility, and performance
@@ -70,6 +75,9 @@ keyboard-operable image viewer.
   dialog restores focus and is hidden from assistive technology while closed.
 - Dark and light themes, responsive layouts, canonical and theme-color metadata,
   Open Graph and Twitter cards, a favicon, and an Apple touch icon are included.
+- The default theme uses a restrained warm hardware palette; the light theme uses
+  warm alabaster surfaces. The palette stays intact when the optional oscilloscope
+  easter egg is active.
 - The added project photos and portfolio screenshot are compressed. Page images
   have dimensions to reduce layout shifts, below-the-fold images are lazy loaded,
   and the homepage portrait is preloaded.
@@ -86,11 +94,11 @@ There is no build step, framework, or package installation.
 
 ## Validation
 
-The pages were checked in Chromium at 360, 768, 1280, and 1920 pixels wide for
-horizontal overflow and basic page metadata. JavaScript syntax and project JSON
-were checked, and the project-data fallback, Workshop keyboard controls, and
-image-dialog keyboard behavior were exercised. Safari and Firefox have not yet
-been tested.
+JavaScript syntax and project JSON were checked. All four pages were checked in
+Chromium at 360, 768, 1280, and 1920 pixels for horizontal overflow and one main
+heading. The project-data retry fallback, carousel, email-copy feedback, circuit
+telemetry, Workshop station selection, XP, and visited state were exercised.
+Safari and Firefox have not yet been tested.
 
 ## Run locally
 
@@ -124,3 +132,6 @@ Open [http://localhost:8000](http://localhost:8000) and stop the server with
 
 - [GitHub profile](https://github.com/Davud09)
 - [LinkedIn](https://www.linkedin.com/in/davud-idrisov-333a382b0/)
+- Email: [didrisov28062@ada.edu.az](mailto:didrisov28062@ada.edu.az)
+
+To enable the Resume (PDF) links, add `assets/Davud_Idrisov_CV.pdf`.

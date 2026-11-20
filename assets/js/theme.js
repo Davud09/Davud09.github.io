@@ -1,6 +1,6 @@
 const themeToggle = document.querySelector(".theme-toggle");
 const themeStorageKey = "davud-portfolio-theme";
-const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)");
+const themeColor = document.querySelector('meta[name="theme-color"]');
 
 function getStoredTheme() {
   const theme = window.localStorage.getItem(themeStorageKey);
@@ -8,16 +8,17 @@ function getStoredTheme() {
 }
 
 function getActiveTheme() {
-  return document.documentElement.dataset.theme
-    || (systemPrefersLight.matches ? "light" : "dark");
+  return document.documentElement.dataset.theme === "light" ? "light" : "dark";
 }
 
 function updateThemeToggle(theme) {
+  const nextTheme = theme === "dark" ? "light" : "dark";
+  themeColor?.setAttribute("content", theme === "light" ? "#F6F4EF" : "#111214");
+
   if (!themeToggle) {
     return;
   }
 
-  const nextTheme = theme === "dark" ? "light" : "dark";
   themeToggle.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
   themeToggle.setAttribute("title", `Switch to ${nextTheme} theme`);
   themeToggle.setAttribute("aria-pressed", String(theme === "dark"));

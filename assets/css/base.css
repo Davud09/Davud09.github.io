@@ -1,18 +1,34 @@
 :root {
   color-scheme: dark;
 
-  --color-page: #101a28;
-  --color-surface: #17283b;
-  --color-surface-raised: #1d3148;
-  --color-text: #f1f5fa;
-  --color-text-muted: #bdc9d8;
-  --color-accent: #86d4c2;
-  --color-accent-rgb: 134 212 194;
-  --color-accent-strong: #a0e3d3;
-  --color-green: #26413f;
-  --color-border: #8297a4;
-  --color-focus: #b4f0e2;
-  --color-on-accent: #10211e;
+  --bg-primary: #111214;
+  --bg-elevated: #181a1d;
+  --bg-subtle: #202327;
+  --border-hairline: rgb(255 255 255 / 8%);
+  --border-strong: rgb(255 255 255 / 16%);
+  --text-primary: #f3f1ed;
+  --text-secondary: #9c9a94;
+  --accent-primary: #d99b52;
+  --accent-primary-rgb: 217 155 82;
+  --accent-soft: rgb(217 155 82 / 12%);
+  --status-active: #529e72;
+  --status-active-rgb: 82 158 114;
+  --color-page: var(--bg-primary);
+  --color-surface: var(--bg-elevated);
+  --color-surface-raised: var(--bg-subtle);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-secondary);
+  --color-accent: var(--accent-primary);
+  --color-accent-rgb: var(--accent-primary-rgb);
+  --color-accent-strong: #e6b16d;
+  --color-green: #252a26;
+  --color-border: var(--border-hairline);
+  --color-border-strong: var(--border-strong);
+  --color-focus: var(--accent-primary);
+  --color-on-accent: #111214;
+  --color-status-active: var(--status-active);
+  --color-status-active-rgb: var(--status-active-rgb);
+  --color-grid-rgb: 255 255 255;
 
   --font-body: system-ui, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-body);
@@ -30,8 +46,10 @@
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
 
@@ -39,9 +57,9 @@
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --radius-pill: 999px;
-  --shadow-card: 0 1.25rem 3rem rgb(0 0 0 / 24%);
+  --shadow-card: 0 0.75rem 2rem rgb(0 0 0 / 18%);
   --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --duration-ui: 240ms;
+  --duration-ui: 180ms;
 
   font-family: var(--font-body);
   font-size: 100%;
@@ -55,19 +73,23 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --color-page: #f4f6f3;
-  --color-surface: #e9eeea;
-  --color-surface-raised: #ffffff;
-  --color-text: #202725;
-  --color-text-muted: #56635f;
-  --color-accent: #28695d;
-  --color-accent-rgb: 40 105 93;
-  --color-accent-strong: #20594f;
-  --color-green: #d8e2dc;
-  --color-border: #7f8a84;
-  --color-focus: #20594f;
-  --color-on-accent: #ffffff;
-  --shadow-card: 0 1rem 2.5rem rgb(32 39 37 / 9%);
+  --bg-primary: #f6f4ef;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #ece9e1;
+  --border-hairline: #e2dfd7;
+  --border-strong: #c9c4b8;
+  --text-primary: #171716;
+  --text-secondary: #5c5a54;
+  --accent-primary: #b4732a;
+  --accent-primary-rgb: 180 115 42;
+  --accent-soft: rgb(180 115 42 / 12%);
+  --status-active: #2f7a50;
+  --status-active-rgb: 47 122 80;
+  --color-accent-strong: #8b551b;
+  --color-green: #e5e9e2;
+  --color-on-accent: #171716;
+  --color-grid-rgb: 92 90 84;
+  --shadow-card: 0 0.75rem 2rem rgb(38 34 27 / 8%);
 }
 
 @view-transition {
@@ -93,26 +115,6 @@
   from {
     opacity: 0;
     transform: translateY(0.25rem);
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    color-scheme: light;
-
-    --color-page: #f4f6f3;
-    --color-surface: #e9eeea;
-    --color-surface-raised: #ffffff;
-    --color-text: #202725;
-    --color-text-muted: #56635f;
-    --color-accent: #28695d;
-    --color-accent-rgb: 40 105 93;
-    --color-accent-strong: #20594f;
-    --color-green: #d8e2dc;
-    --color-border: #7f8a84;
-    --color-on-accent: #ffffff;
-    --color-focus: #20594f;
-    --shadow-card: 0 1rem 2.5rem rgb(32 39 37 / 9%);
   }
 }
 
@@ -157,18 +159,18 @@ body::after {
 
 body::before {
   background:
-    radial-gradient(ellipse at 18% 22%, rgb(54 111 126 / 28%), transparent 36%),
-    radial-gradient(ellipse at 82% 18%, rgb(67 105 141 / 22%), transparent 38%),
-    radial-gradient(ellipse at 62% 78%, rgb(45 111 100 / 20%), transparent 40%);
-  opacity: 0.88;
+    radial-gradient(ellipse at 18% 22%, rgb(var(--color-accent-rgb) / 8%), transparent 36%),
+    radial-gradient(ellipse at 82% 18%, rgb(var(--color-grid-rgb) / 3%), transparent 38%),
+    radial-gradient(ellipse at 62% 78%, rgb(var(--color-status-active-rgb) / 4%), transparent 40%);
+  opacity: 0.62;
   animation: aurora-drift 28s ease-in-out infinite alternate;
 }
 
 body::after {
   background:
-    radial-gradient(ellipse at 8% 72%, rgb(134 212 194 / 14%), transparent 32%),
-    radial-gradient(ellipse at 92% 58%, rgb(88 130 176 / 16%), transparent 34%);
-  opacity: 0.7;
+    radial-gradient(ellipse at 8% 72%, rgb(var(--color-accent-rgb) / 5%), transparent 32%),
+    radial-gradient(ellipse at 92% 58%, rgb(var(--color-grid-rgb) / 3%), transparent 34%);
+  opacity: 0.45;
   animation: aurora-drift 36s ease-in-out infinite alternate-reverse;
 }
 

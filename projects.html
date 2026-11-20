@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Course projects by Davud Idrisov, including a SITE 1101 breadboard logic-gates project and upcoming projects.">
-    <meta name="theme-color" content="#101a28" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#f4f6f3" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111214">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Projects — Davud Idrisov">
     <meta property="og:description" content="Course projects by Davud Idrisov, including a SITE 1101 breadboard logic-gates project and upcoming projects.">
@@ -27,6 +26,7 @@
     <script src="assets/js/site.js" defer></script>
     <script src="assets/js/nav.js" defer></script>
     <script src="assets/js/theme.js" defer></script>
+    <script src="assets/js/copy-email.js" defer></script>
     <script src="assets/js/easter-eggs.js" defer></script>
     <script src="assets/js/projects.js" defer></script>
     <script src="assets/js/reveal.js" defer></script>
@@ -54,6 +54,10 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.53v16.94c0 .85.69 1.53 1.55 1.53h16.9c.86 0 1.55-.68 1.55-1.53V3.53c0-.85-.69-1.53-1.55-1.53ZM7.93 18.34H4.97V9.02h2.96v9.32ZM6.45 7.75a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm11.89 10.59h-2.96v-4.53c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.61H9.2V9.02h2.84v1.27h.04c.4-.73 1.36-1.5 2.8-1.5 3 0 3.56 1.97 3.56 4.53v5.02Z"/></svg>
           </a>
         </div>
+        <div class="site-header__copy-email">
+          <button class="copy-email-button btn btn--secondary" type="button" data-copy-email="didrisov28062@ada.edu.az" aria-describedby="copy-email-feedback" aria-label="Copy email address">Copy email</button>
+          <span class="copy-email-feedback" id="copy-email-feedback" role="status" aria-live="polite"></span>
+        </div>
         <button class="theme-toggle btn btn--icon btn--secondary" type="button" aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 12a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM4 11h1a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2Zm15 0h1a1 1 0 1 1 0 2h-1a1 1 0 0 1 0-2ZM5.64 4.22l.71.71a1 1 0 0 1-1.41 1.41l-.71-.71a1 1 0 0 1 1.41-1.41Zm13.42 13.42.71.71a1 1 0 0 1-1.41 1.41l-.71-.71a1 1 0 0 1 1.41-1.41Zm0-11.3-.71.71a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 1.41ZM5.64 19.78a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 1.41l-.71.71Z"/></svg>
         </button>
@@ -79,24 +83,7 @@
                     class="project-card__image-button"
                     type="button"
                     data-project-image
-                    data-project-title="SITE 1101 Project 1"
-                    data-image-src="assets/images/site1101-team.jpg"
-                    data-image-alt="Four students standing together in a university lab."
-                    aria-label="Enlarge team photo for SITE 1101 Project 1"
-                  >
-                    <img
-                      src="assets/images/site1101-team.jpg"
-                      alt="Four students standing together in a university lab."
-                      width="1357"
-                      height="768"
-                      loading="lazy"
-                    >
-                    <span class="project-card__zoom-hint">View photo 1 of 2</span>
-                  </button>
-                  <button
-                    class="project-card__image-button"
-                    type="button"
-                    data-project-image
+                    data-carousel-slide="0"
                     data-project-title="SITE 1101 Project 1"
                     data-image-src="assets/images/site1101-breadboard.jpg"
                     data-image-alt="Hands assembling a breadboard circuit with jumper wires and a red LED."
@@ -109,77 +96,117 @@
                       height="768"
                       loading="lazy"
                     >
+                    <span class="project-card__zoom-hint">View photo 1 of 2</span>
+                  </button>
+                  <button
+                    class="project-card__image-button"
+                    type="button"
+                    data-project-image
+                    data-carousel-slide="1"
+                    data-project-title="SITE 1101 Project 1"
+                    data-image-src="assets/images/site1101-team.jpg"
+                    data-image-alt="Our four-person team in the university electronics lab."
+                    aria-label="Enlarge team photo for SITE 1101 Project 1"
+                    hidden
+                  >
+                    <img
+                      src="assets/images/site1101-team.jpg"
+                      alt="Our four-person team in the university electronics lab."
+                      width="1357"
+                      height="768"
+                      loading="lazy"
+                    >
                     <span class="project-card__zoom-hint">View photo 2 of 2</span>
                   </button>
+                  <div class="project-card__carousel-controls" aria-label="Project photos">
+                    <button class="project-card__carousel-arrow" type="button" data-carousel-prev aria-label="Previous photo">←</button>
+                    <div class="project-card__carousel-dots" role="group" aria-label="Choose a project photo">
+                      <button class="project-card__carousel-dot" type="button" data-carousel-dot="0" aria-label="Show photo 1 of 2" aria-current="true">●</button>
+                      <button class="project-card__carousel-dot" type="button" data-carousel-dot="1" aria-label="Show photo 2 of 2" aria-current="false">○</button>
+                    </div>
+                    <button class="project-card__carousel-arrow" type="button" data-carousel-next aria-label="Next photo">→</button>
+                  </div>
                 </div>
               </div>
               <div class="project-card__body">
                 <div class="project-card__topline">
                   <p class="project-card__number">Project 01</p>
-                  <p class="project-card__status">Completed</p>
                 </div>
                 <h3 class="project-card__title">SITE 1101 Project 1</h3>
                 <div class="project-card__description">
                   <p>Our team built NAND, OR, and NOT gates on a breadboard.</p>
                   <p>I built the NOT gate and learned to use a breadboard and correctly connect LEDs, transistors, resistors, and a battery.</p>
                 </div>
-                <div class="project-card__tools">
-                  <p class="project-card__tools-label">Tools &amp; focus</p>
-                  <ul class="project-card__tags">
-                    <li>Breadboard</li><li>LED</li><li>Transistor</li><li>Resistor</li><li>Battery</li>
-                  </ul>
-                </div>
+                <dl class="project-card__metadata">
+                  <div><dt>Focus</dt><dd>Digital logic and basic circuits</dd></div>
+                  <div><dt>Tools / Components</dt><dd><ul class="project-card__tags"><li>Breadboard</li><li>LED</li><li>Transistor</li><li>Resistor</li><li>Battery</li></ul></dd></div>
+                  <div><dt>Status</dt><dd>Completed</dd></div>
+                </dl>
                 <div class="project-card__links">
                   <a class="project-card__link btn btn--ghost" href="https://youtu.be/rQI84usunvg" target="_blank" rel="noopener noreferrer">Watch the team project video <span class="btn__arrow" aria-hidden="true">↗</span></a>
                 </div>
               </div>
             </article>
             <article class="project-card">
-              <div class="project-card__media">
-                <p class="project-card__media-label">[TODO: Add an Hour of Code screenshot after the project is complete.]</p>
+              <div class="project-card__media project-card__media--placeholder">
+                <svg class="project-card__illustration" viewBox="0 0 680 380" aria-hidden="true" focusable="false">
+                  <rect x="94" y="58" width="214" height="244" rx="18" class="illustration-frame"></rect>
+                  <path d="M94 104h214M130 82h82M130 145h142M130 179h102M130 213h126M130 247h76" class="illustration-line"></path>
+                  <rect x="358" y="92" width="164" height="58" rx="12" class="illustration-block"></rect>
+                  <rect x="404" y="185" width="164" height="58" rx="12" class="illustration-block"></rect>
+                  <path d="M308 173h40v-52h10M348 173v41h56" class="illustration-wire"></path>
+                  <circle cx="348" cy="173" r="7" class="illustration-node"></circle>
+                  <path d="m532 120 18 18-18 18" class="illustration-arrow"></path>
+                </svg>
+                <span class="project-card__placeholder-status">In Progress</span>
               </div>
               <div class="project-card__body">
                 <div class="project-card__topline">
                   <p class="project-card__number">Project 02</p>
-                  <p class="project-card__status">In progress</p>
                 </div>
                 <h3 class="project-card__title">Project 2: Hour of Code</h3>
                 <div class="project-card__description">
                   <p>I’m preparing to learn more Python and try Microsoft MakeCode for this project.</p>
                   <p>I also plan to put together a presentation; I’ll add the finished work and what I learned once the project is complete.</p>
                 </div>
-                <div class="project-card__tools">
-                  <p class="project-card__tools-label">Tools &amp; focus</p>
-                  <ul class="project-card__tags">
-                    <li>Learning Python</li><li>Microsoft MakeCode</li><li>Presentation</li>
-                  </ul>
-                </div>
+                <dl class="project-card__metadata">
+                  <div><dt>Focus</dt><dd>Introductory programming</dd></div>
+                  <div><dt>Tools / Components</dt><dd><ul class="project-card__tags"><li>Learning Python</li><li>Microsoft MakeCode</li><li>Presentation</li></ul></dd></div>
+                  <div><dt>Status</dt><dd>In Progress</dd></div>
+                </dl>
               </div>
             </article>
             <article class="project-card">
-              <div class="project-card__media">
-                <p class="project-card__media-label">[TODO: Add a robotics project photo or screenshot when available.]</p>
+              <div class="project-card__media project-card__media--placeholder">
+                <svg class="project-card__illustration" viewBox="0 0 680 380" aria-hidden="true" focusable="false">
+                  <path d="M156 264h356M196 264V132h288v132M230 132V92h220v40" class="illustration-frame"></path>
+                  <circle cx="235" cy="278" r="28" class="illustration-wheel"></circle>
+                  <circle cx="434" cy="278" r="28" class="illustration-wheel"></circle>
+                  <rect x="265" y="160" width="154" height="72" rx="12" class="illustration-block"></rect>
+                  <circle cx="304" cy="194" r="12" class="illustration-node"></circle>
+                  <path d="M338 194h52M340 92V62h82v30M360 160v-24M385 160v-24" class="illustration-wire"></path>
+                  <path d="M186 112h-30M494 112h30M340 296v20M386 296v20" class="illustration-line"></path>
+                </svg>
+                <span class="project-card__placeholder-status">In Progress</span>
               </div>
               <div class="project-card__body">
                 <div class="project-card__topline">
                   <p class="project-card__number">Project 03</p>
-                  <p class="project-card__status">In progress</p>
                 </div>
                 <h3 class="project-card__title">Project 3: Robotics</h3>
                 <div class="project-card__description">
                   <p>For this project, I plan to work with a LEGO EV3 robot and use Microsoft MakeCode.</p>
                   <p>The work will also involve drawing and problem solving; I’ll add the robot and my completed work when it is ready.</p>
                 </div>
-                <div class="project-card__tools">
-                  <p class="project-card__tools-label">Tools &amp; focus</p>
-                  <ul class="project-card__tags">
-                    <li>LEGO EV3</li><li>Microsoft MakeCode</li><li>Drawing</li><li>Problem solving</li>
-                  </ul>
-                </div>
+                <dl class="project-card__metadata">
+                  <div><dt>Focus</dt><dd>Robotics and problem solving</dd></div>
+                  <div><dt>Tools / Components</dt><dd><ul class="project-card__tags"><li>LEGO EV3</li><li>Microsoft MakeCode</li><li>Drawing</li><li>Problem solving</li></ul></dd></div>
+                  <div><dt>Status</dt><dd>In Progress</dd></div>
+                </dl>
               </div>
             </article>
             <article class="project-card">
-              <div class="project-card__media">
+              <div class="project-card__media project-card__media--portfolio">
                 <div class="project-card__gallery" role="group" aria-label="Portfolio project screenshot">
                   <button
                     class="project-card__image-button"
@@ -198,7 +225,6 @@
               <div class="project-card__body">
                 <div class="project-card__topline">
                   <p class="project-card__number">Project 04</p>
-                  <p class="project-card__status">Course portfolio</p>
                 </div>
                 <h3 class="project-card__title">Project 4: The Workshop on the Web</h3>
                 <div class="project-card__description">
@@ -206,12 +232,11 @@
                   <p>I used plain HTML, CSS, and JavaScript to make responsive pages and the Field Workshop resume game.</p>
                   <p>Building it gave me practice organizing a site and making interactive features work with a keyboard and on mobile.</p>
                 </div>
-                <div class="project-card__tools">
-                  <p class="project-card__tools-label">Tools &amp; focus</p>
-                  <ul class="project-card__tags">
-                    <li>HTML5</li><li>CSS3</li><li>Vanilla JavaScript</li><li>Git and GitHub Pages</li>
-                  </ul>
-                </div>
+                <dl class="project-card__metadata">
+                  <div><dt>Focus</dt><dd>Responsive web design and interaction</dd></div>
+                  <div><dt>Tools / Components</dt><dd><ul class="project-card__tags"><li>HTML5</li><li>CSS3</li><li>Vanilla JavaScript</li><li>Git and GitHub Pages</li></ul></dd></div>
+                  <div><dt>Status</dt><dd>Course portfolio</dd></div>
+                </dl>
                 <div class="project-card__links">
                   <a class="project-card__link btn btn--ghost" href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer">View the source on GitHub <span class="btn__arrow" aria-hidden="true">↗</span></a>
                 </div>
@@ -236,9 +261,11 @@
         <p>Designed and built by Davud Idrisov.</p>
       </div>
       <nav class="site-footer__social" aria-label="Social and source links">
+        <a href="mailto:didrisov28062@ada.edu.az">Email</a>
         <a href="https://github.com/Davud09" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/davud-idrisov-333a382b0/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://github.com/Davud09/Davud09.github.io" target="_blank" rel="noopener noreferrer">Portfolio source</a>
+        <a href="assets/Davud_Idrisov_CV.pdf" download>Resume (PDF)</a>
       </nav>
     </footer>
   </body>
